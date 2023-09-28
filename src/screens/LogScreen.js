@@ -17,9 +17,10 @@ export default function Log({ navigation }) {
       setErrorMessage("Please enter both email and password.");
       return;
     }
-    if (!userData.password){
+    if (!userData.password) {
       setErrorMessage("Please enter your password");
-      return;}
+      return;
+    }
 
     signInWithEmailAndPassword(auth, userData.email, userData.password)
       .then((userCredential) => {
@@ -36,8 +37,11 @@ export default function Log({ navigation }) {
   return (
     <View style={styles.container}>
       <Logo style={styles.ogo} />
-      <View>
+      <View style={styles.new}>
+        <Text style={styles.title}>Welcome Back</Text>
+
         <TextInput
+          placeholder='Email'
           label="Email"
           returnKeyType="next" style={styles.input}
           autoCapitalize="none"
@@ -48,6 +52,7 @@ export default function Log({ navigation }) {
           onChangeText={(text) => { setUserData({ ...userData, email: text }) }}
         />
         <TextInput
+          placeholder='Password'
           label="Password"
           returnKeyType="done" style={styles.input}
           secureTextEntry
@@ -80,12 +85,13 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: "center",
-    padding: 20
+    padding: 20,
+    fontFamily: 'Roboto',
   },
   title: {
-    fontSize: 24,
+    fontSize: 14,
     fontWeight: 'bold',
-    marginBottom: 20,
+    marginBottom: 15,
   },
   input: {
     marginBottom: 16,
@@ -114,7 +120,8 @@ const styles = StyleSheet.create({
   },
   ogo: {
     left: 100,
-  }
+  },
+
 });
 
 

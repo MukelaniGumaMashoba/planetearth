@@ -2,20 +2,19 @@ import React, { useState } from 'react'
 import { auth } from "../../firebase.js"
 import Logo from '../components/Logo.js';
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import {  TextInput, Text, Button, View, TouchableOpacity, StyleSheet } from 'react-native'
+import { TextInput, Text, Button, View, TouchableOpacity, StyleSheet } from 'react-native'
 
 export default function Register({ navigation }) {
   const [userData, setUserData] = useState({ email: "", password: "", cpassword: "" })
 
   const userRegister = () => {
-    // Validation for our app PlanetPulses
     if (!userData.email || !userData.password) {
       setErrorMessage("Please enter both email and password.");
       return;
     }
-    else if(userData.password != userData.cpassword){
+    else if (userData.password != userData.cpassword) {
       setErrorMessage('The passwords do not match.');
-    } 
+    }
 
     createUserWithEmailAndPassword(auth, userData.email, userData.password)
       .then((userCredential) => {
@@ -30,9 +29,10 @@ export default function Register({ navigation }) {
   }
 
   return (
-    <View style={styles.container}> 
+    <View style={styles.container}>
       <Logo />
       <TextInput
+        placeholder='email'
         label="Email"
         returnKeyType="next" style={styles.input}
         autoCapitalize="none"
