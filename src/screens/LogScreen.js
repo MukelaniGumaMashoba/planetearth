@@ -126,7 +126,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     padding: 23,
     borderRadius: 23,
-    backgroundColor: 'lightgrey'
+    backgroundColor: 'white'
   }
 });
 
