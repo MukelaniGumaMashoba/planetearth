@@ -7,7 +7,7 @@ export const LoadingScreen = ({ navigation }) => {
         <SafeAreaView style={styles.container}> 
             <TouchableOpacity onPress={() => navigation.navigate("Login")}>
                 <Text>
-                    LoadingScreen
+                    PlanetEarth
                 </Text>
             </TouchableOpacity>
 
