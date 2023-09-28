@@ -8,17 +8,22 @@ import { TouchableOpacity, StyleSheet, View, Text, TextInput, Button } from 'rea
 
 export default function Log({ navigation }) {
   const { doLogin } = useContext(UserContext);
-
+  const [error, setErrorMessage] = useState('');
   const [userData, setUserData] = useState({ email: "", password: "" })
 
   const userLogin = () => {
+    setErrorMessage('');
     // Validation here
-    if (!userData.email || !userData.password) {
-      setErrorMessage("Please enter both email and password.");
+    if (!userData.email && !userData.password) {
+      setErrorMessage("Email/Password Rquired..");
       return;
     }
-    if (!userData.password) {
-      setErrorMessage("Please enter your password");
+    else if (!userData.email) {
+      setErrorMessage("Email Rquired...");
+      return;
+    }
+    else if (!userData.password) {
+      setErrorMessage("Password required...");
       return;
     }
 
@@ -59,6 +64,9 @@ export default function Log({ navigation }) {
           value={userData.password}
           onChangeText={(text) => { setUserData({ ...userData, password: text }) }}
         />
+
+        {error !== '' && <Text style={styles.error}>{error}</Text>}
+
         <View style={styles.forgotPassword}>
           <TouchableOpacity
             onPress={() => navigation.navigate('ResetPasswordScreen')}
@@ -127,6 +135,10 @@ const styles = StyleSheet.create({
     padding: 23,
     borderRadius: 23,
     backgroundColor: 'white'
+  },
+  error: {
+    color:'red',
+    textAlign: 'center',
   }
 });
 
