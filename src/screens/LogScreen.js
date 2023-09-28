@@ -87,6 +87,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     padding: 20,
     fontFamily: 'Roboto',
+    backgroundColor: 'lightgreen'
   },
   title: {
     fontSize: 14,
@@ -121,7 +122,12 @@ const styles = StyleSheet.create({
   ogo: {
     left: 100,
   },
-
+  new: {
+    borderWidth: 1,
+    padding: 23,
+    borderRadius: 23,
+    backgroundColor: 'lightgrey'
+  }
 });
 
 
