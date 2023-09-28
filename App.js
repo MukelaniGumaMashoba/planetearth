@@ -10,7 +10,7 @@ import { useState, createContext, useEffect } from "react";
 export const UserContext = createContext()
 
 function App() {
-  registerNNPushToken(12285, 'lOMiA9DsNGC6YkHbeAGF2q');
+  // registerNNPushToken(12285, 'lOMiA9DsNGC6YkHbeAGF2q');
 
   const [user, setuser] = useState(null)
 

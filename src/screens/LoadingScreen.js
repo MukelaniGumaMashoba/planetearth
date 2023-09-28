@@ -1,11 +1,13 @@
-import React from 'react';
-import { View, Text, Image, ImageBackground, TouchableOpacity, StyleSheet } from 'react-native';
+import React, { useEffect } from 'react';
+import { View, Text, Image, ImageBackground, TouchableOpacity, StyleSheet, ProgressBarAndroid } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 export const LoadingScreen = ({ navigation }) => {
-  setTimeout(()=>{
-    navigation.navigate('Login')
-  },4000)
+  useEffect(() => {
+    setTimeout(() => {
+      navigation.navigate('Login');
+    }, 2500);
+  }, []);
 
   return (
     <ImageBackground
@@ -20,6 +22,8 @@ export const LoadingScreen = ({ navigation }) => {
           <Image source={require('../assets/Logo.jpg')} style={styles.logoImage} />
           <Text style={styles.logoText}>Welcome</Text>
         </TouchableOpacity>
+
+        <ProgressBarAndroid styleAttr="Horizontal" />
       </SafeAreaView>
     </ImageBackground>
   );
@@ -41,7 +45,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   logoImage: {
-    width: 150, 
+    width: 150,
     height: 135,
     borderRadius: 30,
     marginBottom: 16,
