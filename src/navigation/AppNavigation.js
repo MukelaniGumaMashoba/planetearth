@@ -13,7 +13,7 @@ export function AppNavigation() {
         <Tab.Navigator
             initialRouteName="Home"
             shifting={true}
-            barStyle={{ backgroundColor: '#ffffff' }}
+            barStyle={{ backgroundColor: 'lightgreen' }}
         >
             <Tab.Screen
                 name="Home"
