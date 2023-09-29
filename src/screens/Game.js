@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, Button, StyleSheet, TouchableOpacity, Animated } from 'react-native';
+import { View, Text, Button, StyleSheet, TouchableOpacity, Animated, Image } from 'react-native';
 
 const GameScreen = () => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
@@ -9,18 +9,18 @@ const GameScreen = () => {
   const questions = [
     {
       question: 'What is the capital of France?',
-      options: ['Paris', 'Madrid', 'London', 'Berlin'],
-      correctAnswer: 'Paris',
+      options: ['A. Paris', 'B. Madrid', 'C. London', 'D. Berlin'],
+      correctAnswer: 'A. Paris',
     },
     {
       question: 'What is the largest planet in our solar system?',
-      options: ['Venus', 'Jupiter', 'Mars', 'Saturn'],
-      correctAnswer: 'Jupiter',
+      options: ['A. Venus', 'B. Jupiter', 'C. Mars', 'D. Saturn'],
+      correctAnswer: 'B. Jupiter',
     },
     {
       question: 'What is the smallest country in the world?',
-      options: ['Vatican City', 'Monaco', 'Liechtenstein', 'San Marino'],
-      correctAnswer: 'Vatican City',
+      options: ['A. Vatican City', 'B. Monaco', 'C. iechtenstein', 'D. San Marino'],
+      correctAnswer: 'A. Vatican City',
     },
   ];
 
@@ -32,7 +32,8 @@ const GameScreen = () => {
     const nextQuestion = currentQuestion + 1;
     if (nextQuestion < questions.length) {
       setCurrentQuestion(nextQuestion);
-    } else {
+    }
+    else {
       Animated.timing(fadeAnim, {
         toValue: 1,
         duration: 1000,
@@ -54,12 +55,10 @@ const GameScreen = () => {
           </View>
         </TouchableOpacity>
       ))}
-      <Text style={styles.score}>Score: {score}</Text>
       <TouchableOpacity onPress={() => { setScore(0), setCurrentQuestion(0) }}
         style={styles.btn}
-
       >
-        <Text style={styles.txt}>Restart Game</Text>
+        <Text style={styles.optionText}>Restart Game</Text>
       </TouchableOpacity>
     </View>
   );
@@ -71,6 +70,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     paddingHorizontal: 20,
+    backgroundColor: 'lightgreen',
   },
   question: {
     fontSize: 20,
@@ -84,6 +84,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 30,
     marginBottom: 15,
     borderRadius: 10,
+    width: '55%'
   },
   optionText: {
     color: 'white',
@@ -99,11 +100,19 @@ const styles = StyleSheet.create({
     margin: 40,
     borderRadius: 12,
     padding: 12,
-    backgroundColor: 'grey',
+    backgroundColor: '#3498db',
   },
   txt: {
     color: 'white',
-  }
+  },
+  image: {
+    width: 80,
+    height: 80,
+    marginBottom: 30,
+    marginTop: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
 });
 
 export default GameScreen;
