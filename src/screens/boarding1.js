@@ -4,7 +4,7 @@ import { Text, Image, StyleSheet, SafeAreaView, TouchableOpacity, View } from 'r
 const Boarding1 = ({ navigation }) => {
     return (
         <View>
-            <Image source={require('../../assets/Onboarding/Board1.png')} style={styles.image} />
+            {/* <Image source={require('../../assets/Onboarding/Board1.png')} style={styles.image} /> */}
             <View style={styles.container}>
                 <Text style={styles.antext}>Book a Local</Text>
                 <Text>You can now book pravite city tours with locals on the top go experience a new place like never before</Text>

@@ -13,7 +13,6 @@ export default function Log({ navigation }) {
 
   const userLogin = () => {
     setErrorMessage('');
-    // Validation here
     if (!userData.email && !userData.password) {
       setErrorMessage("Email/Password Rquired..");
       return;
