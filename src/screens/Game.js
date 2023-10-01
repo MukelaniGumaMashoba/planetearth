@@ -70,7 +70,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     paddingHorizontal: 20,
-    backgroundColor: 'lightgreen',
   },
   question: {
     fontSize: 20,
