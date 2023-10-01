@@ -5,7 +5,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 export const LoadingScreen = ({ navigation }) => {
   useEffect(() => {
     setTimeout(() => {
-      navigation.navigate('Login');
+      navigation.navigate('Boarding1');
     }, 2500);
   }, []);
 
@@ -16,7 +16,7 @@ export const LoadingScreen = ({ navigation }) => {
     >
       <SafeAreaView style={styles.container}>
         <TouchableOpacity
-          onPress={() => navigation.navigate('Login')}
+          onPress={() => navigation.navigate('Boarding1')}
           style={styles.logoContainer}
         >
           <Image source={require('../assets/Logo.jpg')} style={styles.logoImage} />

@@ -8,7 +8,7 @@ const Boarding3 = ({ navigation }) => {
             <View style={styles.container}>
                 <Text style={styles.antext}>Share Your Adventures</Text>
                 <Text>Enjoy your holiday! don't forget to take a photo and share to the world</Text>
-                <TouchableOpacity style={styles.btn} onPress={() => navigation.navigate('Welcome')}>
+                <TouchableOpacity style={styles.btn} onPress={() => navigation.navigate('Login')}>
                     <Text style={styles.texts}>Get Started</Text>
                 </TouchableOpacity>
                 <Text style={styles.texts}>Skip for now</Text>
