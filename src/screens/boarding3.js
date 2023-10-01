@@ -11,7 +11,9 @@ const Boarding3 = ({ navigation }) => {
                 <TouchableOpacity style={styles.btn} onPress={() => navigation.navigate('Login')}>
                     <Text style={styles.texts}>Get Started</Text>
                 </TouchableOpacity>
-                <Text style={styles.texts}>Skip for now</Text>
+                <TouchableOpacity onPress={() => navigation.navigate('Login')}>
+                    <Text style={styles.texts}>Skip for now</Text>
+                </TouchableOpacity>
             </View>
         </View>
     )

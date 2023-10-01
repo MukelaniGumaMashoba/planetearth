@@ -75,9 +75,9 @@ export default function Log({ navigation }) {
         </View>
         <Button mode="contained" title='Log in' onPress={userLogin} />
 
-        <View style={styles.row}>
+        <View>
           <TouchableOpacity onPress={() => navigation.navigate('Register')}>
-            <Text style={styles.link}>Create Account</Text>
+            <Text style={[styles.link , styles.acc]}>Create Account</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -114,6 +114,7 @@ const styles = StyleSheet.create({
   },
   forgot: {
     color: 'blue',
+    textAlign: 'right'
 
   },
   row: {
@@ -135,6 +136,10 @@ const styles = StyleSheet.create({
   },
   error: {
     color:'red',
+    textAlign: 'center',
+  },
+  acc: {
+    marginTop: 9,
     textAlign: 'center',
   }
 });

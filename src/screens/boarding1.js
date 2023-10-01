@@ -11,7 +11,11 @@ const Boarding1 = ({ navigation }) => {
                 <TouchableOpacity style={styles.btn} onPress={() => navigation.navigate('Boarding2')}>
                     <Text style={styles.texts}>Next</Text>
                 </TouchableOpacity>
-                <Text style={styles.texts}>Skip for now</Text>
+
+                <TouchableOpacity onPress={() => navigation.navigate('Login')}>
+                    <Text style={styles.texts}>Skip for now</Text>
+                </TouchableOpacity>
+
             </View>
         </View>
     )
@@ -50,7 +54,7 @@ const styles = StyleSheet.create({
         margin: 12,
     },
     antext: {
-        fontWeight:'bold',
+        fontWeight: 'bold',
         fontSize: 22,
         textAlign: 'center'
     }
