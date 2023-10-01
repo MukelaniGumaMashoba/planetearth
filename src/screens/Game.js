@@ -84,7 +84,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 30,
     marginBottom: 15,
     borderRadius: 10,
-    width: '55%'
+    width: 155,
   },
   optionText: {
     color: 'white',
