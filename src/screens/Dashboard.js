@@ -1,7 +1,7 @@
 import React from 'react';
 import Menu from '../components/menu';
 import { Text, View, StyleSheet } from 'react-native';
-import { TouchableOpacity, ImageBackground } from 'react-native';
+import { TouchableOpacity, ImageBackground, Image } from 'react-native';
 import { ScrollView } from 'react-native';
 
 export default function Dashboard({ navigation }) {
@@ -37,7 +37,27 @@ export default function Dashboard({ navigation }) {
       </View>
 
       <View>
-        <Text style={styles.menu}>Recommended</Text>
+        <Text style={styles.menu}>Trending News</Text>
+        <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+        <TouchableOpacity>
+            <Image
+              source={require('../assets/climate_change.jpg')}
+              style={styles.top2}
+            />
+            {/* <Text style={styles.txt2}>Climate Crisis Warning:</Text> */}
+            {/* <Text style={styles.txt2}> Extreme weather events intensify as global temperatures soar, endangering communities worldwide.</Text> */}
+          </TouchableOpacity>
+
+          <TouchableOpacity>
+            <Image
+              source={require('../assets/news.jpg')}
+              style={styles.top2}
+            />
+            {/* <Text style={styles.txt2}>Climate Crisis Warning:</Text> */}
+            {/* <Text style={styles.txt2}> Extreme weather events intensify as global temperatures soar, endangering communities worldwide.</Text> */}
+          </TouchableOpacity>
+
+        </ScrollView>
       </View>
     </View>
   );
@@ -92,8 +112,23 @@ const styles = StyleSheet.create({
     marginBottom: 15,
   },
   txt2: {
-    color: 'white', 
-    fontSize: 12, 
+    color: 'white',
+    fontSize: 12,
     textAlign: 'center',
+  },
+  top2: {
+    borderRadius: 12,
+    width: 250,
+    height: 153,
+    marginBottom: 23,
+    padding: 10,
+    margin: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    borderColor: 'lightgreen',
+    borderWidth: 2,
+    padding: 15,
   },
 });
