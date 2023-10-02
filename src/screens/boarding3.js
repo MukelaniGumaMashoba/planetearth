@@ -4,10 +4,10 @@ import { Text, Image, StyleSheet, SafeAreaView, TouchableOpacity, View } from 'r
 const Boarding3 = ({ navigation }) => {
     return (
         <View>
-            {/* <Image source={require('../../assets/Onboarding/Board3.png')} style={styles.image} /> */}
+            <Image source={require('../assets/splash4.jpg')} style={styles.image} />
             <View style={styles.container}>
-                <Text style={styles.antext}>Share Your Adventures</Text>
-                <Text>Enjoy your holiday! don't forget to take a photo and share to the world</Text>
+                <Text style={styles.antext}>Help Planet Earth</Text>
+                <Text>Help Us Change the world and be able to achieve good togther. Let Minimize Global Warming</Text>
                 <TouchableOpacity style={styles.btn} onPress={() => navigation.navigate('Login')}>
                     <Text style={styles.texts}>Get Started</Text>
                 </TouchableOpacity>
@@ -22,17 +22,20 @@ const Boarding3 = ({ navigation }) => {
 export default Boarding3
 
 
+
 const styles = StyleSheet.create({
     image: {
         borderRadius: 12,
-        width: 360,
-        height: 450,
-        marginBottom: 20,
-        marginTop: 30,
+        width: 338,
+        height: 420,
+        marginBottom: 55,
+        marginTop: 25,
         justifyContent: 'center',
         alignItems: 'center',
+        margin: 10,
         backgroundColor: 'black',
-
+        borderColor: 'lightgreen',
+        borderWidth: 1,
     },
     btn: {
         backgroundColor: 'black',
@@ -44,17 +47,19 @@ const styles = StyleSheet.create({
     },
     texts: {
         color: 'white',
-        textAlign: 'center'
+        textAlign: 'center',
+        fontWeight: 'bold',
     },
     container: {
-        backgroundColor: 'grey',
+        backgroundColor: 'lightgreen',
         borderRadius: 23,
         padding: 23,
         margin: 12,
     },
     antext: {
-        fontWeight:'bold',
+        fontWeight: 'bold',
         fontSize: 22,
         textAlign: 'center'
     }
+
 })
