@@ -3,7 +3,8 @@ import { auth } from '../../firebase.js';
 import { UserContext } from '../../App.js';
 import React, { useContext, useState } from 'react'
 import { signInWithEmailAndPassword } from 'firebase/auth';
-import { TouchableOpacity, StyleSheet, View, Text, TextInput, Button } from 'react-native'
+import { TouchableOpacity, StyleSheet, View, Text, TextInput, Button, Image } from 'react-native'
+import LogOption from '../components/LogOption.js';
 
 
 export default function Log({ navigation }) {
@@ -77,9 +78,10 @@ export default function Log({ navigation }) {
 
         <View>
           <TouchableOpacity onPress={() => navigation.navigate('Register')}>
-            <Text style={[styles.link , styles.acc]}>Create Account</Text>
+            <Text style={[styles.link, styles.acc]}>Create Account</Text>
           </TouchableOpacity>
         </View>
+        <LogOption />
       </View>
     </View>
   )
@@ -114,8 +116,8 @@ const styles = StyleSheet.create({
   },
   forgot: {
     color: 'blue',
-    textAlign: 'right'
-
+    textAlign: 'right',
+    marginBottom: 12,
   },
   row: {
     flexDirection: 'row',
@@ -135,7 +137,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'white'
   },
   error: {
-    color:'red',
+    color: 'red',
     textAlign: 'center',
   },
   acc: {
