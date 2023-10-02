@@ -33,6 +33,7 @@ export default function Register({ navigation }) {
     <View style={styles.container}>
       <Logo />
       <View style={styles.new}>
+        <Text style={styles.welcome}>Welcome Sign Up</Text>
         <TextInput
           placeholder='email'
           label="Email"
@@ -119,5 +120,10 @@ const styles = StyleSheet.create({
     padding: 23,
     borderRadius: 23,
     backgroundColor: 'white'
+  },
+  welcome: {
+    fontSize : 18,
+    fontWeight: 'bold',
+    margin: 10,
   }
 });
