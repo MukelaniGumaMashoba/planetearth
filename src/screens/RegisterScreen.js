@@ -84,10 +84,12 @@ const styles = StyleSheet.create({
   input: {
     marginBottom: 16,
     borderWidth: 1,
-    borderColor: 'blue',
-    borderRadius: 5,
-    padding: 10,
+    borderColor: 'grey',
+    borderRadius: 16,
+    padding: 6,
     fontSize: 16,
+    marginLeft: 6,
+    marginRight: 6,
   },
   forgotPassword: {
     marginTop: 10,
