@@ -1,7 +1,7 @@
 import React from 'react';
 import Menu from '../components/menu';
 import { Text, View, StyleSheet } from 'react-native';
-import { TouchableOpacity } from 'react-native';
+import { TouchableOpacity, ImageBackground } from 'react-native';
 import { ScrollView } from 'react-native';
 
 export default function Dashboard({ navigation }) {
@@ -11,14 +11,24 @@ export default function Dashboard({ navigation }) {
       <Text style={styles.welcomeText}>PlanetPulse</Text>
       <Text style={styles.txt}>Know What Happening Around You All The Time.!</Text>
       <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-        <TouchableOpacity style={styles.top}>
-          <Text>Globalization</Text>
-          <Text>Explore more about Globalization in this application and find ways to save...</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.top}>
-          <Text>Globalization</Text>
-          <Text>Explore more about Globalization in this application and find ways to save...</Text>
-        </TouchableOpacity>
+        <ImageBackground
+          source={require('../assets/information.jpg')}
+          style={styles.backgroundImage}
+        >
+          <TouchableOpacity style={styles.top}>
+            <Text style={styles.txt2}>Global Warming Alert: </Text>
+            <Text style={styles.txt2}>Rising greenhouse gases are heating our planet, melting polar ice and threatening coastal cities.</Text>
+          </TouchableOpacity>
+        </ImageBackground>
+        <ImageBackground
+          source={require('../assets/globe.png')}
+          style={styles.backgroundImage}
+        >
+          <TouchableOpacity style={styles.top}>
+            <Text style={styles.txt2}>Climate Crisis Warning:</Text>
+            <Text style={styles.txt2}> Extreme weather events intensify as global temperatures soar, endangering communities worldwide.</Text>
+          </TouchableOpacity>
+        </ImageBackground>
       </ScrollView>
 
       <View>
@@ -51,22 +61,39 @@ const styles = StyleSheet.create({
   },
   top: {
     borderRadius: 12,
-    backgroundColor: 'purple',
-    width: 240,
-    height: 130,
+    width: 230,
+    height: 120,
     marginBottom: 23,
     padding: 10,
     margin: 10,
     justifyContent: 'center',
     alignItems: 'center',
+    justifyContent: 'space-between',
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    borderColor: 'lightgreen',
+    borderWidth: 2,
+    padding: 15,
   },
   menu: {
     fontWeight: 'bold',
     fontSize: 16,
   },
   txt: {
-    fontSize : 22,
+    fontSize: 20,
     fontWeight: 'bold',
-    marginBottom: 5,
+    marginBottom: 15,
+  },
+  backgroundImage: {
+    // flex: 1,
+    resizeMode: 'cover',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginRight: 15,
+    marginBottom: 15,
+  },
+  txt2: {
+    color: 'white', 
+    fontSize: 12, 
+    textAlign: 'center',
   },
 });
