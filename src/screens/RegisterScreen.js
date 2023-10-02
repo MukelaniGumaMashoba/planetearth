@@ -2,7 +2,8 @@ import React, { useState } from 'react'
 import { auth } from "../../firebase.js"
 import Logo from '../components/Logo.js';
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { TextInput, Text, Button, View, TouchableOpacity, StyleSheet } from 'react-native'
+import { TextInput, Text, Button, View, TouchableOpacity, StyleSheet } from 'react-native';
+import LogOption from '../components/LogOption.js';
 
 export default function Register({ navigation }) {
   const [userData, setUserData] = useState({ email: "", password: "", cpassword: "" })
@@ -60,8 +61,12 @@ export default function Register({ navigation }) {
         <Button mode="contained" title='Enter' onPress={userRegister} />
 
         <TouchableOpacity onPress={() => navigation.navigate('Register')}>
-          <Text style={styles.link}>Create Account</Text>
+          <Text style={styles.link}>Already Have An Account</Text>
         </TouchableOpacity>
+
+        <View>
+          <LogOption />
+        </View>
       </View>
     </View>
   )
@@ -102,8 +107,12 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   link: {
-    color: 'blue',
+    color: 'black',
     marginLeft: 5,
+    textAlign: 'center',
+    marginBottom: 12,
+    marginTop: 12,
+    fontWeight: 'bold'
   },
   new: {
     borderWidth: 1,
