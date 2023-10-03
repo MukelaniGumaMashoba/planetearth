@@ -26,6 +26,17 @@ export function AppNavigation() {
                 }}
             />
             <Tab.Screen
+                name="Settings"
+                component={Settings}
+                options={{
+                    tabBarLabel: 'Calculator',
+                    tabBarIcon: ({ color }) => (
+                        <Icon name="calculator" color={color} size={26} />
+                    ),
+                }}
+            />
+
+            <Tab.Screen
                 name="Game"
                 component={Game}
                 options={{
@@ -45,16 +56,7 @@ export function AppNavigation() {
                     ),
                 }}
             />
-            <Tab.Screen
-                name="Settings"
-                component={Settings}
-                options={{
-                    tabBarLabel: 'Settings',
-                    tabBarIcon: ({ color }) => (
-                        <Icon name="settings" color={color} size={26} />
-                    ),
-                }}
-            />
+
         </Tab.Navigator>
     );
 }
