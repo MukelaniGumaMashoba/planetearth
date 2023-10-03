@@ -56,7 +56,7 @@ export default function Dashboard({ navigation }) {
               source={require('../assets/climate_change.jpg')}
               style={styles.top2}
             />
-            <Text style={styles.txt2}>Climate Crisis Warning:</Text>
+            <Text style={styles.txt3}>Climate Crisis Warning:</Text>
             {/* <Text style={styles.txt2}> Extreme weather events intensify as global temperatures soar, endangering communities worldwide.</Text> */}
           </TouchableOpacity>
 
@@ -65,7 +65,7 @@ export default function Dashboard({ navigation }) {
               source={require('../assets/news.jpg')}
               style={styles.top2}
             />
-            <Text style={styles.txt2}>Daily New To Keep you updated all times</Text>
+            <Text style={styles.txt3}>Daily New To Keep you updated all times</Text>
             {/* <Text style={styles.txt2}> Extreme weather events intensify as global temperatures soar, endangering communities worldwide.</Text> */}
           </TouchableOpacity>
 
@@ -123,6 +123,11 @@ const styles = StyleSheet.create({
     height: 160,
   },
   txt2: {
+    color: 'white',
+    fontSize: 12,
+    textAlign: 'center',
+  },
+  txt3: {
     color: 'black',
     fontSize: 12,
     textAlign: 'center',
