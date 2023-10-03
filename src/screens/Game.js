@@ -1,7 +1,12 @@
-import React, { useState } from 'react';
-import { View, Text, Button, StyleSheet, TouchableOpacity, Animated, Image } from 'react-native';
+import React, { useContext, useState } from 'react';
+import { View, Text, StyleSheet, TouchableOpacity, Animated, Image, ToastAndroid } from 'react-native';
+import { addScore } from '../database/database';
+import { UserContext } from '../../userCtxt';
 
 const GameScreen = () => {
+
+  const { user } = useContext(UserContext);
+
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [score, setScore] = useState(0);
   const fadeAnim = new Animated.Value(0);
@@ -24,29 +29,36 @@ const GameScreen = () => {
     },
   ];
 
-  const handleAnswer = (answer) => {
+  const handleAnswer = async (answer) => {
     const isCorrect = answer === questions[currentQuestion].correctAnswer;
     if (isCorrect) {
       setScore(score + 1);
     }
+
+
     const nextQuestion = currentQuestion + 1;
-    if (nextQuestion < questions.length) {
+    
+    if (nextQuestion <= questions.length) {
       setCurrentQuestion(nextQuestion);
     }
     else {
-      Animated.timing(fadeAnim, {
-        toValue: 1,
-        duration: 1000,
-        useNativeDriver: true,
-      }).start();
-      alert('Quiz Over! You have earned ' + score + ' points');
+      const result = await addScore(user.uid, score)
+
+      if (result) {
+        ToastAndroid.showWithGravity("Score saved.", ToastAndroid.LONG, ToastAndroid.TOP)
+      } else {
+        ToastAndroid.showWithGravity("Error saving your score", ToastAndroid.SHORT, ToastAndroid.TOP)
+      }
     }
+
   };
 
   return (
     <View style={styles.container}>
-      <Animated.Text style={[styles.question, { opacity: fadeAnim }]}>
-        {questions[currentQuestion].question}
+      <Animated.Text style={[styles.question,
+        //{ opacity: fadeAnim }
+      ]}>
+        {questions[currentQuestion]?.question}
       </Animated.Text>
       {questions[currentQuestion].options.map((option, index) => (
         <TouchableOpacity key={index} onPress={() => handleAnswer(option)}>
@@ -76,6 +88,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginBottom: 20,
     textAlign: 'center',
+    color: "black"
   },
   optionButton: {
     backgroundColor: '#3498db',

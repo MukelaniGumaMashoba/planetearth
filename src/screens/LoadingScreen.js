@@ -4,9 +4,11 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 
 export const LoadingScreen = ({ navigation }) => {
   useEffect(() => {
-    setTimeout(() => {
+    const timer = setTimeout(() => {
       navigation.navigate('Boarding1');
-    }, 2500);
+    }, 2000);
+
+    return () => clearTimeout(timer);
   }, []);
 
   return (

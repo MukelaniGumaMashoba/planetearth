@@ -1,8 +1,9 @@
 import React, { useContext } from 'react';
-import { UserContext } from '../../App';
+
 import { Text, View, Button, StyleSheet, Image, ScrollView } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Score from '../components/Score';
+import { UserContext } from '../../userCtxt';
 
 const AccountScreen = ({ navigation }) => {
   const { user, doLogout } = useContext(UserContext);

@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { auth } from "../../firebase.js"
 import Logo from '../components/Logo.js';
+import { UserContext } from '../../userCtxt.js';
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { TextInput, Text, Button, View, TouchableOpacity, StyleSheet } from 'react-native';
 import LogOption from '../components/LogOption.js';
@@ -20,7 +21,7 @@ export default function Register({ navigation }) {
     createUserWithEmailAndPassword(auth, userData.email, userData.password)
       .then((userCredential) => {
         const user = userCredential.user;
-        console.log(user.uid)
+        doLogin(user)
       })
       .catch((error) => {
         const errorCode = error.code;

@@ -1,9 +1,9 @@
 import Logo from '../components/Logo.js';
 import { auth } from '../../firebase.js';
-import { UserContext } from '../../App.js';
+import { UserContext } from '../../userCtxt.js';
 import React, { useContext, useState } from 'react'
 import { signInWithEmailAndPassword } from 'firebase/auth';
-import { TouchableOpacity, StyleSheet, View, Text, TextInput, Button, Image } from 'react-native'
+import { TouchableOpacity, StyleSheet, View, Text, TextInput, Button, Image } from 'react-native';
 import LogOption from '../components/LogOption.js';
 
 
