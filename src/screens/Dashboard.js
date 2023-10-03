@@ -13,8 +13,6 @@ const Newspaper = () => {
   );
 }
 
-
-
 export default function Dashboard({ navigation }) {
   return (
     <View style={styles.container}>
