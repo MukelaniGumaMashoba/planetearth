@@ -9,7 +9,7 @@ import News from '../components/news.js';
 const detailed = () => {
   return (
     <View>
-      <ScrollView>
+      <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
         <News />
       </ScrollView>
     </View>
@@ -51,7 +51,7 @@ export default function Dashboard({ navigation }) {
       <View>
         <Text style={styles.menu}>Trending News</Text>
         <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-        <TouchableOpacity onPress={() => detailed()}>
+          <TouchableOpacity onPress={() => navigation.navigate('DetailedScreen')}>
             <Image
               source={require('../assets/climate_change.jpg')}
               style={styles.top2}
@@ -60,7 +60,7 @@ export default function Dashboard({ navigation }) {
             {/* <Text style={styles.txt2}> Extreme weather events intensify as global temperatures soar, endangering communities worldwide.</Text> */}
           </TouchableOpacity>
 
-          <TouchableOpacity onPress={() => detailed()}>
+          <TouchableOpacity onPress={() => navigation.navigate('DetailedScreen')}>
             <Image
               source={require('../assets/news.jpg')}
               style={styles.top2}
