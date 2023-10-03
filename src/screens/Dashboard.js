@@ -3,15 +3,18 @@ import Menu from '../components/menu';
 import { Text, View, StyleSheet } from 'react-native';
 import { TouchableOpacity, ImageBackground, Image } from 'react-native';
 import { ScrollView } from 'react-native';
-import news from './news';
+import News from '../components/news.js';
 
-const detailed = ()=> {
+
+const detailed = () => {
   return (
     <View>
-      <news />
+      <ScrollView>
+        <News />
+      </ScrollView>
     </View>
-  )
-}
+  );
+};
 
 export default function Dashboard({ navigation }) {
   return (
@@ -48,7 +51,7 @@ export default function Dashboard({ navigation }) {
       <View>
         <Text style={styles.menu}>Trending News</Text>
         <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-          <TouchableOpacity onPress={detailed}>
+        <TouchableOpacity onPress={() => detailed()}>
             <Image
               source={require('../assets/climate_change.jpg')}
               style={styles.top2}
@@ -57,7 +60,7 @@ export default function Dashboard({ navigation }) {
             {/* <Text style={styles.txt2}> Extreme weather events intensify as global temperatures soar, endangering communities worldwide.</Text> */}
           </TouchableOpacity>
 
-          <TouchableOpacity onPress={detailed}>
+          <TouchableOpacity onPress={() => detailed()}>
             <Image
               source={require('../assets/news.jpg')}
               style={styles.top2}
