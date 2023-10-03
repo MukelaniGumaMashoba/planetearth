@@ -1,7 +1,7 @@
 import { db } from "../../firebase";
 import { doc, getDoc, setDoc } from "firebase/firestore";
 
-// Add a new document in collection "cities"
+//Ngiqala a new document in collection "scores" abantu abawatholile kwi game
 const addScore = async (user_id, score) => {
     try {
         await setDoc(doc(db, "scores", user_id), {
@@ -21,7 +21,7 @@ const getScore = async (user_id) => {
         if (docSnap.exists()) {
             return docSnap.data();
         } else {
-            return null;  // doc.data() will be undefined in this case
+            return null;  //Njengoba ngisebenzisa u doc.data() will be undefined in this case so ngizokwazi ukuyi run 
         }
     } catch (error) {
         return error;

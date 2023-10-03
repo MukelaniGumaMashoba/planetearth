@@ -9,36 +9,104 @@ const GameScreen = () => {
 
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [score, setScore] = useState(0);
-  const fadeAnim = new Animated.Value(0);
+  // const fadeAnim = new Animated.Value(0);
 
   const questions = [
     {
+      question: 'What are the primary greenhouse gases responsible for global warming?',
+      options: ['A. Carbon Doxide',
+        'B. Mathane',
+        'C. Nitrous Oxide',
+        'D. All of the above'],
+      correctAnswer: 'D. All of the above',
+    },
+    {
+      question: 'Which human activities contribute significantly to the increase in carbon dioxide emissions?',
+      options: ['A. Deforestation',
+        'B. Burning fossil fuels',
+        'C. Industrial processes',
+        'D. All of the above'],
+      correctAnswer: 'D. All of the above',
+    },
+    {
+      question: 'What is the main impact of global warming on sea levels and coastal areas?',
+      options: ['A. Rising sea levels leading to flooding',
+        'B. Decreased salinity in oceans',
+        'C. Expansion of marine life habitatsIndustrial processes',
+        'D. Reduced wave intensity'],
+      correctAnswer: 'A. Rising sea levels leading to flooding',
+    },
+    {
+      question: 'How does global warming affect weather patterns and extreme events?',
+      options: ['A. It intensifies hurricanes and typhoons'
+        , 'B. It causes prolonged droughts in certain regions'
+        , 'C. It leads to heavier rainfall and increased flooding'
+        , 'D. All of the above'],
+      correctAnswer: 'D. All of the above',
+    },
+    {
+      question: 'What is the role of renewable energy sources in mitigating global warming?',
+      options: ['A. They reduce dependence on fossil fuels',
+        'B. They produce zero greenhouse gas emissions',
+        'C. They promote sustainable development',
+        'D. All of the above'],
+      correctAnswer: 'D. All of the above',
+    },
+    {
+      question: 'How can individuals contribute to limiting global warming in their daily lives?',
+      options: ['A. Reduce, reuse, and recycle'
+        , 'B. Use energy-efficient appliances and vehicles'
+        , 'C. Plant trees and support reforestation efforts'
+        , 'D. All of the above'],
+      correctAnswer: 'D. All of the Above',
+    },
+    {
       question: 'What is the capital of France?',
-      options: ['A. Paris', 'B. Madrid', 'C. London', 'D. Berlin'],
-      correctAnswer: 'A. Paris',
+      options: ['A. Reduce, reuse, and recycle',
+        'B. Use energy-efficient appliances and vehicles',
+        'C. Plant trees and support reforestation efforts',
+        'D. All of the above'],
+      correctAnswer: 'D. All of the above',
     },
     {
-      question: 'What is the largest planet in our solar system?',
-      options: ['A. Venus', 'B. Jupiter', 'C. Mars', 'D. Saturn'],
-      correctAnswer: 'B. Jupiter',
+      question: 'What international agreements aim to address global warming and climate change?',
+      options: ['A. Kyoto Protocol',
+        'B. Paris Agreement',
+        'C. Montreal Protocol',
+        'D. All of the above'],
+      correctAnswer: 'D. All of the above',
     },
     {
-      question: 'What is the smallest country in the world?',
-      options: ['A. Vatican City', 'B. Monaco', 'C. iechtenstein', 'D. San Marino'],
-      correctAnswer: 'A. Vatican City',
+      question: 'What is the potential consequence of failing to limit global warming?',
+      options: ['A. Loss of biodiversity', 'B. Displacement of communities due to rising sea levels',
+        'C. Increased frequency of severe heatwaves', 'D. All of the above'],
+      correctAnswer: 'D. All of the above',
+    },
+    {
+      question: 'What are the Renewable energy resources ?',
+      options: ['A. Solar', 'B. Wind', 'C. Hydroelectric','D. Geothermal energy.','E. None of the Above'],
+      correctAnswer: 'D. All of the above',
+    },
+    {
+      question: 'What is the most used strategy to limit global warming?',
+      options: ['A. renewable energy sources.',
+        'B. Cleaning Dirt',
+        'C. Coding Html',
+        'D. All of the above'],
+      correctAnswer: 'A. renewable energy sources.',
     },
   ];
 
   const handleAnswer = async (answer) => {
     const isCorrect = answer === questions[currentQuestion].correctAnswer;
     if (isCorrect) {
-      setScore(score + 1);
+      setScore(score + 10);
     }
 
 
     const nextQuestion = currentQuestion + 1;
-    
-    if (nextQuestion <= questions.length) {
+
+    if (nextQuestion < questions.length) {
       setCurrentQuestion(nextQuestion);
     }
     else {
@@ -96,7 +164,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 30,
     marginBottom: 15,
     borderRadius: 10,
-    width: 155,
+    width: 335,
   },
   optionText: {
     color: 'white',

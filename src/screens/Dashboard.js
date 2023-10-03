@@ -88,7 +88,7 @@ const styles = StyleSheet.create({
     //margin: 10,
     justifyContent: 'center',
     alignItems: 'center',
-    justifyContent: 'space-between',
+    // justifyContent: 'space-between',
     backgroundColor: 'rgba(0, 0, 0, 0.5)',
     // borderColor: 'lightgreen',
     // borderWidth: 2,
@@ -113,6 +113,8 @@ const styles = StyleSheet.create({
     marginBottom: 15,
     borderColor: 'lightgreen',
     borderWidth: 2,
+    width: 260,
+    height: 160,
   },
   txt2: {
     color: 'white',

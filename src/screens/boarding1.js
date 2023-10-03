@@ -3,7 +3,7 @@ import { Text, Image, StyleSheet, SafeAreaView, TouchableOpacity, View } from 'r
 
 const Boarding1 = ({ navigation }) => {
     return (
-        <View>
+        <View style={styles.page}>
             <Image source={require('../assets/splash2.jpg')} style={styles.image} />
             <View style={styles.container}>
                 <Text style={styles.antext}>Book a Local</Text>
@@ -25,6 +25,10 @@ export default Boarding1
 
 
 const styles = StyleSheet.create({
+    page: {
+        flex: 1,
+        backgroundColor: 'black',
+    },
     image: {
         borderRadius: 12,
         width: 338,

@@ -3,7 +3,7 @@ import { Text, Image, StyleSheet, SafeAreaView, TouchableOpacity, View } from 'r
 
 const Boarding3 = ({ navigation }) => {
     return (
-        <View>
+        <View style={styles.page}>
             <Image source={require('../assets/splash4.jpg')} style={styles.image} />
             <View style={styles.container}>
                 <Text style={styles.antext}>Help Planet Earth</Text>
@@ -24,6 +24,10 @@ export default Boarding3
 
 
 const styles = StyleSheet.create({
+    page: {
+        flex: 1,
+        backgroundColor: 'black',
+    },
     image: {
         borderRadius: 12,
         width: 338,

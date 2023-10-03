@@ -23,17 +23,17 @@ const AccountScreen = ({ navigation }) => {
         </View>
         <Text style={styles.title}>Welcome, {user.name}!</Text>
         <Text style={styles.subtitle}>Email: {user.email}</Text>
-        <View style={styles.detailsContainer}>
+        {/* <View style={styles.detailsContainer}>
           <Text style={styles.detailLabel}>Age:</Text>
           <Text style={styles.detailText}>{user.age}</Text>
-        </View>
+        </View> */}
         <View style={styles.detailsContainer}>
           <Text style={styles.detailLabel}>Location:</Text>
           <Text style={styles.detailText}>{user.location}</Text>
         </View>
         <Score />
-        <Button title="Edit Profile" onPress={() => navigation.navigate('EditProfile')} />
-        <Button title="Logout" onPress={handleLogout} />
+        <Button title="Edit Profile" onPress={() => navigation.navigate('EditProfile')} style={styles.btn}/>
+        <Button title="Logout" onPress={handleLogout} style={styles.btn}/>
       </ScrollView>
     </SafeAreaView>
   );
@@ -81,4 +81,8 @@ const styles = StyleSheet.create({
   detailText: {
     fontSize: 16,
   },
+  btn: {
+    margin: 20,
+    width: 45,
+  }
 });

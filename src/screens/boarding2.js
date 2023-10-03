@@ -3,7 +3,7 @@ import { Text, Image, StyleSheet, SafeAreaView, TouchableOpacity, View } from 'r
 
 const Boarding2 = ({ navigation }) => {
     return (
-        <View>
+        <View style={styles.page}>
             <Image source={require('../assets/splash3.jpg')} style={styles.image} />
             <View style={styles.container}>
                 <Text style={styles.antext}>Discover Amazing Place</Text>
@@ -24,6 +24,10 @@ export default Boarding2
 
 
 const styles = StyleSheet.create({
+    page: {
+        flex: 1,
+        backgroundColor: 'black',
+    },
     image: {
         borderRadius: 12,
         width: 338,
@@ -34,7 +38,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         margin: 10,
         backgroundColor: 'black',
-        borderColor: 'black',
+        borderColor: 'lightgreen',
         borderWidth: 2,
     },
     btn: {
