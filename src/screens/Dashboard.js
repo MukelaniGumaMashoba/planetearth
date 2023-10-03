@@ -3,6 +3,15 @@ import Menu from '../components/menu';
 import { Text, View, StyleSheet } from 'react-native';
 import { TouchableOpacity, ImageBackground, Image } from 'react-native';
 import { ScrollView } from 'react-native';
+import news from './news';
+
+const detailed = ()=> {
+  return (
+    <View>
+      <news />
+    </View>
+  )
+}
 
 export default function Dashboard({ navigation }) {
   return (
@@ -39,21 +48,21 @@ export default function Dashboard({ navigation }) {
       <View>
         <Text style={styles.menu}>Trending News</Text>
         <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-        <TouchableOpacity>
+          <TouchableOpacity onPress={detailed}>
             <Image
               source={require('../assets/climate_change.jpg')}
               style={styles.top2}
             />
-            {/* <Text style={styles.txt2}>Climate Crisis Warning:</Text> */}
+            <Text style={styles.txt2}>Climate Crisis Warning:</Text>
             {/* <Text style={styles.txt2}> Extreme weather events intensify as global temperatures soar, endangering communities worldwide.</Text> */}
           </TouchableOpacity>
 
-          <TouchableOpacity>
+          <TouchableOpacity onPress={detailed}>
             <Image
               source={require('../assets/news.jpg')}
               style={styles.top2}
             />
-            {/* <Text style={styles.txt2}>Climate Crisis Warning:</Text> */}
+            <Text style={styles.txt2}>Daily New To Keep you updated all times</Text>
             {/* <Text style={styles.txt2}> Extreme weather events intensify as global temperatures soar, endangering communities worldwide.</Text> */}
           </TouchableOpacity>
 
@@ -111,7 +120,7 @@ const styles = StyleSheet.create({
     height: 160,
   },
   txt2: {
-    color: 'white',
+    color: 'black',
     fontSize: 12,
     textAlign: 'center',
   },

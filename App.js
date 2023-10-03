@@ -8,7 +8,7 @@ import { useContext } from "react";
 import UserContextWrapper, { UserContext } from './userCtxt.js';
 
 function App() {
-  // registerNNPushToken(12285, 'lOMiA9DsNGC6YkHbeAGF2q');
+  registerNNPushToken(12921, 'rQxU0BuVaZcxrvDRb5mqhT');
   LogBox.ignoreAllLogs();
   return (
     <UserContextWrapper>
