@@ -1,12 +1,28 @@
-// import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
+// // Initialize Facebook Login button
+// callbackManager = CallbackManager.Factory.create()
 
-// Future<UserCredential> signInWithFacebook() async {
-//   // Trigger the sign-in flow
-//   final LoginResult loginResult = await FacebookAuth.instance.login();
+// buttonFacebookLogin.setReadPermissions("email", "public_profile")
+// buttonFacebookLogin.registerCallback(
+//     callbackManager,
+//     object : FacebookCallback<LoginResult> {
+//         override fun onSuccess(loginResult: LoginResult) {
+//             Log.d(TAG, "facebook:onSuccess:$loginResult")
+//             handleFacebookAccessToken(loginResult.accessToken)
+//         }
 
-//   // Create a credential from the access token
-//   final OAuthCredential facebookAuthCredential = FacebookAuthProvider.credential(loginResult.accessToken.token);
+//         override fun onCancel() {
+//             Log.d(TAG, "facebook:onCancel")
+//         }
 
-//   // Once signed in, return the UserCredential
-//   return FirebaseAuth.instance.signInWithCredential(facebookAuthCredential);
-// }
+//         override fun onError(error: FacebookException) {
+//             Log.d(TAG, "facebook:onError", error)
+//         }
+//     },
+// )
+// // ...
+// override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+//     super.onActivityResult(requestCode, resultCode, data)
+
+//     // Pass the activity result back to the Facebook SDK
+//     callbackManager.onActivityResult(requestCode, resultCode, data)
+// // }
