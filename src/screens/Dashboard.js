@@ -8,7 +8,7 @@ import News from '../components/news';
 const Newspaper = () => {
   return (
     <View>
-      <Menu />
+      <News />
     </View>
   );
 }
