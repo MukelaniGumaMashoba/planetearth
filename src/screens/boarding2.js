@@ -6,8 +6,8 @@ const Boarding2 = ({ navigation }) => {
         <View style={styles.page}>
             <Image source={require('../assets/splash3.jpg')} style={styles.image} />
             <View style={styles.container}>
-                <Text style={styles.antext}>Discover Amazing Place</Text>
-                <Text>You can now book pravite city tours with locals on the top go experience a new place like never before</Text>
+                <Text style={styles.antext}>Discover Amazing Skills</Text>
+                <Text>You can use Planet Pulse to gain more news about glabal warnign and also involve your self in this news which are available in the application</Text>
                 <TouchableOpacity style={styles.btn} onPress={() => navigation.navigate('Boarding3')}>
                     <Text style={styles.texts}>Next</Text>
                 </TouchableOpacity>

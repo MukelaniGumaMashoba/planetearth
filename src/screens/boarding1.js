@@ -6,8 +6,8 @@ const Boarding1 = ({ navigation }) => {
         <View style={styles.page}>
             <Image source={require('../assets/splash2.jpg')} style={styles.image} />
             <View style={styles.container}>
-                <Text style={styles.antext}>Book a Local</Text>
-                <Text>You can now book pravite city tours with locals on the top go experience a new place like never before</Text>
+                <Text style={styles.antext}>Welcome</Text>
+                <Text>You can now start by Allowing Notifications and learn more on how to use renewable resources available all times and make a change in planet earth with reminders</Text>
                 <TouchableOpacity style={styles.btn} onPress={() => navigation.navigate('Boarding2')}>
                     <Text style={styles.texts}>Allow Notifications</Text>
                 </TouchableOpacity>

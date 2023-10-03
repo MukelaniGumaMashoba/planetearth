@@ -61,7 +61,7 @@ const GameScreen = () => {
       correctAnswer: 'D. All of the Above',
     },
     {
-      question: 'What is the capital of France?',
+      question: 'Which of these practices promote eco-friendly living and conservation?',
       options: ['A. Reduce, reuse, and recycle',
         'B. Use energy-efficient appliances and vehicles',
         'C. Plant trees and support reforestation efforts',
@@ -100,7 +100,7 @@ const GameScreen = () => {
   const handleAnswer = async (answer) => {
     const isCorrect = answer === questions[currentQuestion].correctAnswer;
     if (isCorrect) {
-      setScore(score + 10);
+      setScore(score + 12);
     }
 
 

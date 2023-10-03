@@ -62,7 +62,7 @@ export default function Register({ navigation }) {
         />
         <Button mode="contained" title='Enter' onPress={userRegister} />
 
-        <TouchableOpacity onPress={() => navigation.navigate('Register')}>
+        <TouchableOpacity onPress={() => navigation.navigate('Login')}>
           <Text style={styles.link}>Already Have An Account</Text>
         </TouchableOpacity>
 
