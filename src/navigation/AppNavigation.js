@@ -6,6 +6,7 @@ import Game from '../screens/Game.js';
 import { Settings } from '../screens/Settings';
 import AccountScreen from '../screens/AccountScreen';
 import Inbox from '../screens/Inbox';
+import News from '../components/news';
 
 const Tab = createMaterialBottomTabNavigator();
 
@@ -63,7 +64,7 @@ export function AppNavigation() {
                 options={{
                     tabBarLabel: 'Inbox',
                     tabBarIcon: ({ color }) => (
-                        <Icon name="rocket" color={color} size={26} />
+                        <Icon name="notifications" color={color} size={26} />
                     ),
                 }}
             />

@@ -3,6 +3,7 @@ import Menu from '../components/menu';
 import { Text, View, StyleSheet } from 'react-native';
 import { TouchableOpacity, ImageBackground, Image } from 'react-native';
 import { ScrollView } from 'react-native';
+import Icon from 'react-native-vector-icons/Ionicons';
 import News from '../components/news';
 
 const Newspaper = () => {
@@ -18,6 +19,12 @@ export default function Dashboard({ navigation }) {
     <View style={styles.container}>
 
       <Text style={styles.welcomeText}>PlanetPulse</Text>
+
+      <View style={styles.icon}>
+        <Icon name="notifications" color='grey' size={26} />
+      </View>
+
+
       <Text style={styles.txt}>Know What Happening Around You All The Time.!</Text>
       <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
         <ImageBackground
@@ -48,7 +55,7 @@ export default function Dashboard({ navigation }) {
       <View>
         <Text style={styles.menu}>Trending News</Text>
         <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-        <TouchableOpacity onPress={Newspaper}>
+          <TouchableOpacity onPress={() => navigation.navigate('News')}>
             <Image
               source={require('../assets/climate_change.jpg')}
               style={styles.top2}
@@ -144,4 +151,8 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     padding: 15,
   },
+  icon: {
+    alignItems: 'flex-end',
+    margin: 12,
+  }
 });
