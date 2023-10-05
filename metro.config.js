@@ -6,3 +6,7 @@ const config = getDefaultConfig(__dirname);
 config.resolver.sourceExts.push('cjs');
 
 module.exports = config;
+
+// token = await Notifications.getExpoPushTokenAsync({
+//     projectId: Constants.expoConfig.extra.eas.projectId,
+//   });
