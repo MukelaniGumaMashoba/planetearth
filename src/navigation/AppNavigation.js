@@ -5,7 +5,6 @@ import Dashboard from '../screens/Dashboard';
 import Game from '../screens/Game.js';
 import { Settings } from '../screens/Settings';
 import AccountScreen from '../screens/AccountScreen';
-import Inbox from '../screens/Inbox';
 import News from '../components/news';
 
 const Tab = createMaterialBottomTabNavigator();
@@ -55,16 +54,6 @@ export function AppNavigation() {
                     tabBarLabel: 'Account',
                     tabBarIcon: ({ color }) => (
                         <Icon name="person" color={color} size={26} />
-                    ),
-                }}
-            />
-            <Tab.Screen
-                name="Inbox"
-                component={Inbox}
-                options={{
-                    tabBarLabel: 'Inbox',
-                    tabBarIcon: ({ color }) => (
-                        <Icon name="notifications" color={color} size={26} />
                     ),
                 }}
             />
