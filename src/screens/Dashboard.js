@@ -31,19 +31,15 @@ export default function Dashboard({ navigation }) {
           source={require('../assets/information.jpg')}
           style={styles.backgroundImage}
         >
-          <TouchableOpacity style={styles.top}>
-            <Text style={styles.txt2}>Global Warming Alert: </Text>
-            <Text style={styles.txt2}>Rising greenhouse gases are heating our planet, melting polar ice and threatening coastal cities.</Text>
-          </TouchableOpacity>
+          <Text style={styles.txt2}>Global Warming Alert: </Text>
+          <Text style={styles.txt2}>Rising greenhouse gases are heating our planet, melting polar ice and threatening coastal cities.</Text>
         </ImageBackground>
         <ImageBackground
           source={require('../assets/globe.png')}
           style={styles.backgroundImage}
         >
-          <TouchableOpacity style={styles.top}>
-            <Text style={styles.txt2}>Climate Crisis Warning:</Text>
-            <Text style={styles.txt2}> Extreme weather events intensify as global temperatures soar, endangering communities worldwide.</Text>
-          </TouchableOpacity>
+          <Text style={styles.txt2}>Climate Crisis Warning:</Text>
+          <Text style={styles.txt2}> Extreme weather events intensify as global temperatures soar, endangering communities worldwide.</Text>
         </ImageBackground>
       </ScrollView>
 
