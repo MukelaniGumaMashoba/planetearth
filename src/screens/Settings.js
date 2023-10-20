@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { StyleSheet, Text, View, TextInput, Button, TouchableOpacity, Alert } from 'react-native';
+import { StyleSheet, Text, View, TextInput, Button, TouchableOpacity, Alert, Modal } from 'react-native';
+import { PayFastWebView } from "react-native-payfast-gateway";
 
 export const Settings = () => {
 
@@ -64,6 +65,34 @@ export const Settings = () => {
     );
   };
 
+  const [success, setSuccess] = useState(false)
+  const [modalVisible, setModalVisible] = useState(false);
+  const [paymentData, setPaymentData] = useState({});
+
+  let onceOffPayment = {
+    merchant_id: "10000100",
+    merchant_key: '46f0cd694581a',
+    amount: "60.00",
+    item_name: 'Donation'
+  }
+
+  let subscription = {
+    subscription_type: 1,
+    recurring_amount: "200.00",
+    frequency: 3,
+    cycles: 0
+  }
+
+  function handleOnceOffPayment() {
+    setPaymentData(onceOffPayment);
+    setModalVisible(true);
+  }
+
+  function handleSubscriptionPayment() {
+    setPaymentData({ ...onceOffPayment, ...subscription });
+    setModalVisible(true);
+  }
+
 
   return (
     <View style={styles.container}>
@@ -104,24 +133,36 @@ export const Settings = () => {
         <View style={styles.donationButtons}>
           <TouchableOpacity
             style={styles.donationButton}
-            onPress={() => handleDonation(5)}
+            onPress={() => handleOnceOffPayment()}
           >
             <Text style={styles.buttonText}>Donate 5%</Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.donationButton}
-            onPress={() => handleDonation(7)}
+            onPress={() => handleOnceOffPayment()}
           >
             <Text style={styles.buttonText}>Donate 7%</Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.donationButton}
-            onPress={() => handleDonation(10)}
+            onPress={() => handleOnceOffPayment()}
           >
             <Text style={styles.buttonText}>Donate 10%</Text>
           </TouchableOpacity>
         </View>
       </View>
+
+
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={modalVisible}
+        onRequestClose={() => {
+          setModalVisible(!modalVisible);
+        }}
+      >
+        <PayFastWebView sandbox={true} onClick={() => setModalVisible(false)} callback={setSuccess} signature={true} data={paymentData} />
+      </Modal>
     </View>
   )
 }
@@ -194,4 +235,14 @@ const styles = StyleSheet.create({
     marginTop: 20,
     color: 'green',
   },
+  btnWrapper: {
+    width: "100%",
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  btn: {
+    margin: 10
+  }
+
 });
