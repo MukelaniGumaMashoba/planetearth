@@ -7,9 +7,11 @@ import { TextInput, Text, Button, View, TouchableOpacity, StyleSheet } from 'rea
 import LogOption from '../components/LogOption.js';
 
 export default function Register({ navigation }) {
+  const [error, setErrorMessage] = useState('');
   const [userData, setUserData] = useState({ email: "", password: "", cpassword: "" })
 
   const userRegister = () => {
+    setErrorMessage('');
     if (!userData.email || !userData.password) {
       setErrorMessage("Please enter both email and password.");
       return;
@@ -60,6 +62,10 @@ export default function Register({ navigation }) {
           value={userData.cpassword}
           onChangeText={(text) => { setUserData({ ...userData, cpassword: text }) }}
         />
+
+        {error !== '' && <Text style={styles.error}>{error}</Text>}
+
+
         <Button mode="contained" title='Enter' onPress={userRegister} />
 
         <TouchableOpacity onPress={() => navigation.navigate('Login')}>
@@ -123,8 +129,12 @@ const styles = StyleSheet.create({
     backgroundColor: 'white'
   },
   welcome: {
-    fontSize : 18,
+    fontSize: 18,
     fontWeight: 'bold',
     margin: 10,
-  }
+  },
+  error: {
+    color: 'red',
+    textAlign: 'center',
+  },
 });
