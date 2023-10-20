@@ -3,7 +3,7 @@ import { auth } from '../../firebase.js';
 import { UserContext } from '../../userCtxt.js';
 import React, { useContext, useState } from 'react'
 import { signInWithEmailAndPassword } from 'firebase/auth';
-import { TouchableOpacity, StyleSheet, View, Text, TextInput, Button, Image } from 'react-native';
+import { TouchableOpacity, StyleSheet, View, Text, TextInput, Button, Image, Alert } from 'react-native';
 import LogOption from '../components/LogOption.js';
 
 
@@ -13,6 +13,7 @@ export default function Log({ navigation }) {
   const [userData, setUserData] = useState({ email: "", password: "" })
 
   const userLogin = () => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     setErrorMessage('');
     if (!userData.email && !userData.password) {
       setErrorMessage("Email/Password Rquired..");
@@ -25,6 +26,9 @@ export default function Log({ navigation }) {
     else if (!userData.password) {
       setErrorMessage("Password required...");
       return;
+    }
+    else if (!emailRegex.test(userData.email)) {
+      Alert.alert('Invalid Email', 'Please enter a valid email address.');
     }
 
     signInWithEmailAndPassword(auth, userData.email, userData.password)

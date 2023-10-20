@@ -3,7 +3,7 @@ import { auth } from "../../firebase.js"
 import Logo from '../components/Logo.js';
 import { UserContext } from '../../userCtxt.js';
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { TextInput, Text, Button, View, TouchableOpacity, StyleSheet } from 'react-native';
+import { TextInput, Text, Button, View, TouchableOpacity, StyleSheet, Alert } from 'react-native';
 import LogOption from '../components/LogOption.js';
 
 export default function Register({ navigation }) {
@@ -11,7 +11,13 @@ export default function Register({ navigation }) {
   const [userData, setUserData] = useState({ email: "", password: "", cpassword: "" })
 
   const userRegister = () => {
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
     setErrorMessage('');
+    if (!emailRegex.test(userData.email)) {
+      Alert.alert('Invalid Email', 'Please enter a valid email address.');
+    }
     if (!userData.email || !userData.password) {
       setErrorMessage("Please enter both email and password.");
       return;
