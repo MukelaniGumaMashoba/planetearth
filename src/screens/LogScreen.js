@@ -15,7 +15,11 @@ export default function Log({ navigation }) {
   const userLogin = () => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     setErrorMessage('');
-    if (!userData.email && !userData.password) {
+
+    if (!emailRegex.test(userData.email)) {
+      Alert.alert('Invalid Email', 'Please enter a valid email address.');
+    }
+    else if (!userData.email && !userData.password) {
       setErrorMessage("Email/Password Rquired..");
       return;
     }
@@ -27,9 +31,7 @@ export default function Log({ navigation }) {
       setErrorMessage("Password required...");
       return;
     }
-    else if (!emailRegex.test(userData.email)) {
-      Alert.alert('Invalid Email', 'Please enter a valid email address.');
-    }
+
 
     signInWithEmailAndPassword(auth, userData.email, userData.password)
       .then((userCredential) => {
