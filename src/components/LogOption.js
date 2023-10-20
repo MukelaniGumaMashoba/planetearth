@@ -2,6 +2,7 @@ import React from 'react-native';
 import { StyleSheet, Image, Text, View, TouchableOpacity } from 'react-native';
 import { auth, signInWithPopup } from "firebase/auth";
 import { GoogleAuthProvider } from "firebase/auth";
+import { FacebookAuthProvider } from "firebase/auth";
 
 const LogOption = () => {
 
@@ -14,10 +15,18 @@ const handleGoogle = async () => {
         console.error("Error during Google authentication: ", error);
     }
 }
+const handleFacebook = async () => {
+    try {
+        const provider = new FacebookAuthProvider();
+        await signInWithPopup(auth, provider);
+    } catch (error) {
+        console.error("Error during Facebook authentication: ", error);
+    }
+}
 
     return (
         <View style={styles.row}>
-            <TouchableOpacity onPress={() => navigation.navigate("Home")} >
+            <TouchableOpacity onPress={handleFacebook} >
                 <Image source={require('../assets/iconacebook.png')} style={styles.img} />
             </TouchableOpacity>
             <TouchableOpacity onPress={handleGoogle} >
