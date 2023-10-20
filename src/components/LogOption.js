@@ -7,7 +7,7 @@ const LogOption = () => {
             <TouchableOpacity onPress={() => navigation.navigate("Home")} >
                 <Image source={require('../assets/iconacebook.png')} style={styles.img}/>
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => navigation.navigate("Home")} >
+            <TouchableOpacity onPress={() => navigation.navigate("Google")} >
                 <Image source={require('../assets/icongoogle.png')} style={styles.img}/>
             </TouchableOpacity>
         </View>

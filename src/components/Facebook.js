@@ -1,28 +1,26 @@
-// // Initialize Facebook Login button
-// callbackManager = CallbackManager.Factory.create()
+// import { getAuth, signInWithPopup, FacebookAuthProvider } from "firebase/auth";
 
-// buttonFacebookLogin.setReadPermissions("email", "public_profile")
-// buttonFacebookLogin.registerCallback(
-//     callbackManager,
-//     object : FacebookCallback<LoginResult> {
-//         override fun onSuccess(loginResult: LoginResult) {
-//             Log.d(TAG, "facebook:onSuccess:$loginResult")
-//             handleFacebookAccessToken(loginResult.accessToken)
-//         }
+// const auth = getAuth();
+// signInWithPopup(auth, provider)
+//   .then((result) => {
+//     // The signed-in user info.
+//     const user = result.user;
 
-//         override fun onCancel() {
-//             Log.d(TAG, "facebook:onCancel")
-//         }
+//     // This gives you a Facebook Access Token. You can use it to access the Facebook API.
+//     const credential = FacebookAuthProvider.credentialFromResult(result);
+//     const accessToken = credential.accessToken;
 
-//         override fun onError(error: FacebookException) {
-//             Log.d(TAG, "facebook:onError", error)
-//         }
-//     },
-// )
-// // ...
-// override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-//     super.onActivityResult(requestCode, resultCode, data)
+//     // IdP data available using getAdditionalUserInfo(result)
+//     // ...
+//   })
+//   .catch((error) => {
+//     // Handle Errors here.
+//     const errorCode = error.code;
+//     const errorMessage = error.message;
+//     // The email of the user's account used.
+//     const email = error.customData.email;
+//     // The AuthCredential type that was used.
+//     const credential = FacebookAuthProvider.credentialFromError(error);
 
-//     // Pass the activity result back to the Facebook SDK
-//     callbackManager.onActivityResult(requestCode, resultCode, data)
-// // }
+//     // ...
+//   });

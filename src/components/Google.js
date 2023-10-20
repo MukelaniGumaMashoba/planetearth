@@ -1,32 +1,22 @@
-import auth from '@react-native-firebase/auth';
-import { GoogleSignin } from '@react-native-google-signin/google-signin';
+import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 
-GoogleSignin.configure({
-  webClientId: 'YOUR_WEB_CLIENT_ID', 
-});
-
-async function signInWithGoogle() {
-  try {
-    await GoogleSignin.hasPlayServices();
-    const userInfo = await GoogleSignin.signIn();
-    const { idToken, accessToken } = userInfo;
-
-    const googleCredential = auth.GoogleAuthProvider.credential(idToken, accessToken);
-
-    const userCredential = await auth().signInWithCredential(googleCredential);
-
-    const user = userCredential.user;
-    console.log('Google Sign-In Successful!', user);
-    
-  } catch (error) {
-    if (error.code === statusCodes.SIGN_IN_CANCELLED) {
-      console.log('Google Sign-In Cancelled');
-    } else if (error.code === statusCodes.IN_PROGRESS) {
-      console.log('Google Sign-In In Progress');
-    } else if (error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
-      console.log('Google Play Services Not Available');
-    } else {
-      console.log('Error:', error.message);
-    }
-  }
-}
+const auth = getAuth();
+signInWithPopup(auth)
+  .then((result) => {
+    // This gives you a Google Access Token. You can use it to access the Google API.
+    const credential = GoogleAuthProvider.credentialFromResult(result);
+    const token = credential.accessToken;
+    // The signed-in user info.
+    const user = result.user;
+    // IdP data available using getAdditionalUserInfo(result)
+    // ...
+  }).catch((error) => {
+    // Handle Errors here.
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    // The email of the user's account used.
+    const email = error.customData.email;
+    // The AuthCredential type that was used.
+    const credential = GoogleAuthProvider.credentialFromError(error);
+    // ...
+  });
