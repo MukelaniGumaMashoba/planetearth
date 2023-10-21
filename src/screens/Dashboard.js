@@ -92,9 +92,13 @@ export default function Dashboard({ navigation }) {
         >
           <View style={styles.modalContainer}>
             <TouchableOpacity onPress={Close}>
-              <Text>Back</Text>
+              <Text style={styles.btn}>Back</Text>
             </TouchableOpacity>
-            <News />
+
+            <View style={styles.newContainer}>
+              <News />
+            </View>
+
           </View>
         </Modal>
       </View>
@@ -137,11 +141,6 @@ const styles = StyleSheet.create({
     marginBottom: 15,
   },
   backgroundImage: {
-    // flex: 1,
-    // borderRadius: 12,
-    // resizeMode: 'cover',
-    // justifyContent: 'center',
-    // alignItems: 'center',
     marginRight: 15,
     marginBottom: 15,
     borderColor: 'lightgreen',
@@ -182,4 +181,18 @@ const styles = StyleSheet.create({
     backgroundColor: 'grey',
     height: '100%'
   },
+  btn: {
+    backgroundColor: "lightgreen",
+    padding: 10,
+    margin: 10,
+    borderWidth: 1,
+    borderRadius: 12,
+    textAlign: 'center',
+    fontWeight: 'bold'
+  },
+  newContainer: {
+    backgroundColor: 'white',
+    margin: 10,
+    borderRadius: 20,
+  }
 });

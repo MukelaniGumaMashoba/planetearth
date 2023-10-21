@@ -5,7 +5,7 @@ const News = () => {
   return (
     <ScrollView style={styles.container}>
       <Text style={styles.title}>
-        Embracing a Greener Tomorrow: How React Native is Powering Change in the Age of Globalization
+        Embracing a Greener Tomorrow:Change in the Age of Globalization
       </Text>
       <Text style={styles.paragraph}>
         In today's rapidly changing world, where the boundaries between nations are becoming blurrier...
