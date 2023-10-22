@@ -6,6 +6,7 @@ import Game from '../screens/Game.js';
 import { Settings } from '../screens/Settings';
 import AccountScreen from '../screens/AccountScreen';
 import News from '../components/news';
+import Menu from '../components/menu';
 
 const Tab = createMaterialBottomTabNavigator();
 
@@ -54,6 +55,16 @@ export function AppNavigation() {
                     tabBarLabel: 'Account',
                     tabBarIcon: ({ color }) => (
                         <Icon name="person" color={color} size={26} />
+                    ),
+                }}
+            />
+            <Tab.Screen
+                name="Menu"
+                component={Menu}
+                options={{
+                    tabBarLabel: 'Menu',
+                    tabBarIcon: ({ color }) => (
+                        <Icon name="Setting" color={color} size={26} />
                     ),
                 }}
             />
