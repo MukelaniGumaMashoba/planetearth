@@ -72,9 +72,9 @@ export const Settings = ({ navigation }) => {
     merchant_key: "46f0cd694581a",
     amount: "60.00",
     item_name: "Donation",
-    return_url: "https://ulink.uj.ac.za/Default",
-    cancel_url: "https://ulink.uj.ac.za/Default",
-    notify_url: "https://ulink.uj.ac.za/Default",
+    // return_url: "https://ulink.uj.ac.za/Default",
+    // cancel_url: "https://ulink.uj.ac.za/Default",
+    // notify_url: "https://ulink.uj.ac.za/Default",
     name_first: user.name,
     email_address: user.email,
   };
