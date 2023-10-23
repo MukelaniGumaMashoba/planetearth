@@ -191,7 +191,7 @@ export const Settings = ({ navigation }) => {
         <Ozow
           data={{
             SiteCode: "IPR-IPR-003",
-            Amount: 10, // in rands
+            Amount: paymentData.amount, 
             Currency: "ZAR",
             CountryCode: "ZA",
             TransactionReference: "1234567",
@@ -200,11 +200,19 @@ export const Settings = ({ navigation }) => {
             ErrorUrl: "https://www.ozow.com",
             SuccessUrl: "https://www.ozow.com",
             NotifyUrl: "https://www.ozow.com",
+            IsTest:true
           }}
           privateKey="f276b028558946308361979e4bf88ffa"
-          onErrorMessage={() => { }}
-          onPaymentCancel={(data) => { }}
-          onPaymentSuccess={(data) => { }}
+          // onErrorMessage={(erro) => {
+          //   console.log(erro);
+          //  }}
+          onPaymentCancel={(data) => { 
+            console.log(data);
+          }}
+          onPaymentSuccess={(data) => {
+            console.log(data);
+            setModalVisible(!modalVisible);
+          }}
         />
       </Modal>
     </View>
