@@ -7,8 +7,21 @@ import { Settings } from '../screens/Settings';
 import AccountScreen from '../screens/AccountScreen';
 import News from '../components/news';
 import Menu from '../components/menu';
+import { CostSavings } from '../screens/CostSavings';
 
 const Tab = createMaterialBottomTabNavigator();
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+
+const Stack = createNativeStackNavigator();
+
+function StackNavigator() {
+    return (
+      <Stack.Navigator>
+        <Stack.Screen name="CostSavings" component={CostSavings} />
+      </Stack.Navigator>
+    );
+  }
+
 
 export function AppNavigation() {
     return (
@@ -58,16 +71,16 @@ export function AppNavigation() {
                     ),
                 }}
             />
-            <Tab.Screen
+            {/* <Tab.Screen
                 name="Menu"
-                component={Menu}
+                component={StackNavigator}
                 options={{
                     tabBarLabel: 'Menu',
                     tabBarIcon: ({ color }) => (
                         <Icon name="Setting" color={color} size={26} />
                     ),
                 }}
-            />
+            /> */}
 
         </Tab.Navigator>
     );
