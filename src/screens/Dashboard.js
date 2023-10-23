@@ -56,7 +56,7 @@ export default function Dashboard({ navigation }) {
 
       <View>
         <Text style={styles.menu}>Menu</Text>
-        <Menu />
+        <Menu navigation={navigation} />
       </View>
 
       <View>

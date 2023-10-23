@@ -5,8 +5,8 @@ import Dashboard from '../screens/Dashboard';
 import Game from '../screens/Game.js';
 import { Settings } from '../screens/Settings';
 import AccountScreen from '../screens/AccountScreen';
-import News from '../components/news';
-import Menu from '../components/menu';
+// import News from '../components/news';
+// import Menu from '../components/menu';
 import { CostSavings } from '../screens/CostSavings';
 
 const Tab = createMaterialBottomTabNavigator();
@@ -17,6 +17,7 @@ const Stack = createNativeStackNavigator();
 function StackNavigator() {
     return (
       <Stack.Navigator>
+        <Stack.Screen name="Home" component={Dashboard} />
         <Stack.Screen name="CostSavings" component={CostSavings} />
       </Stack.Navigator>
     );
@@ -32,7 +33,7 @@ export function AppNavigation() {
         >
             <Tab.Screen
                 name="Home"
-                component={Dashboard}
+                component={StackNavigator}
                 options={{
                     tabBarLabel: 'Home',
                     tabBarIcon: ({ color }) => (
@@ -73,7 +74,7 @@ export function AppNavigation() {
             />
             {/* <Tab.Screen
                 name="Menu"
-                component={StackNavigator}
+                component={Menu}
                 options={{
                     tabBarLabel: 'Menu',
                     tabBarIcon: ({ color }) => (

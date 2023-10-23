@@ -14,7 +14,7 @@ export default function Menu({ navigation }) {
                 <Text style={styles.text}>Game</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity style={styles.item} onPress={() => navigation.navigate("CostSaving")}>
+            <TouchableOpacity style={styles.item} onPress={() => navigation.navigate("CostSavings")}>
                 <Image source={require('../assets/piggy-bank.png')} style={styles.image} />
                 <Text style={styles.text}>Save</Text>
             </TouchableOpacity>
