@@ -9,7 +9,7 @@ import {
   Alert,
   Modal,
 } from "react-native";
-import { PayFastWebView } from "react-native-payfast-gateway";
+//import { PayFastWebView } from "react-native-payfast-gateway";
 import { UserContext } from "../../userCtxt";
 
 export const CostSavings = ({ navigation }) => {
@@ -186,13 +186,13 @@ export const CostSavings = ({ navigation }) => {
           setModalVisible(!modalVisible);
         }}
       >
-        <PayFastWebView
+        {/* <PayFastWebView
           sandbox={true}
           onClick={() => setModalVisible(false)}
           callback={handleResponse}
           //signature={true}
           data={paymentData}
-        />
+        /> */}
       </Modal>
     </View>
   );
