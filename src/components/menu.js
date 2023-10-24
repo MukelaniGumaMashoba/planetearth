@@ -19,7 +19,7 @@ export default function Menu({ navigation }) {
                 <Text style={styles.text}>Save</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity style={styles.item} onPress={() => navigation.navigate("Settings")}>
+            <TouchableOpacity style={styles.item} onPress={() => navigation.navigate("Account")}>
                 <Image source={require('../assets/settings.png')} style={styles.image} />
                 <Text style={styles.text}>Settings</Text>
             </TouchableOpacity>

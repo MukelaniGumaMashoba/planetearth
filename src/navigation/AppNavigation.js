@@ -6,22 +6,24 @@ import Game from '../screens/Game.js';
 import AccountScreen from '../screens/AccountScreen';
 import { CostSavings } from '../screens/CostSavings';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import Settings from '../screens/Settings'
+import Calculator from '../screens/Calculator'
+import { Gamification } from '../screens/Gamification';
+
 
 const Tab = createMaterialBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 
 function StackNavigator() {
     return (
-      <Stack.Navigator initialRouteName='Dashboard' screenOptions={{
-        headerShown: false
-      }}>
-        <Stack.Screen name="Dashboard" component={Dashboard} />
-        <Stack.Screen name="CostSavings" component={CostSavings} />
-        <Stack.Screen name="Game" component={Game} />
-      </Stack.Navigator>
+        <Stack.Navigator initialRouteName='Dashboard' screenOptions={{
+            headerShown: false
+        }}>
+            <Stack.Screen name="Dashboard" component={Dashboard} />
+            <Stack.Screen name="CostSavings" component={CostSavings} />
+            <Stack.Screen name="Game" component={Game} />
+        </Stack.Navigator>
     );
-  }
+}
 
 
 export function AppNavigation() {
@@ -42,8 +44,8 @@ export function AppNavigation() {
                 }}
             />
             <Tab.Screen
-                name="Settings"
-                component={Settings}
+                name="Calculator"
+                component={Calculator}
                 options={{
                     tabBarLabel: 'Calculator',
                     tabBarIcon: ({ color }) => (
@@ -52,16 +54,16 @@ export function AppNavigation() {
                 }}
             />
 
-            {/* <Tab.Screen
+            <Tab.Screen
                 name="Gamification"
-                component={Gamification_}
+                component={Gamification}
                 options={{
                     tabBarLabel: 'Gamification',
                     tabBarIcon: ({ color }) => (
                         <Icon name="game-controller" color={color} size={26} />
                     ),
                 }}
-            /> */}
+            />
             <Tab.Screen
                 name="Account"
                 component={AccountScreen}

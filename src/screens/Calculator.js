@@ -1,8 +1,9 @@
 import React from 'react'
+import { Text } from 'react-native'
 
 const Calculator = () => {
   return (
-    <div>Calculator</div>
+    <Text>Calculator</Text>
   )
 }
 

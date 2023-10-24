@@ -1,6 +1,5 @@
 import Log from '../screens/LogScreen';
 import Register from '../screens/RegisterScreen';
-import { CodeScreen } from '../screens/CodeScreen';
 import { LoadingScreen } from '../screens/LoadingScreen';
 import ResetPasswordScreen from '../screens/ResetPasswordScreen';
 import Boarding1 from '../screens/boarding1';
@@ -22,7 +21,6 @@ function AuthNavigator() {
         <Stack.Screen name="Boarding3" component={Boarding3}/>
         <Stack.Screen name="Login" component={Log} />
         <Stack.Screen name="Register" component={Register} />
-        <Stack.Screen name="Code" component={CodeScreen} />
         <Stack.Screen name="ResetPasswordScreen" component={ResetPasswordScreen} />
       </Stack.Navigator>
   );
