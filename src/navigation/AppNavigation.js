@@ -3,11 +3,10 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import Dashboard from '../screens/Dashboard';
 import Game from '../screens/Game.js';
-import { Settings } from '../screens/Settings';
 import AccountScreen from '../screens/AccountScreen';
 import { CostSavings } from '../screens/CostSavings';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import Gamification_ from '../screens/Gamification'
+import Settings from '../screens/Settings'
 
 const Tab = createMaterialBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -73,17 +72,6 @@ export function AppNavigation() {
                     ),
                 }}
             />
-            {/* <Tab.Screen
-                name="Menu"
-                component={Menu}
-                options={{
-                    tabBarLabel: 'Menu',
-                    tabBarIcon: ({ color }) => (
-                        <Icon name="Setting" color={color} size={26} />
-                    ),
-                }}
-            /> */}
-
         </Tab.Navigator>
     );
 }
