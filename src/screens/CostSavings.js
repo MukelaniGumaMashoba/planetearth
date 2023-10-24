@@ -9,8 +9,9 @@ import {
   Alert,
   Modal,
 } from "react-native";
-//import { PayFastWebView } from "react-native-payfast-gateway";
+import { Ozow } from "react-native-ozow"
 import { UserContext } from "../../userCtxt";
+
 
 export const CostSavings = ({ navigation }) => {
   const { user } = useContext(UserContext);
@@ -186,13 +187,32 @@ export const CostSavings = ({ navigation }) => {
           setModalVisible(!modalVisible);
         }}
       >
-        {/* <PayFastWebView
-          sandbox={true}
-          onClick={() => setModalVisible(false)}
-          callback={handleResponse}
-          //signature={true}
-          data={paymentData}
-        /> */}
+        <Ozow
+          data={{
+            SiteCode: "IPR-IPR-003",
+            Amount: paymentData.amount,
+            Currency: "ZAR",
+            CountryCode: "ZA",
+            TransactionReference: "1234567",
+            BankReference: "123456",
+            CancelUrl: "https://www.ozow.com",
+            ErrorUrl: "https://www.ozow.com",
+            SuccessUrl: "https://www.ozow.com",
+            NotifyUrl: "https://www.ozow.com",
+            IsTest: false
+          }}
+          privateKey="f276b028558946308361979e4bf88ffa"
+          onErrorMessage={(erro) => {
+            console.log(erro);
+          }}
+          onPaymentCancel={(data) => {
+            console.log(data);
+          }}
+          onPaymentSuccess={(data) => {
+            console.log(data);
+            setModalVisible(!modalVisible);
+          }}
+        />
       </Modal>
     </View>
   );
