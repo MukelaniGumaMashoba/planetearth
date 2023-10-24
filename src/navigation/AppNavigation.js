@@ -53,7 +53,7 @@ export function AppNavigation() {
                 }}
             />
 
-            <Tab.Screen
+            {/* <Tab.Screen
                 name="Gamification"
                 component={Gamification_}
                 options={{
@@ -62,7 +62,7 @@ export function AppNavigation() {
                         <Icon name="game-controller" color={color} size={26} />
                     ),
                 }}
-            />
+            /> */}
             <Tab.Screen
                 name="Account"
                 component={AccountScreen}
