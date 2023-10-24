@@ -7,7 +7,7 @@ import { Settings } from '../screens/Settings';
 import AccountScreen from '../screens/AccountScreen';
 import { CostSavings } from '../screens/CostSavings';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import Gamification_ from '../screens/Game'
+import Gamification_ from '../screens/Gamification'
 
 const Tab = createMaterialBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -57,7 +57,7 @@ export function AppNavigation() {
                 name="Gamification"
                 component={Gamification_}
                 options={{
-                    tabBarLabel: 'Game',
+                    tabBarLabel: 'Gamification',
                     tabBarIcon: ({ color }) => (
                         <Icon name="game-controller" color={color} size={26} />
                     ),
