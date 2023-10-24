@@ -5,20 +5,21 @@ import Dashboard from '../screens/Dashboard';
 import Game from '../screens/Game.js';
 import { Settings } from '../screens/Settings';
 import AccountScreen from '../screens/AccountScreen';
-// import News from '../components/news';
-// import Menu from '../components/menu';
 import { CostSavings } from '../screens/CostSavings';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import Gamification_ from '../screens/Game'
 
 const Tab = createMaterialBottomTabNavigator();
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-
 const Stack = createNativeStackNavigator();
 
 function StackNavigator() {
     return (
-      <Stack.Navigator>
+      <Stack.Navigator initialRouteName='Dashboard' screenOptions={{
+        headerShown: false
+      }}>
         <Stack.Screen name="Dashboard" component={Dashboard} />
         <Stack.Screen name="CostSavings" component={CostSavings} />
+        <Stack.Screen name="Game" component={Game} />
       </Stack.Navigator>
     );
   }
@@ -53,8 +54,8 @@ export function AppNavigation() {
             />
 
             <Tab.Screen
-                name="Game"
-                component={Game}
+                name="Gamification"
+                component={Gamification_}
                 options={{
                     tabBarLabel: 'Game',
                     tabBarIcon: ({ color }) => (

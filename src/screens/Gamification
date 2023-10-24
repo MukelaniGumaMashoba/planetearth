@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { NativeBaseProvider, Box, Center, Heading, Button, Text, Icon, Progress, ScrollView } from 'native-base';
 import { FontAwesome } from '@expo/vector-icons';
 
-export default function App() {
+
+function Gamification_() {
   const [companies, setCompanies] = useState([
     { name: 'Company A', emissions: 90, goal: 50 },
     { name: 'Company B', emissions: 55, goal: 75 },
@@ -139,3 +140,5 @@ export default function App() {
     </NativeBaseProvider>
   );
 }
+
+export default Gamification_
