@@ -9,7 +9,7 @@ const GameScreen = () => {
 
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [score, setScore] = useState(0);
-  // const fadeAnim = new Animated.Value(0);
+
 
   const questions = [
     {

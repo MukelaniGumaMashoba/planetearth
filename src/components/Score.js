@@ -39,11 +39,9 @@ const styles = StyleSheet.create({
   scoreText: {
     fontSize: 20,
     marginBottom: 10,
-    // color: '#007BFF',
   },
   score: {
     fontSize: 36,
     fontWeight: 'bold',
-    // color: '#4CAF50',
   },
 });

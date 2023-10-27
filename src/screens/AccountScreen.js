@@ -26,15 +26,7 @@ const AccountScreen = ({ navigation }) => {
           <Text style={styles.title}>Welcome, {user.name}!</Text>
           <Text style={styles.subtitle}>Email: {user.email}</Text>
         </View>
-
-        {/* <View style={styles.detailsContainer}>
-          <Text style={styles.detailLabel}>Age:</Text>
-          <Text style={styles.detailText}>{user.age}</Text>
-        </View> */}
-        {/* <View style={styles.detailsContainer}>
-          <Text style={styles.detailLabel}>Location:</Text>
-          <Text style={styles.detailText}>{user.location}</Text>
-        </View> */}
+    
         <Score />
         <View style={styles.container2}>
           <TouchableOpacity onPress={() => navigation.navigate('EditProfile')} style={styles.button}>

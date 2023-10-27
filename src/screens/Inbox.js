@@ -14,7 +14,6 @@ Notifications.setNotificationHandler({
 });
 
 
-// Can use this function below or use Expo's Push Notification Tool from: https://expo.dev/notifications
 async function sendPushNotification(expoPushToken) {
   const message = {
     to: expoPushToken,
