@@ -3,9 +3,11 @@ import { auth } from '../../firebase.js';
 import { UserContext } from '../../userCtxt.js';
 import React, { useContext, useState } from 'react'
 import { signInWithEmailAndPassword } from 'firebase/auth';
-import { TouchableOpacity, StyleSheet, View, Text, TextInput, Button, Image, Alert } from 'react-native';
+import { TouchableOpacity, StyleSheet, View, Text, TextInput, Button, Image, Alert, ImageBackground } from 'react-native';
 import LogOption from '../components/LogOption.js';
 
+// Import your LogBack.jpg image
+import LogBackground from '../assets/LogBack.jpg';
 
 export default function Log({ navigation }) {
   const { doLogin } = useContext(UserContext);
@@ -32,7 +34,6 @@ export default function Log({ navigation }) {
       return;
     }
 
-
     signInWithEmailAndPassword(auth, userData.email, userData.password)
       .then((userCredential) => {
         const user = userCredential.user;
@@ -44,17 +45,16 @@ export default function Log({ navigation }) {
       });
   }
 
-
   return (
-    <View style={styles.container}>
+    <ImageBackground source={LogBackground} style={styles.container}>
       <Logo style={styles.ogo} />
       <View style={styles.new}>
-        <Text style={styles.title}>Welcome Back</Text>
-
+        <Text style={styles.title}>Welcome Back!👋</Text>
         <TextInput
           placeholder='Email'
           label="Email"
-          returnKeyType="next" style={styles.input}
+          returnKeyType="next"
+          style={styles.input}
           autoCapitalize="none"
           autoCompleteType="email"
           textContentType="emailAddress"
@@ -65,14 +65,13 @@ export default function Log({ navigation }) {
         <TextInput
           placeholder='Password'
           label="Password"
-          returnKeyType="done" style={styles.input}
+          returnKeyType="done"
+          style={styles.input}
           secureTextEntry
           value={userData.password}
           onChangeText={(text) => { setUserData({ ...userData, password: text }) }}
         />
-
         {error !== '' && <Text style={styles.error}>{error}</Text>}
-
         <View style={styles.forgotPassword}>
           <TouchableOpacity
             onPress={() => navigation.navigate('ResetPasswordScreen')}
@@ -80,30 +79,35 @@ export default function Log({ navigation }) {
             <Text style={styles.forgot}>Forgot your password ?</Text>
           </TouchableOpacity>
         </View>
-        <Button mode="contained" title='Log in' onPress={userLogin} />
-
+        <Button
+          mode="contained"
+          title='Log in'
+          onPress={userLogin}
+          color="green" // Change button background color to green
+          style={{ width: 200 }} // Set the width of the button to 200
+        />
         <View>
           <TouchableOpacity onPress={() => navigation.navigate('Register')}>
-            <Text style={[styles.link, styles.acc]}>Create Account</Text>
+            <Text style={[styles.link, styles.acc]}>Don't have an account? Sign up</Text>
           </TouchableOpacity>
         </View>
         <LogOption />
       </View>
-    </View>
+    </ImageBackground>
   )
 }
-
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: "center",
-    padding: 20,
+    paddingHorizontal: 5,
+    paddingVertical: 20,
     fontFamily: 'Roboto',
-    backgroundColor: 'lightgreen'
+    backgroundColor: 'rgba(255, 255, 255, 0.7)', // 30% transparent white
   },
   title: {
-    fontSize: 14,
+    fontSize: 25,
     fontWeight: 'bold',
     marginBottom: 15,
   },
@@ -111,17 +115,17 @@ const styles = StyleSheet.create({
     marginBottom: 16,
     borderWidth: 1,
     borderColor: 'grey',
-    borderRadius: 16,
+    borderRadius: 5,
     padding: 6,
     fontSize: 16,
     marginLeft: 6,
     marginRight: 6,
   },
   forgotPassword: {
-    marginTop: 10,
+    marginTop: 5,
   },
   forgot: {
-    color: 'blue',
+    color: 'gray',
     textAlign: 'right',
     marginBottom: 12,
   },
@@ -130,17 +134,17 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   link: {
-    color: 'blue',
+    color: 'green',
     marginLeft: 5,
   },
   ogo: {
     left: 100,
   },
   new: {
-    borderWidth: 1,
     padding: 23,
     borderRadius: 23,
-    backgroundColor: 'white'
+    backgroundColor: 'white',
+    opacity: 0.8
   },
   error: {
     color: 'red',
@@ -151,44 +155,3 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   }
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
