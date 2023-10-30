@@ -9,7 +9,6 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Calculator from '../screens/Calculator'
 import { Gamification } from '../screens/Gamification';
 
-
 const Tab = createMaterialBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 

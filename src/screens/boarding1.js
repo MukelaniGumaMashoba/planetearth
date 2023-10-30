@@ -1,46 +1,55 @@
 import React from 'react';
-import { Text, Image, StyleSheet, SafeAreaView, TouchableOpacity, View } from 'react-native';
+import { Text, Image, StyleSheet, SafeAreaView, TouchableOpacity, View, ImageBackground } from 'react-native';
 
 const Boarding1 = ({ navigation }) => {
     return (
-        <View style={styles.page}>
-            <Image source={require('../assets/splash2.jpg')} style={styles.image} />
-            <View style={styles.container}>
-                <Text style={styles.antext}>Welcome</Text>
-                <Text>You can now start by Allowing Notifications and learn more on how to use renewable resources available all times and make a change in planet earth with reminders</Text>
-                <TouchableOpacity style={styles.btn} onPress={() => navigation.navigate('Boarding2')}>
-                    <Text style={styles.texts}>Allow Notifications</Text>
-                </TouchableOpacity>
-
-                <TouchableOpacity onPress={() => navigation.navigate('Login')}>
-                    <Text style={styles.texts}>Skip for now</Text>
-                </TouchableOpacity>
-
-            </View>
-        </View>
+        <SafeAreaView style={styles.safeArea}>
+            <ImageBackground source={require('../assets/splash1.jpg')} style={styles.backgroundImage}>
+                <View style={styles.container}>
+                    <Text style={styles.antext}>Welcome</Text>
+                    <Text style={styles.text}>
+                        You can now start by Allowing Notifications and learn more on how to use renewable resources available all times and make a change in planet earth with reminders
+                    </Text>
+                    <TouchableOpacity style={styles.btn} onPress={() => navigation.navigate('Boarding2')}>
+                        <Text style={styles.texts}>Allow Notifications</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={() => navigation.navigate('Login')}>
+                        <Text style={styles.texts}>Skip for now</Text>
+                    </TouchableOpacity>
+                </View>
+            </ImageBackground>
+        </SafeAreaView>
     )
 }
 
 export default Boarding1
 
-
 const styles = StyleSheet.create({
-    page: {
+    safeArea: {
         flex: 1,
-        backgroundColor: 'black',
     },
-    image: {
-        borderRadius: 12,
-        width: 338,
-        height: 450,
-        marginBottom: 20,
-        marginTop: 25,
+    backgroundImage: {
+        flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        margin: 10,
-        backgroundColor: 'black',
-        borderColor: 'lightgreen',
-        borderWidth: 1,
+    },
+    container: {
+        backgroundColor: 'rgba(173, 216, 230, 0.5)', // Use RGBA to set transparency
+        borderRadius: 23,
+        padding: 23,
+        width: '80%', // Set container width to 80% of the screen
+        justifyContent: 'center', // Center items vertically
+        alignItems: 'center', // Center items horizontally
+    },
+    antext: {
+        fontWeight: 'bold',
+        fontSize: 22,
+        textAlign: 'center',
+        color: 'white',
+    },
+    text: {
+        color: 'white',
+        textAlign: 'center',
     },
     btn: {
         backgroundColor: 'black',
@@ -54,17 +63,5 @@ const styles = StyleSheet.create({
         color: 'white',
         textAlign: 'center',
         fontWeight: 'bold',
-    },
-    container: {
-        backgroundColor: 'lightgreen',
-        borderRadius: 23,
-        padding: 23,
-        margin: 12,
-    },
-    antext: {
-        fontWeight: 'bold',
-        fontSize: 22,
-        textAlign: 'center'
     }
-
 })

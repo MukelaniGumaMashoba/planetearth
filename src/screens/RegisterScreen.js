@@ -3,8 +3,9 @@ import { auth } from "../../firebase.js"
 import Logo from '../components/Logo.js';
 import { UserContext } from '../../userCtxt.js';
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { TextInput, Text, Button, View, TouchableOpacity, StyleSheet, Alert } from 'react-native';
+import { TextInput, Text, Button, View, TouchableOpacity, StyleSheet, Alert, ImageBackground } from 'react-native';
 import LogOption from '../components/LogOption.js';
+import LogBackground from '../assets/LogBack.jpg';
 
 export default function Register({ navigation }) {
   const [error, setErrorMessage] = useState('');
@@ -39,8 +40,9 @@ export default function Register({ navigation }) {
   }
 
   return (
+    <ImageBackground source={LogBackground} style={styles.container}>
     <View style={styles.container}>
-      <Logo />
+    <Logo />
       <View style={styles.new}>
         <Text style={styles.welcome}>Welcome Sign Up</Text>
         <TextInput
@@ -72,7 +74,10 @@ export default function Register({ navigation }) {
         {error !== '' && <Text style={styles.error}>{error}</Text>}
 
 
-        <Button mode="contained" title='Enter' onPress={userRegister} />
+        <Button mode="contained" title='Enter' onPress={userRegister} 
+           color="green"
+          style={{ width: 200 }}
+        />
 
         <TouchableOpacity onPress={() => navigation.navigate('Login')}>
           <Text style={styles.link}>Already Have An Account</Text>
@@ -83,6 +88,7 @@ export default function Register({ navigation }) {
         </View>
       </View>
     </View>
+    </ImageBackground>
   )
 }
 
@@ -92,11 +98,12 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: "center",
-    padding: 20,
-    backgroundColor: 'lightgreen',
+    paddingHorizontal: 5,
+    paddingVertical: 20,
+    fontFamily: 'Roboto',
   },
   title: {
-    fontSize: 24,
+    fontSize: 25,
     fontWeight: 'bold',
     marginBottom: 20,
   },
@@ -104,7 +111,7 @@ const styles = StyleSheet.create({
     marginBottom: 16,
     borderWidth: 1,
     borderColor: 'grey',
-    borderRadius: 16,
+    borderRadius: 5,
     padding: 6,
     fontSize: 16,
     marginLeft: 6,
@@ -121,7 +128,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   link: {
-    color: 'black',
+    color: 'green',
     marginLeft: 5,
     textAlign: 'center',
     marginBottom: 12,
@@ -129,10 +136,10 @@ const styles = StyleSheet.create({
     fontWeight: 'bold'
   },
   new: {
-    borderWidth: 1,
     padding: 23,
     borderRadius: 23,
-    backgroundColor: 'white'
+    backgroundColor: 'white',
+    opacity: 0.8
   },
   welcome: {
     fontSize: 18,

@@ -13,7 +13,7 @@ export const LoadingScreen = ({ navigation }) => {
 
   return (
     <ImageBackground
-      source={require('../assets/splash.jpg')}
+      source={require('../assets/splash1.jpg')}
       style={styles.backgroundImage}
     >
       <SafeAreaView style={styles.container}>
