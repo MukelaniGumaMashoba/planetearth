@@ -31,9 +31,9 @@ export default function Dashboard({ navigation }) {
 
       <Text style={styles.welcomeText}>PlanetPulse</Text>
 
-      <View style={styles.icon}>
+      <TouchableOpacity style={styles.icon}>
         <Icon name="notifications" color='grey' size={26} />
-      </View>
+      </TouchableOpacity>
 
 
       <Text style={styles.txt}>Know What Happening Around You All The Time.!</Text>
