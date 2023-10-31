@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, Image, ScrollView, StyleSheet, SafeAreaView } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
 import { useNavigation } from '@react-navigation/native';
-import iconImage from '../icons/waste-icon.jpg';
+import iconImage from '../../icons/waste-icon.jpg';
 
 const WasteForm = ({ onSubmit }) => {
   const [wasteType, setWasteType] = useState('');

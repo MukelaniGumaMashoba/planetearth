@@ -3,7 +3,7 @@ import { View, Text, TouchableOpacity, StyleSheet, Image, ScrollView, SafeAreaVi
 import * as Print from 'expo-print';
 import * as Sharing from 'expo-sharing';
 import { useNavigation } from '@react-navigation/native';
-import iconImage from '../icons/icon.png';
+import iconImage from '../../icons/icon.png';
 
 const Report = ({
   energyData = {tips},

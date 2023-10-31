@@ -3,7 +3,7 @@ import { View, Text, TextInput, TouchableOpacity, Image, ScrollView, StyleSheet,
 import { useNavigation } from '@react-navigation/native';
 import { Picker } from '@react-native-picker/picker';
 
-const iconImage = require('../icons/energy-icon.jpg');
+const iconImage = require('../../icons/energy-icon.jpg');
 
 const BuildingForm  = ({ onSubmit}) => {
   const [buildingType, setBuildingType] = useState('');

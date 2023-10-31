@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, Image, ScrollView, StyleSheet, SafeAreaView } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import iconImage from '../icons/equipment-icon.jpg';
+import iconImage from '../../icons/equipment-icon.jpg';
 
 const EquipmentForm = ({ onSubmit }) => {
   const [toolType, setToolType] = useState('');
