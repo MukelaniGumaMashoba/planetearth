@@ -6,18 +6,23 @@ import { LogBox } from 'react-native';
 
 import { useContext } from "react";
 import UserContextWrapper, { UserContext } from './userCtxt.js';
+import { NativeBaseProvider } from 'native-base';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 function App() {
-  registerNNPushToken(13887, 'wJ3I2tFy54eqRawuXVfDDT');
-  getNotificationInbox(13887, "wJ3I2tFy54eqRawuXVfDDT").then((data) => {
-    console.log(data);
-  })
-  
+  //registerNNPushToken(13887, 'wJ3I2tFy54eqRawuXVfDDT');
+  // getNotificationInbox(13887, "wJ3I2tFy54eqRawuXVfDDT").then((data) => {
+  //   console.log(data);
+  // })
+
   LogBox.ignoreAllLogs();
   return (
-    <UserContextWrapper>
-      <RootNavigator />
-    </UserContextWrapper>
+    <NativeBaseProvider>
+      
+      <UserContextWrapper>
+        <RootNavigator />
+      </UserContextWrapper>
+    </NativeBaseProvider>
   );
 }
 
