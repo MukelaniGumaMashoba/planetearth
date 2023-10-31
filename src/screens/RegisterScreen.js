@@ -16,6 +16,13 @@ export default function Register({ navigation }) {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
     setErrorMessage('');
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    if (errorCode === "auth/email-already-in-use") {
+      setErrorMessage("Email address is already in use.");
+    } else {
+      setErrorMessage(errorMessage);
+    }
     if (!emailRegex.test(userData.email)) {
       Alert.alert('Invalid Email', 'Please enter a valid email address.');
     }
