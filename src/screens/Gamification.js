@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, ScrollView, StyleSheet } from 'react-native';
+import { View, Text, ScrollView, StyleSheet, ImageBackground } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
 import { Box, Heading, Icon, Progress, Button, HStack } from 'native-base';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { collection, query, where, onSnapshot } from "firebase/firestore";
 import { db } from '../../firebase';
 
+// Import the background image
+import backgroundImage from '../assets/LogBack.jpg';
 
 function Gamification() {
   const [companies, setCompanies] = useState([]);
@@ -48,7 +50,7 @@ function Gamification() {
   };
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: '#c0e57c', paddingTop: 10 }}>
+    <ImageBackground source={backgroundImage} style={{ flex: 1, backgroundColor: 'rgba(192, 229, 124, 0.3)', paddingTop: 10 }}>
       <View style={{ flex: 1, paddingHorizontal: 16, justifyContent: "center" }}>
         {!showRanking ? (
           <View style={styles.container}>
@@ -64,7 +66,7 @@ function Gamification() {
                 Join us in celebrating companies that are taking steps to reduce their carbon emissions and contribute
                 to a better future for our planet. Click the button below to see the rankings!
               </Text>
-              <Button onPress={rankCompanies} colorScheme="blue">
+              <Button onPress={rankCompanies} colorScheme="green">
                 Rank Companies
               </Button>
             </View>
@@ -167,7 +169,7 @@ function Gamification() {
           </ScrollView>
         )}
       </View>
-    </SafeAreaView>
+    </ImageBackground>
   );
 }
 
@@ -179,6 +181,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: 'green',
+    marginVertical: 40,
+    opacity: 0.9
   },
   content: {
     flex: 1,
@@ -205,4 +209,3 @@ const styles = StyleSheet.create({
     margin: 16,
   },
 });
-

@@ -5,24 +5,26 @@ import { Box, Progress, Text } from 'native-base';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import React, { useContext, useEffect, useState } from 'react';
 import { collection, onSnapshot, query, where } from "firebase/firestore";
-import { View, StyleSheet, Image, ScrollView, TouchableOpacity, KeyboardAvoidingView } from 'react-native';
+import { View, StyleSheet, Image, ScrollView, TouchableOpacity, KeyboardAvoidingView, ImageBackground } from 'react-native';
 
+// Import the background image
+const backgroundImage = require('../assets/LogBack.jpg');
 
 const AccountScreen = ({ navigation }) => {
   const { user, doLogout } = useContext(UserContext);
 
-  const [company, setCompany] = useState(null)
+  const [company, setCompany] = useState(null);
 
   useEffect(() => {
     const q = query(collection(db, "companies"), where("user", "==", user.uid));
     const unsubscribe = onSnapshot(q, (querySnapshot) => {
-      setCompany(null)
+      setCompany(null);
       querySnapshot.forEach((doc) => {
-        setCompany({ ...doc.data(), id: doc.id })
+        setCompany({ ...doc.data(), id: doc.id });
       });
-    })
-    return () => unsubscribe()
-  }, [])
+    });
+    return () => unsubscribe();
+  }, []);
 
   const handleLogout = () => {
     doLogout();
@@ -40,8 +42,7 @@ const AccountScreen = ({ navigation }) => {
   };
 
   return (
-
-    <SafeAreaView style={styles.container}>
+    <ImageBackground source={backgroundImage} style={styles.container}>
       <KeyboardAvoidingView>
         <ScrollView contentContainerStyle={styles.scrollContainer}>
           <View style={styles.account}>
@@ -52,15 +53,15 @@ const AccountScreen = ({ navigation }) => {
               />
             </View>
 
-            <Text style={styles.title}>Welcome, {user.name}!</Text>
+            <Text style={styles.title}>Welcome {user.name}!</Text>
             <Text style={styles.subtitle}>Email: {user.email}</Text>
           </View>
 
           <Score />
 
-          {company ?
+          {company ? (
             <TouchableOpacity onPress={() => {
-              navigation.navigate('Company', company)
+              navigation.navigate('Company', company);
             }} >
               <Box
                 bg="white"
@@ -79,9 +80,7 @@ const AccountScreen = ({ navigation }) => {
                 <Progress
                   value={(company.goal - company.emissions) / company.goal * 100}
                   size="sm"
-                  colorScheme={(company.goal - company.emissions) / company.goal * 100
-                    < 20 ? "red" : (company.goal - company.emissions) / company.goal * 100 < 60 ? "blue" : "green"
-                  }
+                  colorScheme={(company.goal - company.emissions) / company.goal * 100 < 20 ? "red" : (company.goal - company.emissions) / company.goal * 100 < 60 ? "blue" : "green"}
                   mb={3}
                   mt={3}
                 />
@@ -90,12 +89,11 @@ const AccountScreen = ({ navigation }) => {
                 </Text>
               </Box>
             </TouchableOpacity>
-            :
-            <TouchableOpacity
-              onPress={() => {
-                navigation.navigate('Company', {})
-              }} >
-              <Box
+          ) : (
+            <TouchableOpacity onPress={() => {
+              navigation.navigate('Company', {});
+            }} >
+              <Box style={{backgroundColor: 'grey', opacity:0.85}}
                 bg="white"
                 p={4}
                 borderRadius={8}
@@ -104,13 +102,13 @@ const AccountScreen = ({ navigation }) => {
                 maxWidth="100%"
               >
                 <Text
-                  style={{ fontSize: 16, fontWeight: '400' }}
+                  style={{ fontSize: 20, fontWeight: '500',  }}
                   p={4}>
                   Click To Add Company
                 </Text>
               </Box>
-            </TouchableOpacity>}
-
+            </TouchableOpacity>
+          )}
 
           <View style={styles.container2}>
             <TouchableOpacity onPress={() => navigation.navigate('EditProfile')} style={styles.button}>
@@ -122,7 +120,7 @@ const AccountScreen = ({ navigation }) => {
           </View>
         </ScrollView>
       </KeyboardAvoidingView>
-    </SafeAreaView>
+    </ImageBackground>
   );
 };
 
@@ -138,7 +136,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'grey',
     padding: 5,
     borderRadius: 12,
-
+    opacity: 0.8,
   },
   container: {
     flex: 1,
@@ -154,6 +152,7 @@ const styles = StyleSheet.create({
     borderRadius: 60,
     overflow: 'hidden',
     marginBottom: 20,
+    marginTop: 10,
     borderColor: 'lightgreen',
     borderWidth: 2,
   },
@@ -192,7 +191,7 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     gap: 12,
-
+    opacity: 0.9,
   },
   button: {
     marginVertical: 10,
@@ -204,7 +203,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   logoutButton: {
-    backgroundColor: '#DC3545', // Red color for logout button
+    backgroundColor: '#DC3545',
   },
   buttonText: {
     color: '#fff',

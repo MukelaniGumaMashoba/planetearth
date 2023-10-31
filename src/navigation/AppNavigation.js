@@ -43,7 +43,7 @@ function StackNavigatorTwo() {
         <Tab.Navigator
             initialRouteName="Home"
             shifting={true}
-            barStyle={{ backgroundColor: 'lightgreen' }}
+            barStyle={{ backgroundColor: 'white' }}
         >
             <Tab.Screen
                 name="Home"
@@ -51,7 +51,7 @@ function StackNavigatorTwo() {
                 options={{
                     tabBarLabel: 'Home',
                     tabBarIcon: ({ color }) => (
-                        <Icon name="home" color={color} size={26} />
+                        <Icon name="home" color={color} size={22} />
                     ),
                 }}
             />
@@ -61,7 +61,7 @@ function StackNavigatorTwo() {
                 options={{
                     tabBarLabel: 'Calculator',
                     tabBarIcon: ({ color }) => (
-                        <Icon name="calculator" color={color} size={26} />
+                        <Icon name="calculator" color={color} size={22} />
                     ),
                 }}
             />
@@ -72,7 +72,7 @@ function StackNavigatorTwo() {
                 options={{
                     tabBarLabel: 'Gamification',
                     tabBarIcon: ({ color }) => (
-                        <Icon name="game-controller" color={color} size={26} />
+                        <Icon name="game-controller" color={color} size={22} />
                     ),
                 }}
             />
@@ -82,7 +82,7 @@ function StackNavigatorTwo() {
                 options={{
                     tabBarLabel: 'Account',
                     tabBarIcon: ({ color }) => (
-                        <Icon name="person" color={color} size={26} />
+                        <Icon name="person" color={color} size={22} />
                     ),
                 }}
             />

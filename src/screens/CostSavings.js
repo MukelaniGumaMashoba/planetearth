@@ -8,24 +8,25 @@ import {
   TouchableOpacity,
   Alert,
   Modal,
+  ImageBackground,
 } from "react-native";
-import { Ozow } from "react-native-ozow"
+import { Ozow } from "react-native-ozow";
 import { UserContext } from "../../userCtxt";
-
+import { MaterialIcons } from '@expo/vector-icons'; // Import MaterialIcons for the back button
 
 export const CostSavings = ({ navigation }) => {
   const { user } = useContext(UserContext);
-  //useStates to handle values
+  // useState to handle values
   const [currentSpending, setCurrentSpending] = useState("");
   const [previousYearSpending, setPreviousYearSpending] = useState("");
   const [difference, setDifference] = useState("");
   const [savingsType, setSavingsType] = useState("");
   const [donationAmount, setDonationAmount] = useState(0);
 
-  //Function to calculate thr diffrence
+  // Function to calculate the difference
   const calculateDifference = () => {
     if (currentSpending !== "" && previousYearSpending !== "") {
-      const current = parseFloat(currentSpending); //convert yo float so we can have decima figures
+      const current = parseFloat(currentSpending); // Convert to float so we can have decimal figures
       const previous = parseFloat(previousYearSpending);
       const calculatedDifference = current - previous;
       setDifference(calculatedDifference.toFixed(2));
@@ -46,9 +47,9 @@ export const CostSavings = ({ navigation }) => {
     }
   };
 
-  //Calculate the amount of donations
+  // Calculate the amount of donations
   const handleDonation = (percentage) => {
-    const donation = (parseFloat(difference) * (percentage / 100)).toFixed(2); //convert yo float so we can have decima figures
+    const donation = (parseFloat(difference) * (percentage / 100)).toFixed(2); // Convert to float so we can have decimal figures
     setDonationAmount(donation);
     return donation;
   };
@@ -102,7 +103,7 @@ export const CostSavings = ({ navigation }) => {
 
   const handleResponse = async (response) => {
     if (response === true) {
-      // payment was successful
+      // Payment was successful
       Alert.alert("Success", "Payment was successful", [
         {
           text: "Ok",
@@ -113,8 +114,14 @@ export const CostSavings = ({ navigation }) => {
   };
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Planet Pulse Saving</Text>
+    <ImageBackground source={require('../assets/LogBack.jpg')} style={styles.container}>
+      <View style={styles.header}>
+        <TouchableOpacity onPress={() => navigation.goBack()}>
+          <MaterialIcons name="arrow-back" size={24} color="white" />
+        </TouchableOpacity>
+        <Text style={styles.headerText}>Cost Savings</Text>
+      </View>
+      <Text style={styles.title}>Planet Pulse Saving 🌍</Text>
       <View style={styles.form}>
         <View style={styles.row}>
           <Text style={styles.label}>Current Spending On Energy:</Text>
@@ -135,18 +142,18 @@ export const CostSavings = ({ navigation }) => {
             value={previousYearSpending}
             onChangeText={(text) => setPreviousYearSpending(text)}
           />
-          {/* display the amount in red if its negative  */}
+          {/* Display the amount in red if it's negative */}
         </View>
         <Button
           title="Calculate Difference"
           onPress={calculateDifference}
-          color="#007AFF"
+          color="green"
         />
         {difference !== "" && (
           <Text
             style={[
               styles.result,
-              { color: difference < 0 ? "red" : "#007AFF" },
+              { color: difference < 0 ? "red" : "green" }, {/* Change text color to green */}
             ]}
           >
             {savingsType}: R{Math.abs(difference)}
@@ -214,7 +221,7 @@ export const CostSavings = ({ navigation }) => {
           }}
         />
       </Modal>
-    </View>
+    </ImageBackground>
   );
 };
 
@@ -223,15 +230,27 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
+    backgroundColor: 'rgba(255, 255, 255, 0.5)', // 50% transparent background
+  },
+  header: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    padding: 10,
+  },
+  headerText: {
+    fontSize: 20,
+    color: 'white',
+    marginLeft: 10,
   },
   title: {
     fontSize: 24,
     fontWeight: "bold",
-    marginBottom: 20,
+    marginBottom: 40,
+    color: 'black',
   },
   form: {
     padding: 20,
-    backgroundColor: "#FFFFFF",
+    backgroundColor: "rgba(255, 255, 255, 0.7)", // 70% transparent white background
     borderRadius: 10,
     elevation: 3,
   },
@@ -260,7 +279,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: "bold",
     marginTop: 25,
-    color: "#007AFF",
+    color: "green",
   },
   donationButtons: {
     flexDirection: "row",
@@ -268,7 +287,7 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   donationButton: {
-    backgroundColor: "#007AFF",
+    backgroundColor: "green", // Change button color to green
     padding: 8,
     borderRadius: 5,
     alignItems: "center",
