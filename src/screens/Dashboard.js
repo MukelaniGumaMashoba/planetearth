@@ -31,7 +31,7 @@ export default function Dashboard({ navigation }) {
 
       <Text style={styles.welcomeText}>PlanetPulse</Text>
 
-      <TouchableOpacity style={styles.icon}>
+      <TouchableOpacity style={styles.icon} onPress={()=>{}}>
         <Icon name="notifications" color='grey' size={26} />
       </TouchableOpacity>
 
