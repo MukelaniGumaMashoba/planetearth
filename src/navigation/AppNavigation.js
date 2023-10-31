@@ -7,7 +7,8 @@ import AccountScreen from '../screens/AccountScreen';
 import { CostSavings } from '../screens/CostSavings';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Calculator from '../screens/Calculator'
-import { Gamification } from '../screens/Gamification';
+import Gamification from '../screens/Gamification';
+import Company from '../screens/Company';
 
 const Tab = createMaterialBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -20,12 +21,24 @@ function StackNavigator() {
             <Stack.Screen name="Dashboard" component={Dashboard} />
             <Stack.Screen name="CostSavings" component={CostSavings} />
             <Stack.Screen name="Game" component={Game} />
+            <Stack.Screen name="Company" component={Company} />
+        </Stack.Navigator>
+    );
+}
+
+export function AppNavigation() {
+    return (
+        <Stack.Navigator initialRouteName='app' screenOptions={{
+            headerShown: false
+        }}>
+            <Stack.Screen name="app" component={StackNavigatorTwo} />
+            <Stack.Screen name="Company" options={{ headerShown: true }} component={Company} />
         </Stack.Navigator>
     );
 }
 
 
-export function AppNavigation() {
+function StackNavigatorTwo() {
     return (
         <Tab.Navigator
             initialRouteName="Home"
