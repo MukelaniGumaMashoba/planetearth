@@ -28,8 +28,8 @@ function MainApp({ navigation }) {
         <View >
           {/* <View style={styles.centeredContent}>
             <Image source={iconImage} style={styles.icon} />
-            <Text style={styles.text}>TOOLS</Text>
           </View> */}
+          <Text style={styles.text}>TOOLS</Text>
           <View style={styles.buttonContainer}>
 
             <IconButton  text="Energy Usage" icon={require('../../icons/energy-icon.jpg')} onPress={() => navigateToForm('Energy Usage')}/>
