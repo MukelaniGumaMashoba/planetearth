@@ -5,6 +5,8 @@ import VehicleForm from '../screens/Vehicle';
 import BuildingForm from '../screens/EnergyUsage';
 import MainApp from '../screens/Main';
 import Report from '../screens/Report';
+import EquipmentForm from '../screens/EandQ';
+
 
 const Stack = createStackNavigator();
 
@@ -63,9 +65,9 @@ function App() {
           {() => <VehicleForm onSubmit={handleVehicleDataSubmit} />} 
         </Stack.Screen>
 
-        {/* <Stack.Screen name="EquipmentAndMachinery" options={{ title: 'EquipmentAndMachinery' }}>
+        <Stack.Screen name="EandQ" options={{ title: 'EandQ' }}>
           {() => <EquipmentForm onSubmit={handleEquipmentDataSubmit} />} 
-        </Stack.Screen> */}
+        </Stack.Screen>
 
         <Stack.Screen name="Waste Management" options={{ title: 'Waste Managementm' }}>
           {() => <WasteForm onSubmit={handleWasteDataSubmit} />} 

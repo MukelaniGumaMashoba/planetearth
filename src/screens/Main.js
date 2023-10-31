@@ -21,15 +21,15 @@ function MainApp({ navigation }) {
 
   return (
     <SafeAreaView style={styles.container} >
-      <ScrollView>
-      <TouchableOpacity style={styles.backButton} onPress={() => navigation.navigate('')}>
+      <ScrollView showsHorizontalScrollIndicator={false}>
+      {/* <TouchableOpacity style={styles.backButton} onPress={() => navigation.navigate('')}>
             <Text style={styles.buttonText}>BACK</Text>
-          </TouchableOpacity>
+          </TouchableOpacity> */}
         <View >
-          <View style={styles.centeredContent}>
+          {/* <View style={styles.centeredContent}>
             <Image source={iconImage} style={styles.icon} />
             <Text style={styles.text}>TOOLS</Text>
-          </View>
+          </View> */}
           <View style={styles.buttonContainer}>
 
             <IconButton  text="Energy Usage" icon={require('../../icons/energy-icon.jpg')} onPress={() => navigateToForm('Energy Usage')}/>
@@ -40,8 +40,8 @@ function MainApp({ navigation }) {
              <Text style={styles.texts2} onPress={() => navigateToForm('Waste Management')} >Use This Tool To Calculate Emission Caused By Waste In A Work Placehjbnmghn</Text><Text style={styles.arror2} onPress={() => navigateToForm('Waste Management')}>:</Text>
              
 
-            <IconButton text="Equipment and Machinery" icon={require('../../icons/equipment-icon.jpg')} onPress={() => navigateToForm('EquipmentAndMachinery')} />
-            <Text style={styles.texts3} onPress={() => navigateToForm('EquipmentAndMachinery')}>Use This Tool To Calculate Emission Caused By Equipment & Machinery In A Work Place</Text><Text style={styles.arror3} onPress={() => navigateToForm('EquipmentAndMachinery')}>:</Text>
+            <IconButton text="Equipment and Machinery" icon={require('../../icons/equipment-icon.jpg')} onPress={() => navigateToForm('EandQ')} />
+            <Text style={styles.texts3} onPress={() => navigateToForm('EandQ')}>Use This Tool To Calculate Emission Caused By Equipment & Machinery In A Work Place</Text><Text style={styles.arror3} onPress={() => navigateToForm('EandQ')}>:</Text>
 
 
             <IconButton text="Vehicle" icon={require('../../icons/Vehicle-icon.jpg')} onPress={() => navigateToForm('Vehicle')} />
