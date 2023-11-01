@@ -4,7 +4,7 @@ import { collection, getDocs, deleteDoc, doc } from 'firebase/firestore';
 import { db } from '../../firebase';
 import { UserContext } from '../../userCtxt';
 
-export const AdminPage = () => {
+export const AdminPage = ({navigation}) => {
     const [users, setUsers] = useState([]);
 
     const { user, doLogout } = useContext(UserContext);
@@ -26,7 +26,7 @@ export const AdminPage = () => {
     };
 
     const handleLogout = () => {
-        doLogout();
+        navigation.goBack()
       };
 
     const logout = () => {
@@ -40,9 +40,7 @@ export const AdminPage = () => {
                 },
                 {
                     text: 'Logout',
-                    onPress: () => {
-                        // Perform your logout action here
-                    },
+                    onPress: handleLogout,
                 },
             ]
         );

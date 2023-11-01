@@ -1,17 +1,30 @@
 import React, { useState } from 'react'
-import { Button, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
-import Logo from '../components/Logo'
+import { Alert, Button, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
+import Logo from '../components/Logo';
+
+import { sendPasswordResetEmail } from "firebase/auth";
+import { auth } from '../../firebase';
+
+
 
 export default function ResetPasswordScreen({ navigation }) {
   const [email, setEmail] = useState({ value: '', error: '' })
 
   const sendResetPasswordEmail = () => {
-    const emailError = emailValidator(email.value)
-    if (emailError) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email.value)) {
       setEmail({ ...email, error: emailError })
       return
     }
-    navigation.navigate('LoginScreen')
+
+    sendPasswordResetEmail(auth, email.value)
+      .then(() => {
+        Alert.alert("Success", "Email has been sent to" + email.value)
+      })
+      .catch((error) => {
+        Alert.alert("Error", error.message)
+      });
+
   }
 
   return (
@@ -29,7 +42,6 @@ export default function ResetPasswordScreen({ navigation }) {
         autoCompleteType="email"
         textContentType="emailAddress"
         keyboardType="email-address"
-        description="You will receive an email with the reset link."
       />
       <Button
         mode="contained"
@@ -39,10 +51,10 @@ export default function ResetPasswordScreen({ navigation }) {
       />
 
       <View style={styles.row}>
-          <TouchableOpacity onPress={() => navigation.navigate('Register')}>
-            <Text style={styles.link}>Create Account</Text>
-          </TouchableOpacity>
-        </View>
+        <TouchableOpacity onPress={() => navigation.navigate('Register')}>
+          <Text style={styles.link}>Create Account</Text>
+        </TouchableOpacity>
+      </View>
 
     </View>
   )

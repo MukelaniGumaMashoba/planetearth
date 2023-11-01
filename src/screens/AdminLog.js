@@ -43,7 +43,7 @@ export default function AdminLog({ navigation }) {
     <ImageBackground source={LogBackground} style={styles.container}>
       <Logo style={styles.ogo} />
       <View style={styles.new}>
-        <Text style={styles.title}>Welcome Admin!👋</Text>
+        <Text style={styles.title}>Welcome Admin! 👋</Text>
         <TextInput
           placeholder='Email'
           label="Email"

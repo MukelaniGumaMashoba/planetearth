@@ -49,7 +49,7 @@ export default function Log({ navigation }) {
     <ImageBackground source={LogBackground} style={styles.container}>
       <Logo style={styles.ogo} />
       <View style={styles.new}>
-        <Text style={styles.title}>Welcome Back!👋</Text>
+        <Text style={styles.title}>Welcome Back! 👋</Text>
         <TextInput
           placeholder='Email'
           label="Email"
