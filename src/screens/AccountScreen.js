@@ -1,19 +1,20 @@
-import { db } from '../../firebase';
+import React, { useContext, useEffect, useState } from 'react';
+import { TextInput, Modal } from 'react-native';
+import { collection, onSnapshot, query, where } from "firebase/firestore";
+import { Text, Box, Progress } from 'native-base';
+import { ImageBackground, View, ScrollView, Image, StyleSheet, TouchableOpacity, KeyboardAvoidingView } from 'react-native';
 import Score from '../components/Score';
 import { UserContext } from '../../userCtxt';
-import { Box, Progress, Text } from 'native-base';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import React, { useContext, useEffect, useState } from 'react';
-import { collection, onSnapshot, query, where } from "firebase/firestore";
-import { View, StyleSheet, Image, ScrollView, TouchableOpacity, KeyboardAvoidingView, ImageBackground } from 'react-native';
+import { db } from '../../firebase';
 
-// Import the background image
 const backgroundImage = require('../assets/LogBack.jpg');
 
 const AccountScreen = ({ navigation }) => {
   const { user, doLogout } = useContext(UserContext);
 
   const [company, setCompany] = useState(null);
+  const [editProfileModalVisible, setEditProfileModalVisible] = useState(false);
+  const [editedEmail, setEditedEmail] = useState(user.email);
 
   useEffect(() => {
     const q = query(collection(db, "companies"), where("user", "==", user.uid));
@@ -26,9 +27,18 @@ const AccountScreen = ({ navigation }) => {
     return () => unsubscribe();
   }, []);
 
+  const openEditProfileModal = () => {
+    setEditProfileModalVisible(true);
+  };
+
+  const closeEditProfileModal = () => {
+    setEditProfileModalVisible(false);
+  };
+
   const handleLogout = () => {
     doLogout();
   };
+
   const getTrophyMessage = (index) => {
     if (index >= 80) {
       return 'Congratulations! You are the Eco Champion!';
@@ -93,7 +103,7 @@ const AccountScreen = ({ navigation }) => {
             <TouchableOpacity onPress={() => {
               navigation.navigate('Company', {});
             }} >
-              <Box style={{backgroundColor: 'grey', opacity:0.85}}
+              <Box style={{ backgroundColor: 'grey', opacity: 0.85 }}
                 bg="white"
                 p={4}
                 borderRadius={8}
@@ -102,7 +112,7 @@ const AccountScreen = ({ navigation }) => {
                 maxWidth="100%"
               >
                 <Text
-                  style={{ fontSize: 20, fontWeight: '500',  }}
+                  style={{ fontSize: 20, fontWeight: '500', }}
                   p={4}>
                   Click To Add Company
                 </Text>
@@ -111,13 +121,46 @@ const AccountScreen = ({ navigation }) => {
           )}
 
           <View style={styles.container2}>
-            <TouchableOpacity onPress={() => navigation.navigate('EditProfile')} style={styles.button}>
+            <TouchableOpacity onPress={openEditProfileModal} style={styles.button}>
               <Text style={styles.buttonText}>Edit Profile</Text>
             </TouchableOpacity>
             <TouchableOpacity onPress={handleLogout} style={[styles.button, styles.logoutButton]}>
               <Text style={styles.buttonText}>Logout</Text>
             </TouchableOpacity>
           </View>
+
+          {/* Edit Profile Modal */}
+          <Modal
+            animationType="slide"
+            transparent={true}
+            visible={editProfileModalVisible}
+            onRequestClose={closeEditProfileModal}
+          >
+        <View style={styles.editProfileModalContainer}>
+          <View style={styles.editProfileModalContent}>
+          <TouchableOpacity onPress={closeEditProfileModal} style={styles.backButton}>
+            <Text style={styles.backButtonText}>❌</Text>
+          </TouchableOpacity>
+            <Text style={{ marginBottom: 5 }}>Update Email</Text>
+            <TextInput
+              style={styles.editProfileInput}
+              value={editedEmail}
+              onChangeText={(text) => setEditedEmail(text)}
+              placeholder="Edit Email"
+            />
+
+      <TouchableOpacity onPress={closeEditProfileModal} style={styles.updateAccountButton}>
+        <Text style={styles.buttonText}>Update</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity onPress={closeEditProfileModal} style={styles.deleteAccountButton}>
+        <Text style={styles.buttonText}>Delete Account</Text>
+      </TouchableOpacity>
+    </View>
+  </View>
+</Modal>
+
+
         </ScrollView>
       </KeyboardAvoidingView>
     </ImageBackground>
@@ -208,5 +251,41 @@ const styles = StyleSheet.create({
   buttonText: {
     color: '#fff',
     fontSize: 18,
+  },
+  editProfileModalContainer: {
+    flex: 1,
+    justifyContent: 'flex-end',
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+  },
+  editProfileModalContent: {
+    backgroundColor: '#fff',
+    padding: 20,
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
+  },
+  editProfileInput: {
+    borderBottomWidth: 1,
+    borderColor: '#000',
+    fontSize: 16,
+    marginBottom: 20,
+  },
+  deleteAccountButton: {
+    backgroundColor: '#DC3545',
+    padding: 10,
+    alignItems: 'center',
+    borderRadius: 8,
+  },
+  updateAccountButton: {
+    backgroundColor: 'blue',
+    padding: 10,
+    alignItems: 'center',
+    borderRadius: 8,
+    marginBottom: 10,
+  },
+  backButton:{
+    position: 'absolute',
+    top: 10,
+    right: 10,
+    padding: 10,  
   },
 });
