@@ -1,16 +1,14 @@
 import Logo from '../components/Logo.js';
-import { auth } from '../../firebase.js';
-import { UserContext } from '../../userCtxt.js';
+// import { auth } from '../../firebase.js';
+// import { UserContext } from '../../userCtxt.js';
 import React, { useContext, useState } from 'react'
-import { signInWithEmailAndPassword } from 'firebase/auth';
+// import { signInWithEmailAndPassword } from 'firebase/auth';
 import { TouchableOpacity, StyleSheet, View, Text, TextInput, Button, Image, Alert, ImageBackground } from 'react-native';
-import LogOption from '../components/LogOption.js';
 
-// Import your LogBack.jpg image
 import LogBackground from '../assets/LogBack.jpg';
 
-export default function Log({ navigation }) {
-  const { doLogin } = useContext(UserContext);
+export default function AdminLog({ navigation }) {
+//   const { doLogin } = useContext(UserContext);
   const [error, setErrorMessage] = useState('');
   const [userData, setUserData] = useState({ email: "", password: "" })
 
@@ -33,23 +31,32 @@ export default function Log({ navigation }) {
       setErrorMessage("Password required...");
       return;
     }
+    else if(userData.password !== 'mukelani23'){
+        setErrorMessage("Incorrect password")
+    }
+    else if(userData.email !== 'planetpulse@gmail.com'){
+        setErrorMessage("Incorrect Email")
+    }
+    else{
+        navigation.navigate('AdminPage')
+    }
 
-    signInWithEmailAndPassword(auth, userData.email, userData.password)
-      .then((userCredential) => {
-        const user = userCredential.user;
-        doLogin(user)
-      })
-      .catch((error) => {
-        const errorMessage = error.message;
-        console.log(errorMessage)
-      });
+    // signInWithEmailAndPassword(auth, userData.email, userData.password)
+    //   .then((userCredential) => {
+    //     const user = userCredential.user;
+    //     doLogin(user)
+    //   })
+    //   .catch((error) => {
+    //     const errorMessage = error.message;
+    //     console.log(errorMessage)
+    //   });
   }
 
   return (
     <ImageBackground source={LogBackground} style={styles.container}>
       <Logo style={styles.ogo} />
       <View style={styles.new}>
-        <Text style={styles.title}>Welcome Back!👋</Text>
+        <Text style={styles.title}>Welcome Admin!👋</Text>
         <TextInput
           placeholder='Email'
           label="Email"
@@ -72,31 +79,14 @@ export default function Log({ navigation }) {
           onChangeText={(text) => { setUserData({ ...userData, password: text }) }}
         />
         {error !== '' && <Text style={styles.error}>{error}</Text>}
-        <View style={styles.forgotPassword}>
-          <TouchableOpacity
-            onPress={() => navigation.navigate('ResetPasswordScreen')}
-          >
-            <Text style={styles.forgot}>Forgot your password ?</Text>
-          </TouchableOpacity>
-        </View>
+
         <Button
           mode="contained"
           title='Log in'
           onPress={userLogin}
-          color="green" // Change button background color to green
-          style={{ width: 200 }} // Set the width of the button to 200
+          color="green" 
+          style={{ width: 200 }} 
         />
-        <View>
-          <TouchableOpacity onPress={() => navigation.navigate('Register')}>
-            <Text style={[styles.link, styles.acc]}>Don't have an account? Sign up</Text>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={()=>{
-            navigation.navigate('AdminLog')
-          }}>
-            <Text>Admin</Text>
-          </TouchableOpacity>
-        </View>
-        <LogOption />
       </View>
     </ImageBackground>
   )

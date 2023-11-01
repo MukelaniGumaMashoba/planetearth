@@ -61,7 +61,7 @@ async function schedulePushNotification() {
   await Notifications.scheduleNotificationAsync({
     content: {
       title: "You've got mail! 📬",
-      body: 'Here is the notification body',
+      body: 'Dont Forget to Save The world',
       data: { data: 'goes here' },
     },
     trigger: { seconds: 2 },
