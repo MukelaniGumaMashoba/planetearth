@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { auth } from "../../firebase.js"
 import Logo from '../components/Logo.js';
 import { UserContext } from '../../userCtxt.js';
@@ -11,6 +11,7 @@ export default function Register({ navigation }) {
   const [error, setErrorMessage] = useState('');
   const [userData, setUserData] = useState({ email: "", password: "", cpassword: "" })
 
+  const { doLogin } = useContext(UserContext)
   const userRegister = () => {
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -53,12 +54,12 @@ export default function Register({ navigation }) {
         <View style={styles.new}>
           <Text style={styles.welcome}>Welcome Sign Up</Text>
 
-          <TextInput
+          {/* <TextInput
             placeholder='Name'
             label='Name'
             value=''
             style={styles.input}
-          />
+          /> */}
 
           <TextInput
             placeholder='email'
