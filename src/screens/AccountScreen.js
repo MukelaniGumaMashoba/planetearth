@@ -103,7 +103,8 @@ const AccountScreen = ({ navigation }) => {
             <TouchableOpacity onPress={() => {
               navigation.navigate('Company', {});
             }} >
-              <Box style={{ backgroundColor: 'grey', opacity: 0.85 }}
+              {/* <Box style={{ backgroundColor: 'grey', opacity: 0.85 }} */}
+              <Box
                 bg="white"
                 p={4}
                 borderRadius={8}
@@ -136,29 +137,29 @@ const AccountScreen = ({ navigation }) => {
             visible={editProfileModalVisible}
             onRequestClose={closeEditProfileModal}
           >
-        <View style={styles.editProfileModalContainer}>
-          <View style={styles.editProfileModalContent}>
-          <TouchableOpacity onPress={closeEditProfileModal} style={styles.backButton}>
-            <Text style={styles.backButtonText}>❌</Text>
-          </TouchableOpacity>
-            <Text style={{ marginBottom: 5 }}>Update Email</Text>
-            <TextInput
-              style={styles.editProfileInput}
-              value={editedEmail}
-              onChangeText={(text) => setEditedEmail(text)}
-              placeholder="Edit Email"
-            />
+            <View style={styles.editProfileModalContainer}>
+              <View style={styles.editProfileModalContent}>
+                <TouchableOpacity onPress={closeEditProfileModal} style={styles.backButton}>
+                  <Text style={styles.backButtonText}>❌</Text>
+                </TouchableOpacity>
+                <Text style={{ marginBottom: 5 }}>Update Email</Text>
+                <TextInput
+                  style={styles.editProfileInput}
+                  value={editedEmail}
+                  onChangeText={(text) => setEditedEmail(text)}
+                  placeholder="Edit Email"
+                />
 
-      <TouchableOpacity onPress={closeEditProfileModal} style={styles.updateAccountButton}>
-        <Text style={styles.buttonText}>Update</Text>
-      </TouchableOpacity>
+                <TouchableOpacity onPress={closeEditProfileModal} style={styles.updateAccountButton}>
+                  <Text style={styles.buttonText}>Update</Text>
+                </TouchableOpacity>
 
-      <TouchableOpacity onPress={closeEditProfileModal} style={styles.deleteAccountButton}>
-        <Text style={styles.buttonText}>Delete Account</Text>
-      </TouchableOpacity>
-    </View>
-  </View>
-</Modal>
+                <TouchableOpacity onPress={closeEditProfileModal} style={styles.deleteAccountButton}>
+                  <Text style={styles.buttonText}>Delete Account</Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+          </Modal>
 
 
         </ScrollView>
@@ -176,10 +177,13 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginTop: '5%',
     width: '100%',
-    backgroundColor: 'grey',
+    backgroundColor: 'white',
     padding: 5,
     borderRadius: 12,
     opacity: 0.8,
+    borderRightcolor: 'black',
+    borderBottomWidth: 1,
+    borderBottomColor: 'black'
   },
   container: {
     flex: 1,
@@ -256,6 +260,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'flex-end',
     backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    height: 300,
   },
   editProfileModalContent: {
     backgroundColor: '#fff',
@@ -282,10 +287,10 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     marginBottom: 10,
   },
-  backButton:{
+  backButton: {
     position: 'absolute',
     top: 10,
     right: 10,
-    padding: 10,  
+    padding: 10,
   },
 });

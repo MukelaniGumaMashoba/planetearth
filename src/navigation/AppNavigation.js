@@ -44,7 +44,7 @@ function StackNavigatorTwo() {
         <Tab.Navigator
             initialRouteName="Home"
             shifting={true}
-            barStyle={{ backgroundColor: 'white' }}
+            barStyle={{ backgroundColor: 'lightgreen' }}
         >
             <Tab.Screen
                 name="Home"
@@ -95,7 +95,7 @@ function StackNavigatorTwo() {
                 options={{
                     tabBarLabel: 'Inbox',
                     tabBarIcon: ({ color }) => (
-                        <Icon name="bell" color={color} size={26} />
+                        <Icon name="person" color={color} size={26} />
                     ),
                 }}
             />
