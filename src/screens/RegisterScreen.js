@@ -16,6 +16,13 @@ export default function Register({ navigation }) {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
     setErrorMessage('');
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    if (errorCode === "auth/email-already-in-use") {
+      setErrorMessage("Email address is already in use.");
+    } else {
+      setErrorMessage(errorMessage);
+    }
     if (!emailRegex.test(userData.email)) {
       Alert.alert('Invalid Email', 'Please enter a valid email address.');
     }
@@ -41,53 +48,61 @@ export default function Register({ navigation }) {
 
   return (
     <ImageBackground source={LogBackground} style={styles.container}>
-    <View style={styles.container}>
-    <Logo />
-      <View style={styles.new}>
-        <Text style={styles.welcome}>Welcome Sign Up</Text>
-        <TextInput
-          placeholder='email'
-          label="Email"
-          returnKeyType="next" style={styles.input}
-          autoCapitalize="none"
-          autoCompleteType="email"
-          textContentType="emailAddress"
-          keyboardType="email-address"
-          value={userData.email}
-          onChangeText={(text) => { setUserData({ ...userData, email: text }) }}
-        />
-        <TextInput
-          placeholder="Password"
-          returnKeyType="done" style={styles.input}
-          secureTextEntry
-          value={userData.password}
-          onChangeText={(text) => { setUserData({ ...userData, password: text }) }}
-        />
-        <TextInput
-          placeholder="Confirm Password"
-          returnKeyType="done" style={styles.input}
-          secureTextEntry
-          value={userData.cpassword}
-          onChangeText={(text) => { setUserData({ ...userData, cpassword: text }) }}
-        />
+      <View style={styles.container}>
+        <Logo />
+        <View style={styles.new}>
+          <Text style={styles.welcome}>Welcome Sign Up</Text>
 
-        {error !== '' && <Text style={styles.error}>{error}</Text>}
+          <TextInput
+            placeholder='Name'
+            label='Name'
+            value=''
+            style={styles.input}
+          />
+
+          <TextInput
+            placeholder='email'
+            label="Email"
+            returnKeyType="next" style={styles.input}
+            autoCapitalize="none"
+            autoCompleteType="email"
+            textContentType="emailAddress"
+            keyboardType="email-address"
+            value={userData.email}
+            onChangeText={(text) => { setUserData({ ...userData, email: text }) }}
+          />
+          <TextInput
+            placeholder="Password"
+            returnKeyType="done" style={styles.input}
+            secureTextEntry
+            value={userData.password}
+            onChangeText={(text) => { setUserData({ ...userData, password: text }) }}
+          />
+          <TextInput
+            placeholder="Confirm Password"
+            returnKeyType="done" style={styles.input}
+            secureTextEntry
+            value={userData.cpassword}
+            onChangeText={(text) => { setUserData({ ...userData, cpassword: text }) }}
+          />
+
+          {error !== '' && <Text style={styles.error}>{error}</Text>}
 
 
-        <Button mode="contained" title='Enter' onPress={userRegister} 
-           color="green"
-          style={{ width: 200 }}
-        />
+          <Button mode="contained" title='Enter' onPress={userRegister}
+            color="green"
+            style={{ width: 200 }}
+          />
 
-        <TouchableOpacity onPress={() => navigation.navigate('Login')}>
-          <Text style={styles.link}>Already Have An Account</Text>
-        </TouchableOpacity>
+          <TouchableOpacity onPress={() => navigation.navigate('Login')}>
+            <Text style={styles.link}>Already Have An Account</Text>
+          </TouchableOpacity>
 
-        <View>
-          <LogOption />
+          <View>
+            <LogOption />
+          </View>
         </View>
       </View>
-    </View>
     </ImageBackground>
   )
 }

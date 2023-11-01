@@ -7,6 +7,8 @@ import Boarding2 from '../screens/boarding2';
 import Boarding3 from '../screens/boarding3';
 
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import AdminLog from '../screens/AdminLog';
+import { AdminPage } from '../screens/AdminPage';
 
 const Stack = createNativeStackNavigator();
 
@@ -16,6 +18,8 @@ function AuthNavigator() {
         headerShown: false
       }}>
         <Stack.Screen name="Loading" component={LoadingScreen} />
+        <Stack.Screen name="AdminLog" component={AdminLog} />
+        <Stack.Screen name="AdminPage" component={AdminPage} />
         <Stack.Screen name="Boarding1" component={Boarding1}/>
         <Stack.Screen name="Boarding2" component={Boarding2}/>
         <Stack.Screen name="Boarding3" component={Boarding3}/>

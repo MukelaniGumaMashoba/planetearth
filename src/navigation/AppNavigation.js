@@ -9,6 +9,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Calculator from '../screens/Calculator'
 import Gamification from '../screens/Gamification';
 import Company from '../screens/Company';
+import Inbox from '../screens/Inbox'
 
 const Tab = createMaterialBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -86,6 +87,21 @@ function StackNavigatorTwo() {
                     ),
                 }}
             />
+
+
+            <Tab.Screen
+                name="Inbox"
+                component={Inbox}
+                options={{
+                    tabBarLabel: 'Inbox',
+                    tabBarIcon: ({ color }) => (
+                        <Icon name="bell" color={color} size={26} />
+                    ),
+                }}
+            />
+
+
+
         </Tab.Navigator>
     );
 }
