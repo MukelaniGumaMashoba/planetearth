@@ -1,31 +1,24 @@
 import React, { useContext, useState } from 'react'
-import { auth } from "../../firebase.js"
+import { auth, db } from "../../firebase.js"
 import Logo from '../components/Logo.js';
 import { UserContext } from '../../userCtxt.js';
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { TextInput, Text, Button, View, TouchableOpacity, StyleSheet, Alert, ImageBackground } from 'react-native';
 import LogOption from '../components/LogOption.js';
 import LogBackground from '../assets/LogBack.jpg';
+import { collection, doc, setDoc } from 'firebase/firestore';
 
 export default function Register({ navigation }) {
   const [error, setErrorMessage] = useState('');
-  const [userData, setUserData] = useState({ email: "", password: "", cpassword: "" })
+  const [userData, setUserData] = useState({ email: "", password: "", cpassword: "", name: "" })
 
   const { doLogin } = useContext(UserContext)
   const userRegister = () => {
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-    setErrorMessage('');
-    const errorCode = error.code;
-    const errorMessage = error.message;
-    if (errorCode === "auth/email-already-in-use") {
-      setErrorMessage("Email address is already in use.");
-    } else {
-      setErrorMessage(errorMessage);
-    }
     if (!emailRegex.test(userData.email)) {
       Alert.alert('Invalid Email', 'Please enter a valid email address.');
+      return
     }
     if (!userData.email || !userData.password) {
       setErrorMessage("Please enter both email and password.");
@@ -33,18 +26,30 @@ export default function Register({ navigation }) {
     }
     else if (userData.password != userData.cpassword) {
       setErrorMessage('The passwords do not match.');
+      return
     }
 
     createUserWithEmailAndPassword(auth, userData.email, userData.password)
-      .then((userCredential) => {
+      .then(async (userCredential) => {
         const user = userCredential.user;
-        doLogin(user)
+
+        const { email, photoURL, uid, displayName, emailVerified, phoneNumber } = user
+
+        await setDoc(doc(db, "users", user.uid), {
+          name: userData.name,
+          email, photoURL, uid, displayName, emailVerified, phoneNumber
+        }).then(() => doLogin(user)).catch((r) => console.log(r))
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
-        console.log(errorMessage)
-      });
+        if (errorCode === "auth/email-already-in-use") {
+          setErrorMessage("Email address is already in use.");
+        } else {
+          setErrorMessage(errorMessage);
+        }
+      }
+      );
   }
 
   return (
@@ -54,12 +59,13 @@ export default function Register({ navigation }) {
         <View style={styles.new}>
           <Text style={styles.welcome}>Welcome Sign Up</Text>
 
-          {/* <TextInput
+          <TextInput
             placeholder='Name'
             label='Name'
-            value=''
             style={styles.input}
-          /> */}
+            value={userData.name}
+            onChangeText={(text) => setUserData({ ...userData, name: text })}
+          />
 
           <TextInput
             placeholder='email'
