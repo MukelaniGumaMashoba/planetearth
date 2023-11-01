@@ -83,17 +83,21 @@ export default function Log({ navigation }) {
           mode="contained"
           title='Log in'
           onPress={userLogin}
-          color="green" // Change button background color to green
-          style={{ width: 200 }} // Set the width of the button to 200
+          color="green"
+          style={{ width: 200 }}
+        />
+        <Button
+          mode="contained"
+          title='Admin'
+          onPress={() => {
+            navigation.navigate('AdminLog')
+          }}
+          color="green"
+          style={{ width: 200 , marginTop: 10}}
         />
         <View>
           <TouchableOpacity onPress={() => navigation.navigate('Register')}>
             <Text style={[styles.link, styles.acc]}>Don't have an account? Sign up</Text>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={()=>{
-            navigation.navigate('AdminLog')
-          }}>
-            <Text>Admin</Text>
           </TouchableOpacity>
         </View>
         <LogOption />

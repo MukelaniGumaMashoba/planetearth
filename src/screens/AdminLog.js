@@ -1,14 +1,10 @@
 import Logo from '../components/Logo.js';
-// import { auth } from '../../firebase.js';
-// import { UserContext } from '../../userCtxt.js';
 import React, { useContext, useState } from 'react'
-// import { signInWithEmailAndPassword } from 'firebase/auth';
 import { TouchableOpacity, StyleSheet, View, Text, TextInput, Button, Image, Alert, ImageBackground } from 'react-native';
 
 import LogBackground from '../assets/LogBack.jpg';
 
 export default function AdminLog({ navigation }) {
-//   const { doLogin } = useContext(UserContext);
   const [error, setErrorMessage] = useState('');
   const [userData, setUserData] = useState({ email: "", password: "" })
 
@@ -34,22 +30,13 @@ export default function AdminLog({ navigation }) {
     else if(userData.password !== 'mukelani23'){
         setErrorMessage("Incorrect password")
     }
-    else if(userData.email !== 'planetpulse@gmail.com'){
+    else if(userData.email !== 'planetpulse@outlook.com'){
         setErrorMessage("Incorrect Email")
     }
     else{
         navigation.navigate('AdminPage')
     }
 
-    // signInWithEmailAndPassword(auth, userData.email, userData.password)
-    //   .then((userCredential) => {
-    //     const user = userCredential.user;
-    //     doLogin(user)
-    //   })
-    //   .catch((error) => {
-    //     const errorMessage = error.message;
-    //     console.log(errorMessage)
-    //   });
   }
 
   return (
