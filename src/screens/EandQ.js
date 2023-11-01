@@ -45,7 +45,7 @@ const EquipmentForm = ({ onSubmit }) => {
     setError(false);
     setErrorMessage('');
     setTips([]);
-    setLetter('Calculate')
+
   };
 
   const submit = () => {
@@ -224,14 +224,17 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: 'bold',
   },
-  
   resetButton: {
     width: 300,
     alignItems: 'center',
     marginTop: 10,
+    backgroundColor: "lightgreen",
+    width: 150,
+    borderRadius: 90,
+    padding: 10,
   },
   resetButtonText:{
-    color:colors.green,
+    color:colors.white,
     fontSize:20,
   },
   icon: {
@@ -274,5 +277,9 @@ const styles = StyleSheet.create({
   },
   errorText: {
     color: 'red',
+  },
+  tipsText:{
+    marginHorizontal: 20,
+    marginVertical: 10,
   },
 });

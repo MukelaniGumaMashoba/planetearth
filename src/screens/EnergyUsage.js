@@ -105,7 +105,6 @@ const BuildingForm  = ({ onSubmit}) => {
       <ScrollView contentContainerStyle={styles.scrollContainer}>
         <View style={styles.container}>
           <TouchableOpacity style={styles.backButton} onPress={() => navigation.navigate('Calculator')}>
-            <Text style={styles.buttonText}>BACK</Text>
           </TouchableOpacity>
           <Image source={iconImage} style={styles.icon} />
           <Text style={styles.title}>Energy Usage Calculator</Text>
@@ -208,7 +207,10 @@ export const styles = StyleSheet.create({
      color:colors.green,
      fontSize:15,
   },
-  
+  tipsText:{
+    marginHorizontal: 20,
+    marginVertical: 10,
+  },
   pickerItem: {
     borderRadius: 5,
     borderColor: colors.green,
@@ -299,9 +301,13 @@ export const styles = StyleSheet.create({
     width: 300,
     alignItems: 'center',
     marginTop: 10,
+    backgroundColor: "lightgreen",
+    width: 150,
+    borderRadius: 90,
+    padding: 10,
   },
   resetButtonText: {
-    color: colors.green,
+    color: colors.white,
     fontSize: 20,
   },
   errorText: {

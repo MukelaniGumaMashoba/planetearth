@@ -79,7 +79,6 @@ const VehicleForm = ({ onSubmit }) => {
     setError(false);
     setErrorMessage('');
     setTips([]);
-    setLetter('Calculate');
   };
 
   const getEmissionFactor = (fuelType, vehicleType) => {
@@ -139,7 +138,6 @@ const VehicleForm = ({ onSubmit }) => {
       <ScrollView contentContainerStyle={styles.scrollContainer}>
         <View style={styles.container}>
           <TouchableOpacity style={styles.backStyle} onPress={() => navigation.navigate('Calculator')}>
-            <Text style={styles.buttonText}>BACK</Text>
           </TouchableOpacity>
           <Image source={iconImage} style={styles.icon} />
           <Text style={styles.text}>Vehicle Calculator</Text>
@@ -314,11 +312,16 @@ const styles = StyleSheet.create({
     color: 'red',
     fontSize: 16,
     marginTop: 10,
+    marginHorizontal: 20,
   },
   resetButton: {
     width: 300,
     alignItems: 'center',
     marginTop: 10,
+    backgroundColor: "lightgreen",
+    width: 150,
+    borderRadius: 90,
+    padding: 10,
   },
   resetButtonText:{
     color:colors.green,
@@ -353,6 +356,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     color: 'black',
     fontSize: 18,
+  },
+  tipsText:{
+    marginHorizontal: 20,
+    marginVertical: 10,
   },
 });
 
