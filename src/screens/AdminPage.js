@@ -7,7 +7,7 @@ export const AdminPage = () => {
     const [users, setUsers] = useState([]);
 
     const fetchUsers = async () => {
-        const usersCollectionRef = collection(db, 'users');
+        const usersCollectionRef = collection(db, 'companies');
         const querySnapshot = await getDocs(usersCollectionRef);
         const usersData = [];
         querySnapshot.forEach((doc) => {
@@ -16,39 +16,44 @@ export const AdminPage = () => {
         setUsers(usersData);
     };
 
-    const deleteUser = async (userId) => {
-        const userDocRef = doc(db, 'users', userId);
+    const deleteUser = async (companyId) => {
+        const userDocRef = doc(db, 'companies', companyId);
         await deleteDoc(userDocRef);
         fetchUsers();
     };
 
     return (
-        <SafeAreaView>
-            <View style={styles.container}>
-                <Button title="See all users" onPress={fetchUsers} />
-                <FlatList
-                    data={users}
-                    keyExtractor={(item) => item.id}
-                    renderItem={({ item }) => (
-                        <View>
-                            <Text>{item.email}</Text>
-                            <Button title="Delete" onPress={() => deleteUser(item.id)} />
-                        </View>
-                    )}
-                />
-            </View>
+        <SafeAreaView style={styles.container}>
+            <Button title="See all users" onPress={fetchUsers} />
+            <FlatList
+                data={users}
+                keyExtractor={(item) => item.id}
+                renderItem={({ item }) => (
+                    <View style={styles.userContainer}>
+                        <Text style={styles.emailText}>{item.name}</Text>
+                        <Button title="Delete" onPress={() => deleteUser(item.id)} />
+                    </View>
+                )}
+            />
         </SafeAreaView>
     );
 };
 
-
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: 'center',
-        alignContent: 'center',
+        padding: 20,
+    },
+    userContainer: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
         alignItems: 'center',
-        position: 'relative',
-        top: 10,
+        marginVertical: 10,
+    },
+    emailText: {
+        fontSize: 16,
+    },
+    deleteButton: {
+        marginLeft: 10,
     }
-})
+});
