@@ -23,6 +23,10 @@ function StackNavigator() {
             <Stack.Screen name="CostSavings" component={CostSavings} />
             <Stack.Screen name="Game" component={Game} />
             <Stack.Screen name="Company" component={Company} />
+            <Stack.Screen
+                name="Inbox"
+                component={Inbox}
+            />
         </Stack.Navigator>
     );
 }
@@ -89,16 +93,7 @@ function StackNavigatorTwo() {
             />
 
 
-            <Tab.Screen
-                name="Inbox"
-                component={Inbox}
-                options={{
-                    tabBarLabel: 'Inbox',
-                    tabBarIcon: ({ color }) => (
-                        <Icon name="person" color={color} size={26} />
-                    ),
-                }}
-            />
+           
 
 
 

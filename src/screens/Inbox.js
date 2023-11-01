@@ -1,22 +1,73 @@
 import { useState, useEffect, useRef } from 'react';
-import { Text, View, Button, Platform } from 'react-native';
+import { Text, View, Platform } from 'react-native';
 import * as Device from 'expo-device';
 import * as Notifications from 'expo-notifications';
+import { collection, query, onSnapshot, orderBy } from "firebase/firestore";
+import { db } from '../../firebase';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { FlatList } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
     shouldShowAlert: true,
-    shouldPlaySound: false,
-    shouldSetBadge: false,
+    shouldPlaySound: true,
+    shouldSetBadge: true,
   }),
 });
 
 export default function Inbox() {
   const [expoPushToken, setExpoPushToken] = useState('');
   const [notification, setNotification] = useState(false);
+  const [notifications, setNotifications] = useState([]);
+  const [ready, setReady] = useState(false);
+  const [idss, setIds] = useState([]);
   const notificationListener = useRef();
   const responseListener = useRef();
 
+  useEffect(() => {
+    const getSavedNotification = async () => {
+      const res = await AsyncStorage.getItem("@notifications");
+      if (res) {
+        setIds(JSON.parse(res))
+        setReady(true)
+      }
+    }
+
+    (async () => {
+      await getSavedNotification();
+    })();
+    let unsubscribe = () => { }
+
+
+    if (ready) {
+      const q = query(collection(db, "notifications"), orderBy("expire", "desc"));
+      unsubscribe = onSnapshot(q, async (querySnapshot) => {
+        const noti = [];
+        const ids = [];
+
+        querySnapshot.forEach((doc) => {
+          noti.push({ ...doc.data(), id: doc.id });
+          if (Date(doc.data().expire) >= Date(Date.now()) && !idss.includes(doc.id)) {
+            schedulePushNotification(doc.data())
+          }
+
+          if (!idss.includes(doc.id)) {
+            ids.push(doc.id);
+          }
+        });
+
+        setIds((prev) => ([...prev, ...ids]))
+        setNotifications(noti)
+        AsyncStorage.setItem("@notifications", JSON.stringify(idss), (err) => {
+          //console.error("Saving Eror:", err)
+        })
+      });
+    }
+
+    return async () => unsubscribe()
+
+  }, [ready]);
   useEffect(() => {
     registerForPushNotificationsAsync().then(token => setExpoPushToken(token));
 
@@ -35,36 +86,39 @@ export default function Inbox() {
   }, []);
 
   return (
-    <View
-      style={{
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'space-around',
-      }}>
-      <Text>Your expo push token: {expoPushToken}</Text>
-      <View style={{ alignItems: 'center', justifyContent: 'center' }}>
-        <Text>Title: {notification && notification.request.content.title} </Text>
-        <Text>Body: {notification && notification.request.content.body}</Text>
-        <Text>Data: {notification && JSON.stringify(notification.request.content.data)}</Text>
+    <SafeAreaView style={{ flex: 1 }}>
+      <View
+        style={{
+          flex: 1,
+          alignItems: 'center',
+          justifyContent: 'center',
+          alignContent: "center"
+        }}>
+
+        <FlatList
+          data={notifications}
+
+          renderItem={({ item }) => (
+            <View style={{textAlign: "left", alignItems: 'center',backgroundColor: "green" }}>
+              <Text style={{color: "white", fontSize: 14}}>{item.title} </Text>
+              <Text style={{color: "white", fontSize: 14}}>{item.body}</Text>
+              <Text style={{color: "white", fontSize: 14}}>{Date(item.expire)}</Text>
+            </View>
+          )}
+
+          ListEmptyComponent={()=>(<Text>No notifications this time 🎉</Text>)}
+        />
+
       </View>
-      <Button
-        title="Press to schedule a notification"
-        onPress={async () => {
-          await schedulePushNotification();
-        }}
-      />
-    </View>
+      </SafeAreaView>
   );
 }
 
-async function schedulePushNotification() {
+async function schedulePushNotification(content) {
   await Notifications.scheduleNotificationAsync({
-    content: {
-      title: "You've got mail! 📬",
-      body: 'Dont Forget to Save The world',
-      data: { data: 'goes here' },
-    },
-    trigger: { seconds: 2 },
+    content,
+
+    trigger: { seconds: 1, }
   });
 }
 
@@ -91,10 +145,9 @@ async function registerForPushNotificationsAsync() {
       alert('Failed to get push token for push notification!');
       return;
     }
-    // Learn more about projectId:
-    // https://docs.expo.dev/push-notifications/push-notifications-setup/#configure-projectid
+
     token = (await Notifications.getExpoPushTokenAsync({ projectId: 'your-project-id' })).data;
-    console.log(token);
+    // console.log(token);
   } else {
     alert('Must use physical device for Push Notifications');
   }
