@@ -129,6 +129,9 @@ const AccountScreen = ({ navigation }) => {
               <Text style={styles.buttonText}>Logout</Text>
             </TouchableOpacity>
           </View>
+          <TouchableOpacity style={styles.button3}>
+              <Text style={styles.buttonText}>PlanetPulse Support</Text>
+          </TouchableOpacity>
 
           {/* Edit Profile Modal */}
           <Modal
@@ -248,6 +251,16 @@ const styles = StyleSheet.create({
     borderRadius: 25,
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  button3: {
+    marginVertical: 10,
+    width: 300,
+    height: 50,
+    backgroundColor: 'green',
+    borderRadius: 5,
+    justifyContent: 'center',
+    alignItems: 'center',
+    
   },
   logoutButton: {
     backgroundColor: '#DC3545',
