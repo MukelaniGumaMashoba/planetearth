@@ -58,7 +58,7 @@ function App() {
     <ImageBackground source={LogBack} style={styles.backgroundImage}>
       <View style={styles.container}>
         <Stack.Navigator>
-          <Stack.Screen name="Calculator" component={MainApp} />
+          <Stack.Screen name="Main" component={MainApp} />
 
           <Stack.Screen name="Energy Usage" options={{ title: 'Building Form' }}>
             {() => <BuildingForm onSubmit={handleFormDataSubmit} />} 
