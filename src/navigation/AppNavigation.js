@@ -48,7 +48,7 @@ function StackNavigatorTwo() {
         <Tab.Navigator
             initialRouteName="Home"
             shifting={true}
-            barStyle={{ backgroundColor: 'lightgreen' }}
+            barStyle={{ backgroundColor: 'white' }}
         >
             <Tab.Screen
                 name="Home"

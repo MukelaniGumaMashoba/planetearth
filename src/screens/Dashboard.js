@@ -29,14 +29,15 @@ export default function Dashboard({ navigation }) {
   return (
     <View style={styles.container}>
 
-      <Text style={styles.welcomeText}>PlanetPulse</Text>
+      <View style={styles.h1}>
+      <Text style={styles.welcomeText}>PlanetPulse 🌍</Text>
 
       <TouchableOpacity style={styles.icon} onPress={()=>{navigation.navigate("Inbox")}}>
-        <Icon name="notifications" color='grey' size={26} />
+        <Icon name="notifications" color='green' size={26} />
       </TouchableOpacity>
+      </View>
 
-
-      <Text style={styles.txt}>Know What Happening Around You All The Time.!</Text>
+      <Text style={styles.txt}>Know What Is Happening Around You!</Text>
       <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
         <ImageBackground
           source={require('../assets/information.jpg')}
@@ -52,6 +53,13 @@ export default function Dashboard({ navigation }) {
           <Text style={styles.txt2}>Climate Crisis Warning:</Text>
           <Text style={styles.txt2}> Extreme weather events intensify as global temperatures soar, endangering communities worldwide.</Text>
         </ImageBackground>
+        <ImageBackground
+          source={require('../assets/information.jpg')}
+          style={styles.backgroundImage}
+        >
+          <Text style={styles.txt2}>Global Warming Alert: </Text>
+          <Text style={styles.txt2}>Rising greenhouse gases are heating our planet, melting polar ice and threatening coastal cities.</Text>
+        </ImageBackground>
       </ScrollView>
 
       <View>
@@ -60,7 +68,7 @@ export default function Dashboard({ navigation }) {
       </View>
 
       <View>
-        <Text style={styles.menu}>Trending News</Text>
+        <Text style={styles.news}>Trending News</Text>
         <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
           <TouchableOpacity onPress={Open}>
             <Image
@@ -133,12 +141,28 @@ const styles = StyleSheet.create({
   },
   menu: {
     fontWeight: 'bold',
-    fontSize: 16,
+    fontSize: 20,
+    alignSelf: 'center',
+    backgroundColor: '#dedcd7',
+    paddingHorizontal: 155,
+    paddingVertical: 10,
+  },
+  news: {
+    fontWeight: 'bold',
+    fontSize: 20,
+    alignSelf: 'center',
+    backgroundColor: '#dedcd7',
+    paddingHorizontal: 110,
+    paddingVertical: 10,
   },
   txt: {
     fontSize: 20,
+    fontFamily: 'serif',
+    textAlign: 'center',
     fontWeight: 'bold',
-    marginBottom: 15,
+    marginBottom: 5,
+    backgroundColor: '#dedcd7',
+    padding: 10,
   },
   backgroundImage: {
     marginRight: 15,
@@ -173,9 +197,19 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     padding: 15,
   },
+  h1: {
+    flexDirection: 'row',
+    alignItems: 'center', 
+    justifyContent: 'space-between', 
+    padding: 16, 
+    marginTop: 10,
+  },
+  welcomeText: {
+    fontSize: 24,
+    fontWeight: 'bold',
+  },
   icon: {
-    alignItems: 'flex-end',
-    margin: 12,
+    marginLeft: 16,
   },
   modalContainer: {
     backgroundColor: 'grey',
