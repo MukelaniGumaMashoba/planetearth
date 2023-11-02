@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { TextInput, Modal } from 'react-native';
-import { collection, onSnapshot, query, where } from "firebase/firestore";
+import { TextInput, Modal, Alert } from 'react-native';
+import { collection, doc, getDoc, onSnapshot, query, where } from "firebase/firestore";
 import { Text, Box, Progress } from 'native-base';
 import { ImageBackground, View, ScrollView, Image, StyleSheet, TouchableOpacity, KeyboardAvoidingView } from 'react-native';
 import Score from '../components/Score';
@@ -8,6 +8,9 @@ import { UserContext } from '../../userCtxt';
 import { db } from '../../firebase';
 
 const backgroundImage = require('../assets/LogBack.jpg');
+import { getAuth, deleteUser } from "firebase/auth";
+
+
 
 const AccountScreen = ({ navigation }) => {
   const { user, doLogout } = useContext(UserContext);
@@ -15,6 +18,37 @@ const AccountScreen = ({ navigation }) => {
   const [company, setCompany] = useState(null);
   const [editProfileModalVisible, setEditProfileModalVisible] = useState(false);
   const [editedEmail, setEditedEmail] = useState(user.email);
+  const [users, setUsers] = useState({})
+
+  const deleteFroFB = () => {
+    const auth = getAuth();
+    const user = auth.currentUser;
+
+    deleteUser(user).then(() => {
+
+    }).catch((error) => {
+      Alert.alert("Wowo hai ngamawala", error.message)
+    });
+  }
+
+  const Delete = () => {
+    Alert.alert(
+      'Logout',
+      'Are you sure you want to log out?',
+      [
+        {
+          text: 'Cancel',
+          style: 'cancel',
+        },
+        {
+          text: 'I am sure',
+          onPress: deleteFroFB,
+        },
+      ]
+    );
+  };
+
+
 
   useEffect(() => {
     const q = query(collection(db, "companies"), where("user", "==", user.uid));
@@ -25,6 +59,24 @@ const AccountScreen = ({ navigation }) => {
       });
     });
     return () => unsubscribe();
+  }, []);
+
+
+
+  const UserName = async () => {
+    const docRef = doc(db, "users", user.uid);
+    const docSnap = await getDoc(docRef);
+
+    if (docSnap.exists()) {
+      setUsers(docSnap.data())
+      console.log("Document data:", docSnap.data());
+    } else {
+      console.log("No such document!");
+    }
+  }
+
+  useEffect(() => {
+    UserName()
   }, []);
 
   const openEditProfileModal = () => {
@@ -63,7 +115,7 @@ const AccountScreen = ({ navigation }) => {
               />
             </View>
 
-            <Text style={styles.title}>Welcome {user.name}!</Text>
+            <Text style={styles.title}>Welcome {users?.name}!</Text>
             <Text style={styles.subtitle}>Email: {user.email}</Text>
           </View>
 
@@ -154,7 +206,7 @@ const AccountScreen = ({ navigation }) => {
                   <Text style={styles.buttonText}>Update</Text>
                 </TouchableOpacity>
 
-                <TouchableOpacity onPress={closeEditProfileModal} style={styles.deleteAccountButton}>
+                <TouchableOpacity onPress={Delete} style={styles.deleteAccountButton}>
                   <Text style={styles.buttonText}>Delete Account</Text>
                 </TouchableOpacity>
               </View>

@@ -118,7 +118,7 @@ const styles = StyleSheet.create({
     top:133,
     left:92,
     color:'gray',
-    fontSi1ze:12,
+    fontSize:12,
     width: 180,
   },
   texts3:{

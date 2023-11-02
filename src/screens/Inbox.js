@@ -17,8 +17,8 @@ Notifications.setNotificationHandler({
 });
 
 export default function Inbox() {
-  const [expoPushToken, setExpoPushToken] = useState('');
-  const [notification, setNotification] = useState(false);
+  const [, setExpoPushToken] = useState('');
+  const [, setNotification] = useState(false);
   const [notifications, setNotifications] = useState([]);
   const [ready, setReady] = useState(false);
   const [idss, setIds] = useState([]);
@@ -76,7 +76,6 @@ export default function Inbox() {
     });
 
     responseListener.current = Notifications.addNotificationResponseReceivedListener(response => {
-      console.log(response);
     });
 
     return () => {
