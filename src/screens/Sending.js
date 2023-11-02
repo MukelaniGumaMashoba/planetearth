@@ -1,47 +1,45 @@
 import React, { useState } from 'react';
-import { View, TextInput, Button, DatePickerAndroid, TimePickerAndroid, Alert } from 'react-native';
+import { collection, addDoc } from "firebase/firestore";
+import { View, TextInput, Button, Alert } from 'react-native';
+import { db } from '../../firebase';
+import DateTimePickerModal from "react-native-modal-datetime-picker";
 
-const App = () => {
+const SendingNotifications = () => {
   const [title, setTitle] = useState('');
   const [body, setBody] = useState('');
-  const [expireDate, setExpireDate] = useState(null);
+  const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
+  const [date, setDate] = useState(null);
 
-  const openDatePicker = async () => {
-    try {
-      const { action, year, month, day } = await DatePickerAndroid.open({
-        date: new Date(),
-        mode: 'default'
-      });
-      if (action !== DatePickerAndroid.dismissedAction) {
-        openTimePicker(year, month, day);
-      }
-    } catch ({ code, message }) {
-      console.warn('Cannot open date picker', message);
-    }
+  const showDatePicker = () => {
+    setDatePickerVisibility(true);
   };
 
-  const openTimePicker = async (year, month, day) => {
-    try {
-      const { action, hour, minute } = await TimePickerAndroid.open({
-        hour: 0,
-        minute: 0,
-        is24Hour: false,
-      });
-      if (action !== TimePickerAndroid.dismissedAction) {
-        const selectedDate = new Date(year, month, day, hour, minute);
-        setExpireDate(selectedDate);
-      }
-    } catch ({ code, message }) {
-      console.warn('Cannot open time picker', message);
-    }
+  const hideDatePicker = () => {
+    setDatePickerVisibility(false);
   };
 
-  const sendNotification = () => {
-    if (title && body && expireDate) {
-      // Send notification logic goes here
-      Alert.alert('Notification Sent', 'Notification has been sent successfully.');
+  const handleConfirm = (pickedDate) => {
+    console.log("A date has been picked: ", pickedDate);
+    setDate(pickedDate); // Update the date state with the pickedDate
+    hideDatePicker();
+  };
+
+  const sendNotification = async () => {
+    if (title && body && date) { // Check if date is not null
+      try {
+        const docRef = await addDoc(collection(db, "notifications"), {
+          title: title,
+          body: body,
+          date: date.toISOString() // Store date as string in the database
+        });
+        console.log("Document written with ID: ", docRef.id);
+        Alert.alert('Notification Sent', 'Notification has been sent successfully.');
+      } catch (error) {
+        console.error('Error adding document: ', error);
+        Alert.alert('Error', 'Failed to send notification. Please try again later.');
+      }
     } else {
-      Alert.alert('Error', 'Please fill out all fields and select an expiration date.');
+      Alert.alert('Error', 'Please fill out all fields and select a date.');
     }
   };
 
@@ -59,15 +57,19 @@ const App = () => {
         onChangeText={text => setBody(text)}
         style={{ marginBottom: 16, padding: 10, borderColor: 'gray', borderWidth: 1 }}
       />
-      <Button title="Select Expiration Date" onPress={openDatePicker} />
-      {expireDate && (
-        <View style={{ marginTop: 16 }}>
-          <Text>Selected Expiration Date: {expireDate.toString()}</Text>
-        </View>
-      )}
       <Button title="Send Notification" onPress={sendNotification} />
+
+      <View>
+        <Button title="Show Date Picker" onPress={showDatePicker} />
+        <DateTimePickerModal
+          isVisible={isDatePickerVisible}
+          mode="date"
+          onConfirm={handleConfirm}
+          onCancel={hideDatePicker}
+        />
+      </View>
     </View>
   );
 };
 
-export default App;
+export default SendingNotifications;

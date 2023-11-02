@@ -66,7 +66,11 @@ export const AdminPage = ({navigation}) => {
                 />
                 
                 <View style={styles.panel}>
-
+                        <TouchableOpacity onPress={()=>{
+                            navigation.navigate('Sending')
+                        }}>
+                            <Text>Send Alerts</Text>
+                        </TouchableOpacity>
                     <TouchableOpacity onPress={logout} style={styles.logout}>
                         <Text style={styles.buttonText}>LOGOUT</Text>
                     </TouchableOpacity>
