@@ -45,6 +45,9 @@ const SendingNotifications = () => {
 
   return (
     <View style={{ flex: 1, justifyContent: 'center', padding: 16 }}>
+      <Text>Send Alerts</Text>
+
+
       <TextInput
         placeholder="Enter notification title"
         value={title}
@@ -57,17 +60,21 @@ const SendingNotifications = () => {
         onChangeText={text => setBody(text)}
         style={{ marginBottom: 16, padding: 10, borderColor: 'gray', borderWidth: 1 }}
       />
-      <Button title="Send Notification" onPress={sendNotification} />
+
 
       <View>
-        <Button title="Show Date Picker" onPress={showDatePicker} />
+        <Button title="Show Date Picker" onPress={showDatePicker} style={{ marginBottom: 12 }} />
         <DateTimePickerModal
           isVisible={isDatePickerVisible}
-          mode="date"
+          mode="datetime"
+
           onConfirm={handleConfirm}
           onCancel={hideDatePicker}
         />
       </View>
+
+
+      <Button title="Send Notification" onPress={sendNotification} />
     </View>
   );
 };
