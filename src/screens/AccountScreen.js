@@ -25,27 +25,28 @@ const AccountScreen = ({ navigation }) => {
     const user = auth.currentUser;
 
     deleteUser(user).then(() => {
-      
+
     }).catch((error) => {
-      Alert.alert("Wowo hai ngamawala",error.message)    });
+      Alert.alert("Wowo hai ngamawala", error.message)
+    });
   }
 
   const Delete = () => {
     Alert.alert(
-        'Logout',
-        'Are you sure you want to log out?',
-        [
-            {
-                text: 'Cancel',
-                style: 'cancel',
-            },
-            {
-                text: 'I am sure',
-                onPress: deleteFroFB,
-            },
-        ]
+      'Logout',
+      'Are you sure you want to log out?',
+      [
+        {
+          text: 'Cancel',
+          style: 'cancel',
+        },
+        {
+          text: 'I am sure',
+          onPress: deleteFroFB,
+        },
+      ]
     );
-};
+  };
 
 
 
@@ -64,14 +65,14 @@ const AccountScreen = ({ navigation }) => {
   useEffect(async () => {
     const docRef = doc(db, "users", user.uid);
     const docSnap = await getDoc(docRef);
-    
+
     if (docSnap.exists()) {
       setUsers(docSnap.data())
       console.log("Document data:", docSnap.data());
     } else {
       console.log("No such document!");
     }
-    }, [ ]);
+  }, []);
 
   const openEditProfileModal = () => {
     setEditProfileModalVisible(true);
