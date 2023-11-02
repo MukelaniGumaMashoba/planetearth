@@ -3,6 +3,7 @@ import { collection, addDoc } from "firebase/firestore";
 import { View, TextInput, Button, Alert } from 'react-native';
 import { db } from '../../firebase';
 import DateTimePickerModal from "react-native-modal-datetime-picker";
+import { Text } from 'react-native';
 
 const SendingNotifications = () => {
   const [title, setTitle] = useState('');
@@ -47,19 +48,22 @@ const SendingNotifications = () => {
     <View style={{ flex: 1, justifyContent: 'center', padding: 16 }}>
       <Text>Send Alerts</Text>
 
-
+      <Text>Alert Title</Text>
       <TextInput
         placeholder="Enter notification title"
         value={title}
         onChangeText={text => setTitle(text)}
         style={{ marginBottom: 16, padding: 10, borderColor: 'gray', borderWidth: 1 }}
       />
+
+      <Text>Alert Title</Text>
       <TextInput
         placeholder="Enter notification body"
         value={body}
         onChangeText={text => setBody(text)}
         style={{ marginBottom: 16, padding: 10, borderColor: 'gray', borderWidth: 1 }}
       />
+
 
 
       <View>
@@ -73,7 +77,7 @@ const SendingNotifications = () => {
         />
       </View>
 
-
+      <Text style={{color: 'white'}}>Alert Title</Text>
       <Button title="Send Notification" onPress={sendNotification} />
     </View>
   );

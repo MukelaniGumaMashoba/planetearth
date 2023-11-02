@@ -4,7 +4,7 @@ import { collection, getDocs, deleteDoc, doc } from 'firebase/firestore';
 import { db } from '../../firebase';
 import { UserContext } from '../../userCtxt';
 
-export const AdminPage = ({navigation}) => {
+export const AdminPage = ({ navigation }) => {
     const [users, setUsers] = useState([]);
 
     const { user, doLogout } = useContext(UserContext);
@@ -27,7 +27,7 @@ export const AdminPage = ({navigation}) => {
 
     const handleLogout = () => {
         navigation.goBack()
-      };
+    };
 
     const logout = () => {
         Alert.alert(
@@ -60,17 +60,17 @@ export const AdminPage = ({navigation}) => {
                     renderItem={({ item }) => (
                         <View style={styles.userContainer}>
                             <Text style={styles.emailText}>{item.name}</Text>
-                            <Button  title="Delete" onPress={() => deleteUser(item.id)} color="red" />
+                            <Button title="Delete" onPress={() => deleteUser(item.id)} color="red" />
                         </View>
                     )}
                 />
-                
-                <View style={styles.panel}>
-                        <TouchableOpacity onPress={()=>{
-                            navigation.navigate('Sending')
-                        }}>
-                            <Text>Send Alerts</Text>
-                        </TouchableOpacity>
+
+                <View style={styles.panel2}>
+                    <TouchableOpacity onPress={() => {
+                        navigation.navigate('Sending')
+                    }} style={styles.logout}>
+                        <Text style={styles.buttonText}>Send Alerts</Text>
+                    </TouchableOpacity>
                     <TouchableOpacity onPress={logout} style={styles.logout}>
                         <Text style={styles.buttonText}>LOGOUT</Text>
                     </TouchableOpacity>
@@ -107,6 +107,12 @@ const styles = StyleSheet.create({
         width: 200,
         marginBottom: 20,
     },
+    panel2: {
+        width: 200,
+        marginBottom: 20,
+        flexDirection: 'row',
+        gap: 12,
+    },
     userContainer: {
         flexDirection: 'row',
         justifyContent: 'space-between',
@@ -118,9 +124,16 @@ const styles = StyleSheet.create({
         marginRight: 20,
     },
     logout: {
-        padding: 10,
-        backgroundColor: 'gray',
+        padding: 5,
+        backgroundColor: 'lightblue',
         borderRadius: 5,
+        width: '50%'
+    },
+    Send: {
+        padding: 5,
+        backgroundColor: 'lightblue',
+        borderRadius: 5,
+        width: '50%'
     },
     buttonText: {
         padding: 10,
