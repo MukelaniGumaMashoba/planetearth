@@ -26,12 +26,13 @@ const SendingNotifications = () => {
   };
 
   const sendNotification = async () => {
-    if (title && body && date) { // Check if date is not null
+    if (title && body && date) {
       try {
+        const expireTimestamp = date.getTime();
         const docRef = await addDoc(collection(db, "notifications"), {
           title: title,
           body: body,
-          date: date.toISOString() // Store date as string in the database
+          expire: expireTimestamp
         });
         console.log("Document written with ID: ", docRef.id);
         Alert.alert('Notification Sent', 'Notification has been sent successfully.');
@@ -43,6 +44,7 @@ const SendingNotifications = () => {
       Alert.alert('Error', 'Please fill out all fields and select a date.');
     }
   };
+
 
   return (
     <View style={{ flex: 1, justifyContent: 'center', padding: 16 }}>
@@ -77,7 +79,7 @@ const SendingNotifications = () => {
         />
       </View>
 
-      <Text style={{color: 'white'}}>Alert Title</Text>
+      <Text style={{ color: 'white' }}>Alert Title</Text>
       <Button title="Send Notification" onPress={sendNotification} />
     </View>
   );
