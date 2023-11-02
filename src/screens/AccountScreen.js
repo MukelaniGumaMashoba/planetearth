@@ -62,7 +62,8 @@ const AccountScreen = ({ navigation }) => {
   }, []);
 
 
-  useEffect(async () => {
+
+  const UserName = async () => {
     const docRef = doc(db, "users", user.uid);
     const docSnap = await getDoc(docRef);
 
@@ -72,6 +73,10 @@ const AccountScreen = ({ navigation }) => {
     } else {
       console.log("No such document!");
     }
+  }
+
+  useEffect(() => {
+    UserName()
   }, []);
 
   const openEditProfileModal = () => {
