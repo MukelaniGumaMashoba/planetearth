@@ -8,6 +8,7 @@
       "distribution": "internal"
     },
     "preview": {
+      "extends": "production",
       "distribution": "internal"
     },
     "production": {}

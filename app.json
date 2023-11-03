@@ -20,7 +20,6 @@
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
-        "googleServicesFile": "./google-services.json",
         "backgroundColor": "#ffffff"
       },
       "package": "com.mukelani_mashoba.planetearth"
