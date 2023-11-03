@@ -30,9 +30,10 @@ const SendingNotifications = () => {
       try {
         const expireTimestamp = date.getTime();
         const docRef = await addDoc(collection(db, "notifications"), {
-          title: title,
-          body: body,
-          expire: expireTimestamp
+          title,
+          body,
+          expire: expireTimestamp,
+          createdAt: Date.now()
         });
         console.log("Document written with ID: ", docRef.id);
         Alert.alert('Notification Sent', 'Notification has been sent successfully.');
@@ -58,7 +59,7 @@ const SendingNotifications = () => {
         style={{ marginBottom: 16, padding: 10, borderColor: 'gray', borderWidth: 1 }}
       />
 
-      <Text>Alert Title</Text>
+      <Text>Alert Body</Text>
       <TextInput
         placeholder="Enter notification body"
         value={body}
@@ -69,18 +70,17 @@ const SendingNotifications = () => {
 
 
       <View>
-        <Button title="Show Date Picker" onPress={showDatePicker} style={{ marginBottom: 12 }} />
+        <Button title="Pick expiring time" onPress={showDatePicker} style={{ marginBottom: 12 }} />
         <DateTimePickerModal
           isVisible={isDatePickerVisible}
           mode="datetime"
-
           onConfirm={handleConfirm}
           onCancel={hideDatePicker}
         />
       </View>
 
       <Text style={{ color: 'white' }}>Alert Title</Text>
-      <Button title="Send Notification" onPress={sendNotification} />
+      <Button title="Send Alerts" onPress={sendNotification} />
     </View>
   );
 };

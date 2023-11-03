@@ -55,11 +55,11 @@ export default function ResetPasswordScreen({ navigation }) {
           title='Continue'
         />
 
-        <View style={styles.row}>
+        {/* <View style={styles.row}>
           <TouchableOpacity onPress={() => navigation.goBack()}>
             <Text style={styles.link}>Back</Text>
           </TouchableOpacity>
-        </View>
+        </View> */}
 
       </View>
     </SafeAreaView>
