@@ -74,7 +74,6 @@ const Report = ({
       <ScrollView>
         <View style={styles.container}>
           <TouchableOpacity style={styles.backButton} onPress={() => navigation.navigate('Calculator')}>
-            <Text style={styles.buttonText}>BACK</Text>
           </TouchableOpacity>
           <Image source={iconImage} style={styles.logo} />
 

@@ -6,6 +6,7 @@ import { ImageBackground, View, ScrollView, Image, StyleSheet, TouchableOpacity,
 import Score from '../components/Score';
 import { UserContext } from '../../userCtxt';
 import { db } from '../../firebase';
+import { Ionicons } from '@expo/vector-icons';
 
 const backgroundImage = require('../assets/LogBack.jpg');
 import { getAuth, deleteUser } from "firebase/auth";
@@ -86,6 +87,19 @@ const AccountScreen = ({ navigation }) => {
   const closeEditProfileModal = () => {
     setEditProfileModalVisible(false);
   };
+
+    // State to control the contact info pop-up
+    const [showContactPopUp, setShowContactPopUp] = useState(false);
+
+    // Function to open the contact info pop-up
+    const openContactPopUp = () => {
+      setShowContactPopUp(true);
+    };
+  
+    // Function to close the contact info pop-up
+    const closeContactPopUp = () => {
+      setShowContactPopUp(false);
+    };
 
   const handleLogout = () => {
     doLogout();
@@ -181,7 +195,7 @@ const AccountScreen = ({ navigation }) => {
               <Text style={styles.buttonText}>Logout</Text>
             </TouchableOpacity>
           </View>
-          <TouchableOpacity style={styles.button3}>
+          <TouchableOpacity onPress={openContactPopUp} style={styles.button3}>
               <Text style={styles.buttonText}>PlanetPulse Support</Text>
           </TouchableOpacity>
 
@@ -216,6 +230,30 @@ const AccountScreen = ({ navigation }) => {
             </View>
           </Modal>
 
+          <Modal
+            animationType="slide"
+            transparent={true}
+            visible={showContactPopUp}
+            onRequestClose={closeContactPopUp}
+          >
+            <View style={styles.contactInfoPopUp}>
+              <TouchableOpacity onPress={closeContactPopUp} style={styles.closeButton}>
+                <Ionicons name="close" size={24} color="black" />
+              </TouchableOpacity>
+              <View style={styles.contactInfoContainer}>
+                <View style={styles.searchContainer}>
+                  <Ionicons name="search" size={24} color="black" style={styles.searchIcon} />
+                  <TextInput
+                    style={styles.searchInput}
+                    placeholder="Search..."
+                  />
+                </View>
+                <Text style={styles.contactName}>Contact Us</Text>
+                <Text style={styles.contactEmail}>Tel: 011 065 0288</Text>
+                <Text style={styles.contactEmail}>Email: planetpulse@email.com</Text>
+              </View>
+            </View>
+          </Modal>
 
         </ScrollView>
       </KeyboardAvoidingView>
@@ -266,6 +304,7 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: 'bold',
     marginBottom: 10,
+    paddingTop: 10,
   },
   subtitle: {
     fontSize: 16,
@@ -357,5 +396,50 @@ const styles = StyleSheet.create({
     top: 10,
     right: 10,
     padding: 10,
+  },
+  contactInfoPopUp: {
+    flex: 1,
+    justifyContent: 'flex-start',
+    backgroundColor: 'white',
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
+  },
+  closeButton: {
+    position: 'absolute',
+    top: 0,
+    right: 10,
+    padding: 10,
+    backgroundColor: 'lightgray',
+    borderRadius:10,
+
+  },
+  contactInfoContainer: {
+    padding: 20,
+    alignItems: 'center',
+  },
+  searchContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 10,
+    marginTop: 40,
+    borderWidth: 1,
+    borderColor: '#000',
+    borderRadius: 5,
+    padding: 5,
+  },
+  searchIcon: {
+    marginRight: 10,
+  },
+  searchInput: {
+    flex: 1,
+    fontSize: 16,
+  },
+  contactName: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginBottom: 10,
+  },
+  contactEmail: {
+    fontSize: 16,
   },
 });
