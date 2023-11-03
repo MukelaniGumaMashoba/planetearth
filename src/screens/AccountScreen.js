@@ -414,6 +414,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
+    marginTop:120,
   },
   closeButton: {
     position: 'absolute',
@@ -427,6 +428,7 @@ const styles = StyleSheet.create({
   contactInfoContainer: {
     padding: 20,
     alignItems: 'center',
+    
   },
   searchContainer: {
     flexDirection: 'row',
@@ -462,7 +464,7 @@ const styles = StyleSheet.create({
   faqHeading: {
     fontSize: 22,
     marginBottom: 10,
-    marginTop: -60,
+    marginTop: -80,
     backgroundColor: 'gray',
     paddingHorizontal: 171,
     paddingVertical: 15,
@@ -483,6 +485,6 @@ const styles = StyleSheet.create({
     color: 'white',
     paddingHorizontal: 100,
     paddingVertical: 15,
-    marginTop: 50,
+    marginTop: 10,
   },
 });
