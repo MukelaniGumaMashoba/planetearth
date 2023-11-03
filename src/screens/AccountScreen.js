@@ -169,7 +169,6 @@ const AccountScreen = ({ navigation }) => {
             <TouchableOpacity onPress={() => {
               navigation.navigate('Company', {});
             }} >
-              {/* <Box style={{ backgroundColor: 'grey', opacity: 0.85 }} */}
               <Box
                 bg="white"
                 p={4}
@@ -252,13 +251,17 @@ const AccountScreen = ({ navigation }) => {
                 <Text style={styles.contactName}>Contact Us</Text>
                 <Text style={styles.contactEmail}>Tel: 011 065 0288</Text>
                 <Text style={styles.contactEmail}>Email: planetpulse@email.com</Text>
+                <Text style={styles.contactEmail}></Text>
               </View>
 
               <View style={styles.faq}>
-                  <Text style={styles.faqInfo}>Contact Us</Text>
-                  <Text style={styles.faqInfo}>Contact Us</Text>
-                  <Text style={styles.faqInfo}>Contact Us</Text>
+                  <Text style={styles.faqHeading}>FAQ</Text>
+                  <Text style={styles.faqInfo}>How to use the carbon calculator?</Text>
+                  <Text style={styles.faqInfo}>How to calculate cost savings</Text>
+                  <Text style={styles.faqInfo}>User Support. Report a problem</Text>
+                  <Text style={styles.faqInfo}>Assisting you with connecting to the world</Text>
                 </View>
+                <Text style={styles.faqSave}>🌍 Save Earth 🌍</Text>
             </View>
             
           </Modal>
@@ -443,9 +446,10 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   contactName: {
-    fontSize: 18,
+    fontSize: 22,
     fontWeight: 'bold',
     marginBottom: 10,
+    marginTop: 10,
   },
   contactEmail: {
     fontSize: 16,
@@ -455,9 +459,30 @@ const styles = StyleSheet.create({
     marginTop:50,
     fontSize: 16,
   },
+  faqHeading: {
+    fontSize: 22,
+    marginBottom: 10,
+    marginTop: -60,
+    backgroundColor: 'gray',
+    paddingHorizontal: 171,
+    paddingVertical: 15,
+  },
   faqInfo: {
     fontSize: 16,
+    textAlign: 'center',
     backgroundColor: 'lightgray',
     paddingHorizontal: 100,
+    paddingVertical: 15,
+    marginTop: 5,
+    borderRadius:5,
+  },
+  faqSave: {
+    fontSize: 20,
+    textAlign: 'center',
+    backgroundColor: 'green',
+    color: 'white',
+    paddingHorizontal: 100,
+    paddingVertical: 15,
+    marginTop: 50,
   },
 });
