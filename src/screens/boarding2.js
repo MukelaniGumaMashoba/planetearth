@@ -53,6 +53,7 @@ const styles = StyleSheet.create({
     btn: {
         backgroundColor: 'black',
         borderRadius: 23,
+        width: 150,
         margin: 12,
         padding: 13,
         justifyContent: 'center',
