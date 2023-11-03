@@ -42,6 +42,7 @@ export default function Log({ navigation }) {
       .catch((error) => {
         const errorMessage = error.message;
         console.log(errorMessage)
+        Alert.alert(errorMessage)
       });
   }
 

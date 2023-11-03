@@ -1,9 +1,10 @@
 import React, { useState } from 'react'
-import { Alert, Button, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
+import { Alert, Button, SafeAreaView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import Logo from '../components/Logo';
 
 import { sendPasswordResetEmail } from "firebase/auth";
 import { auth } from '../../firebase';
+import { Image } from 'react-native';
 
 
 
@@ -28,46 +29,52 @@ export default function ResetPasswordScreen({ navigation }) {
   }
 
   return (
-    <View>
-      <Logo />
-      <Text>Reset your password.</Text>
-      <TextInput
-        label="Email"
-        returnKeyType="done"
-        value={email.value}
-        onChangeText={(text) => setEmail({ value: text, error: '' })}
-        error={!!email.error}
-        errorText={email.error}
-        autoCapitalize="none"
-        autoCompleteType="email"
-        textContentType="emailAddress"
-        keyboardType="email-address"
-      />
-      <Button
-        mode="contained"
-        onPress={sendResetPasswordEmail}
-        style={{ marginTop: 16 }}
-        title='Continue'
-      />
+    <SafeAreaView>
+      <Image source={require('../assets/LogBack.jpg')} style={styles.backgroundImage} />
+      <View style={styles.container}>
+        <Logo />
+        <Text style={styles.title}>Reset your password.</Text>
+        <TextInput
+          label="Email"
+          returnKeyType="done"
+          value={email.value}
+          onChangeText={(text) => setEmail({ value: text, error: '' })}
+          error={!!email.error}
+          errorText={email.error}
+          autoCapitalize="none"
+          autoCompleteType="email"
+          textContentType="emailAddress"
+          keyboardType="email-address"
+          style={styles.input}
+        />
+        <Button
+          mode="contained"
+          onPress={sendResetPasswordEmail}
+          style={{ marginTop: 16}}
+          color= "green"
+          title='Continue'
+        />
 
-      <View style={styles.row}>
-        <TouchableOpacity onPress={() => navigation.navigate('Register')}>
-          <Text style={styles.link}>Create Account</Text>
-        </TouchableOpacity>
+        <View style={styles.row}>
+          <TouchableOpacity onPress={() => navigation.goBack()}>
+            <Text style={styles.link}>Back</Text>
+          </TouchableOpacity>
+        </View>
+
       </View>
-
-    </View>
+    </SafeAreaView>
   )
 };
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    // flex: 1,
     justifyContent: "center",
-    padding: 20
+    padding: 20,
+    height: '100%'
   },
   title: {
-    fontSize: 24,
+    fontSize: 18,
     fontWeight: 'bold',
     marginBottom: 20,
   },
@@ -80,6 +87,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     marginLeft: 6,
     marginRight: 6,
+    backgroundColor: 'white'
   },
   forgotPassword: {
     marginTop: 10,
@@ -98,5 +106,12 @@ const styles = StyleSheet.create({
   },
   ogo: {
     left: 100,
-  }
+  },
+  backgroundImage: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    width: '100%',
+    height: '100%',
+  },
 });

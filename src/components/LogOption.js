@@ -1,4 +1,4 @@
-import React from 'react-native';
+import React, { Alert } from 'react-native';
 import { StyleSheet, Image, Text, View, TouchableOpacity } from 'react-native';
 import { auth, signInWithPopup } from "firebase/auth";
 import { GoogleAuthProvider } from "firebase/auth";
@@ -7,22 +7,24 @@ import { FacebookAuthProvider } from "firebase/auth";
 const LogOption = () => {
 
 
-const handleGoogle = async () => {
-    try {
-        const provider = new GoogleAuthProvider();
-        await signInWithPopup(auth, provider);
-    } catch (error) {
-        console.error("Error during Google authentication: ", error);
+    const handleGoogle = async () => {
+        Alert.alert("Please Wait", "This will take time sorry for incovience estimated time 10 minutes...")
+        try {
+            const provider = new GoogleAuthProvider();
+            await signInWithPopup(auth, provider);
+        } catch (error) {
+            console.error("Error during Google authentication: ", error);
+        }
     }
-}
-const handleFacebook = async () => {
-    try {
-        const provider = new FacebookAuthProvider();
-        await signInWithPopup(auth, provider);
-    } catch (error) {
-        console.error("Error during Facebook authentication: ", error);
+    const handleFacebook = async () => {
+        Alert.alert("Please Wait", "This will take time sorry for incovience estimated time 10 minutes...")
+        try {
+            const provider = new FacebookAuthProvider();
+            await signInWithPopup(auth, provider);
+        } catch (error) {
+            console.error("Error during Facebook authentication: ", error);
+        }
     }
-}
 
     return (
         <View style={styles.row}>
