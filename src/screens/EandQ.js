@@ -12,11 +12,11 @@ const EquipmentForm = ({ onSubmit }) => {
   const [errorMessage, setErrorMessage] = useState('');
   const [tips, setTips] = useState([]);
   const navigation = useNavigation();
-    const [isSaveButtonClicked, setIsSaveButtonClicked] = useState(false);
+  const [isSaveButtonClicked, setIsSaveButtonClicked] = useState(false);
 
   const carbonEmissionFactor = 0.5;
 
- const emissionReductionTips = [
+  const emissionReductionTips = [
     'Upgrade to energy-efficient equipment and machinery.',
     'Implement a regular maintenance schedule to ensure optimal performance and reduce emissions.',
     'Optimize usage schedules to minimize idle time for machinery.',
@@ -32,7 +32,7 @@ const EquipmentForm = ({ onSubmit }) => {
     'Consider retrofitting older equipment with emission-reducing technology.',
     'Set emission reduction targets for machinery operation and regularly track progress.',
     'Collaborate with suppliers to source eco-friendly and energy-efficient machinery and equipment.'
-];
+  ];
 
 
 
@@ -71,7 +71,7 @@ const EquipmentForm = ({ onSubmit }) => {
     setCarbonEmissions(emissions + ' grams of CO2');
 
     if (emissions > 100) {
-    
+
       setError(true);
       setErrorMessage('High carbon emissions! Consider the following tips to reduce emissions:');
       const shuffledTips = shuffleArray(emissionReductionTips);
@@ -99,7 +99,7 @@ const EquipmentForm = ({ onSubmit }) => {
       setLetter('Save Tips');
     }
   };
-  
+
   const shuffleArray = (array) => {
     for (let i = array.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
@@ -139,40 +139,38 @@ const EquipmentForm = ({ onSubmit }) => {
             keyboardType="numeric"
           />
 
-           {error && (
+          {error && (
+            <Text style={styles.errorText}>{errorMessage}</Text>
+          )}
+
+          {tips.length > 0 && (
             <>
-              <Text style={styles.errorText}>{errorMessage}</Text>
-            </>
-          )}
+              <Text style={styles.tipsText}>
+                {tips.map((tip, index) => `${index + 1}. ${tip}`).join('\n')}
+              </Text>
+              <TouchableOpacity
 
-         {tips.length > 0 && (
-      <>
-        <Text style={styles.tipsText}>
-          {tips.map((tip, index) => `${index + 1}. ${tip}`).join('\n')}
-        </Text>
-        <TouchableOpacity
- 
-  onPress={() => {
-    setIsSaveButtonClicked(true);
-    submit();
-  }}
->
-  <Text  style={[
-    styles.savetipText,
-    {
-      color: isSaveButtonClicked ? colors.white : colors.green,
-    }
-  ]}>Save Tip</Text>
-</TouchableOpacity>
+                onPress={() => {
+                  setIsSaveButtonClicked(true);
+                  submit();
+                }}
+              >
+                <Text style={[
+                  styles.savetipText,
+                  {
+                    color: isSaveButtonClicked ? colors.white : colors.green,
+                  }
+                ]}>Save Tip</Text>
+              </TouchableOpacity>
 
             </>
           )}
 
-           <TouchableOpacity
-      style={styles.submitButton}
-   onPress={() => {submit(); submit(); }}>
-      <Text style={styles.submitButtonText}>Calculate</Text>
-    </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.submitButton}
+            onPress={() => { submit(); submit(); }}>
+            <Text style={styles.submitButtonText}>Calculate</Text>
+          </TouchableOpacity>
 
           {carbonEmissions !== null && (
             <Text style={styles.resultText}>
@@ -205,7 +203,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: colors.white,
-    height:700,
+    height: 700,
   },
   backStyle: {
     position: 'absolute',
@@ -232,9 +230,9 @@ const styles = StyleSheet.create({
     borderRadius: 90,
     padding: 10,
   },
-  resetButtonText:{
-    color:colors.white,
-    fontSize:20,
+  resetButtonText: {
+    color: colors.white,
+    fontSize: 20,
   },
   icon: {
     top: -50,
@@ -277,7 +275,7 @@ const styles = StyleSheet.create({
   errorText: {
     color: 'red',
   },
-  tipsText:{
+  tipsText: {
     marginHorizontal: 20,
     marginVertical: 10,
   },

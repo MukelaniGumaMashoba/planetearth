@@ -1,6 +1,7 @@
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { auth } from './firebase.js';
 import { useState, createContext, useEffect } from "react";
+import { StatusBar } from "expo-status-bar";
 
 export const UserContext = createContext()
 
@@ -29,6 +30,7 @@ function UserContextWrapper({children}) {
 
   return (
     <UserContext.Provider value={{ user, doLogin, doLogout }}>
+      <StatusBar style="auto" />
       {children}
     </UserContext.Provider>
   );

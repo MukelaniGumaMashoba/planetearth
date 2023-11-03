@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react';
-import { View, Text, Image, ImageBackground, TouchableOpacity, StyleSheet, ProgressBarAndroid } from 'react-native';
+import { Text, Image, ImageBackground, TouchableOpacity, StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+
+import {} from "react-native"
 
 export const LoadingScreen = ({ navigation }) => {
   useEffect(() => {
@@ -24,8 +26,6 @@ export const LoadingScreen = ({ navigation }) => {
           <Image source={require('../assets/Logo.jpg')} style={styles.logoImage} />
           <Text style={styles.logoText}>Welcome</Text>
         </TouchableOpacity>
-
-        <ProgressBarAndroid styleAttr="Horizontal" />
       </SafeAreaView>
     </ImageBackground>
   );

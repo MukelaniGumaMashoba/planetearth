@@ -14,7 +14,7 @@ import { Ozow } from "react-native-ozow";
 import { UserContext } from "../../userCtxt";
 import { MaterialIcons } from '@expo/vector-icons'; // Import MaterialIcons for the back button
 
-export const CostSavings = ({ navigation }) => {
+export default CostSavings = ({ navigation }) => {
   const { user } = useContext(UserContext);
   // useState to handle values
   const [currentSpending, setCurrentSpending] = useState("");
