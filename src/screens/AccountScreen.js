@@ -247,12 +247,20 @@ const AccountScreen = ({ navigation }) => {
                     style={styles.searchInput}
                     placeholder="Search..."
                   />
-                </View>
+
+              </View>
                 <Text style={styles.contactName}>Contact Us</Text>
                 <Text style={styles.contactEmail}>Tel: 011 065 0288</Text>
                 <Text style={styles.contactEmail}>Email: planetpulse@email.com</Text>
               </View>
+
+              <View style={styles.faq}>
+                  <Text style={styles.faqInfo}>Contact Us</Text>
+                  <Text style={styles.faqInfo}>Contact Us</Text>
+                  <Text style={styles.faqInfo}>Contact Us</Text>
+                </View>
             </View>
+            
           </Modal>
 
         </ScrollView>
@@ -441,5 +449,15 @@ const styles = StyleSheet.create({
   },
   contactEmail: {
     fontSize: 16,
+  },
+  faq: {
+    alignItems: 'center',
+    marginTop:50,
+    fontSize: 16,
+  },
+  faqInfo: {
+    fontSize: 16,
+    backgroundColor: 'lightgray',
+    paddingHorizontal: 100,
   },
 });
