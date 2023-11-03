@@ -211,8 +211,10 @@ const styles = StyleSheet.create({
     marginLeft: 16,
   },
   modalContainer: {
-    backgroundColor: 'grey',
-    height: '100%'
+    flex: 1,
+    backgroundColor: 'lightgray',
+    height: '70%',
+    marginTop: 110,
   },
   btn: {
     backgroundColor: "lightgreen",
