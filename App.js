@@ -7,13 +7,14 @@ import UserContextWrapper, { UserContext } from './userCtxt.js';
 import { NativeBaseProvider } from 'native-base';
 
 function App() {
-  LogBox.ignoreAllLogs();
+  LogBox.ignoreAllLogs(true)
+
   return (
-    <NativeBaseProvider>
-      <UserContextWrapper>
+    <UserContextWrapper>
+      <NativeBaseProvider>
         <RootNavigator />
-      </UserContextWrapper>
-    </NativeBaseProvider>
+      </NativeBaseProvider>
+    </UserContextWrapper>
   );
 }
 

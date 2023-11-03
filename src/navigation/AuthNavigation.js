@@ -15,9 +15,7 @@ const Stack = createNativeStackNavigator();
 
 function AuthNavigator() {
   return (
-    <Stack.Navigator initialRouteName='Loading' screenOptions={{
-      headerShown: false
-    }}>
+    <Stack.Navigator initialRouteName='Loading' screenOptions={{ headerShown: false }}>
       <Stack.Screen name="Loading" component={LoadingScreen} />
       <Stack.Screen name="AdminLog" component={AdminLog} />
       <Stack.Screen name="AdminPage" component={AdminPage} />

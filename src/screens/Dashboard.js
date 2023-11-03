@@ -7,15 +7,6 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import News from '../components/news';
 
 
-
-const Newspaper = () => {
-  return (
-    <View>
-      <News />
-    </View>
-  );
-}
-
 export default function Dashboard({ navigation }) {
   const [modalVisible, setModalVisible] = useState(false);
 
