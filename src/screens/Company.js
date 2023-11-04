@@ -8,7 +8,9 @@ import { Ionicons } from '@expo/vector-icons'; // Import Ionicons
 const App = ({ route }) => {
   const { params } = route;
   const { user } = useContext(UserContext);
-  const [company, setCompany] = useState({ name: "", emissions: "", goal: "", id: null });
+  const [company, setCompany] = useState({ name: "", emissions: "", goal: "", id: null, description: "", location: "" });
+  const [description, setDescription] = useState("")
+  const [location, setLocation] = useState("")
 
   useEffect(() => {
     if (params?.id) {
@@ -49,11 +51,9 @@ const App = ({ route }) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      {/* Add a background image */}
       <Image source={require('../assets/LogBack.jpg')} style={styles.backgroundImage} />
 
       <View style={styles.content}>
-        {/* Add a company icon from Ionicons */}
         <Ionicons name="business" size={64} color="green" style={styles.icon} />
 
         <Text style={styles.heading}>Company</Text>
@@ -67,13 +67,20 @@ const App = ({ route }) => {
             }}
           />
           <TextInput
-            onChangeText={(e) => {
-              setCompany((prev) => ({ ...prev, emissions: e }));
-            }}
-            value={company.emissions}
             style={styles.input}
-            keyboardType='number-pad'
-            placeholder='Emission'
+            placeholder='Company Discription'
+            value={company.discription}
+            onChangeText={(e) => {
+              setCompany((prev) => ({ ...prev, discription: e }));
+            }}
+          />
+          <TextInput
+            style={styles.input}
+            placeholder='Company Location'
+            value={company.location}
+            onChangeText={(e) => {
+              setCompany((prev) => ({ ...prev, location: e }));
+            }}
           />
           <TextInput
             value={company.goal}
@@ -82,10 +89,17 @@ const App = ({ route }) => {
             }}
             style={styles.input}
             keyboardType='number-pad'
-            placeholder='Goal'
+            placeholder='Emission Goal'
           />
-
-          {/* Make the button green */}
+          <TextInput
+            onChangeText={(e) => {
+              setCompany((prev) => ({ ...prev, emissions: e }));
+            }}
+            value={company.emissions}
+            style={styles.input}
+            keyboardType='number-pad'
+            placeholder='Current Emissions'
+          />
           <Button title='Save' color='green' onPress={() => saveCompany()} />
         </View>
       </View>

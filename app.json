@@ -2,7 +2,7 @@
   "expo": {
     "name": "planetearth",
     "slug": "planetearth",
-    "version": "1.0.0",
+    "version": "0.0.1",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
@@ -20,18 +20,26 @@
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
-        "googleServicesFile": "./google-services.json",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.mukelani_mashoba.planetearth"
     },
     "web": {
       "favicon": "./assets/favicon.png"
     },
     "plugins": [
       [
-        "expo-notifications"
+        "expo-notifications",
+        {
+          "icon": "./assets/noti-icon.png",
+          "color": "#ffffff"
+        }
       ]
-    ]
-
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "466b568e-5ace-41e9-b237-9b9946153340"
+      }
+    }
   }
 }

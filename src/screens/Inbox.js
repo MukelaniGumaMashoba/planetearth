@@ -7,82 +7,27 @@ import { db } from '../../firebase';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { FlatList } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-
-Notifications.setNotificationHandler({
-  handleNotification: async () => ({
-    shouldShowAlert: true,
-    shouldPlaySound: true,
-    shouldSetBadge: true,
-  }),
-});
+import Constants from 'expo-constants';
+import { StyleSheet } from 'react-native';
+import { Dimensions } from 'react-native';
 
 export default function Inbox() {
-  const [, setExpoPushToken] = useState('');
-  const [, setNotification] = useState(false);
   const [notifications, setNotifications] = useState([]);
-  const [ready, setReady] = useState(false);
-  const [idss, setIds] = useState([]);
-  const notificationListener = useRef();
-  const responseListener = useRef();
 
   useEffect(() => {
-    const getSavedNotification = async () => {
-      const res = await AsyncStorage.getItem("@notifications");
-      if (res) {
-        setIds(JSON.parse(res))
-        setReady(true)
-      }
-    }
-
-    (async () => {
-      await getSavedNotification();
-    })();
-    let unsubscribe = () => { }
-
-
-    if (ready) {
-      const q = query(collection(db, "notifications"), orderBy("expire", "desc"));
-      unsubscribe = onSnapshot(q, async (querySnapshot) => {
-        const noti = [];
-        const ids = [];
-
-        querySnapshot.forEach((doc) => {
-          noti.push({ ...doc.data(), id: doc.id });
-          if (Date(doc.data().expire) >= Date(Date.now()) && !idss.includes(doc.id)) {
-            schedulePushNotification(doc.data())
-          }
-
-          if (!idss.includes(doc.id)) {
-            ids.push(doc.id);
-          }
-        });
-
-        setIds((prev) => ([...prev, ...ids]))
-        setNotifications(noti)
-        AsyncStorage.setItem("@notifications", JSON.stringify(idss), (err) => {
-          //console.error("Saving Eror:", err)
-        })
+    const q = query(collection(db, "notifications"), orderBy("expire", "desc"));
+    const unsubscribe = onSnapshot(q, async (querySnapshot) => {
+      const data = []
+      querySnapshot.forEach((doc) => {
+        data.push({ ...doc.data(), id: doc.id })
       });
-    }
-
-    return async () => unsubscribe()
-
-  }, [ready]);
-  useEffect(() => {
-    registerForPushNotificationsAsync().then(token => setExpoPushToken(token));
-
-    notificationListener.current = Notifications.addNotificationReceivedListener(notification => {
-      setNotification(notification);
+      setNotifications(data)
     });
 
-    responseListener.current = Notifications.addNotificationResponseReceivedListener(response => {
-    });
+    return () => unsubscribe()
 
-    return () => {
-      Notifications.removeNotificationSubscription(notificationListener.current);
-      Notifications.removeNotificationSubscription(responseListener.current);
-    };
   }, []);
+
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
@@ -91,65 +36,70 @@ export default function Inbox() {
           flex: 1,
           alignItems: 'center',
           justifyContent: 'center',
-          alignContent: "center"
+          alignContent: "center",
         }}>
 
         <FlatList
           data={notifications}
-
-          renderItem={({ item }) => (
-            <View style={{textAlign: "left", alignItems: 'center',backgroundColor: "green" }}>
-              <Text style={{color: "white", fontSize: 14}}>{item.title} </Text>
-              <Text style={{color: "white", fontSize: 14}}>{item.body}</Text>
-              <Text style={{color: "white", fontSize: 14}}>{Date(item.expire)}</Text>
-            </View>
-          )}
-
-          ListEmptyComponent={()=>(<Text>No notifications this time 🎉</Text>)}
+          keyExtractor={(item) => item.id}
+          renderItem={({ item }) => {
+            const date = new Date(item.createdAt || 1_699_043_759_501).toDateString();
+            const time = new Date(item.createdAt || 1_699_043_759_501).toLocaleTimeString();
+            return (
+              <View>
+                <View style={styles.messageContainer}>
+                  <Text style={styles.messageTitle}>{item.title}</Text>
+                  <Text style={styles.messageBody}>{item.body}</Text>
+                  <Text style={styles.messageDate}>{`${date}, ${time}`}</Text>
+                </View>
+              </View>
+            );
+          }}
+          showsVerticalScrollIndicator={false}
+          ListEmptyComponent={() => <Text style={styles.emptyMessage}>No notifications this time 🎉</Text>}
         />
 
+
       </View>
-      </SafeAreaView>
+    </SafeAreaView>
   );
 }
 
-async function schedulePushNotification(content) {
-  await Notifications.scheduleNotificationAsync({
-    content,
 
-    trigger: { seconds: 1, }
-  });
-}
-
-async function registerForPushNotificationsAsync() {
-  let token;
-
-  if (Platform.OS === 'android') {
-    await Notifications.setNotificationChannelAsync('default', {
-      name: 'default',
-      importance: Notifications.AndroidImportance.MAX,
-      vibrationPattern: [0, 250, 250, 250],
-      lightColor: '#FF231F7C',
-    });
-  }
-
-  if (Device.isDevice) {
-    const { status: existingStatus } = await Notifications.getPermissionsAsync();
-    let finalStatus = existingStatus;
-    if (existingStatus !== 'granted') {
-      const { status } = await Notifications.requestPermissionsAsync();
-      finalStatus = status;
-    }
-    if (finalStatus !== 'granted') {
-      alert('Failed to get push token for push notification!');
-      return;
-    }
-
-    token = (await Notifications.getExpoPushTokenAsync({ projectId: 'your-project-id' })).data;
-    // console.log(token);
-  } else {
-    alert('Must use physical device for Push Notifications');
-  }
-
-  return token;
-}
+const styles = StyleSheet.create({
+  messageContainer: {
+    backgroundColor: '#4CAF50',
+    padding: 10,
+    marginVertical: 12,
+    borderRadius: 10,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.2,
+    shadowRadius: 2,
+    elevation: 3,
+    width: Dimensions.get("screen").width,
+    height: 100,
+    margin: 2,
+  },
+  messageTitle: {
+    color: 'white',
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginBottom: 5,
+  },
+  messageBody: {
+    color: 'white',
+    fontSize: 14,
+    marginBottom: 10,
+  },
+  messageDate: {
+    color: 'white',
+    fontSize: 12,
+    textAlign: 'right',
+  },
+  emptyMessage: {
+    textAlign: 'center',
+    marginTop: 20,
+    fontSize: 18,
+  },
+});

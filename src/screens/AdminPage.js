@@ -52,7 +52,7 @@ export const AdminPage = ({ navigation }) => {
             <View style={styles.centeredView}>
                 <Text style={styles.heading}>Welcome To the Admin Panel</Text>
                 <View style={styles.panel}>
-                    <Button title="See all users" onPress={fetchUsers} color="green" />
+                    <Button title="View Companies" onPress={fetchUsers} color="green" />
                 </View>
                 <FlatList
                     data={users}

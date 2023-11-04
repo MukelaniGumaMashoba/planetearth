@@ -8,7 +8,7 @@ const LogOption = () => {
 
 
     const handleGoogle = async () => {
-        Alert.alert("Please Wait", "This will take time sorry for incovience estimated time 10 minutes...")
+        Alert.alert("403 invalid_account", "This will take time sorry for incovience estimated time 10 minutes...")
         try {
             const provider = new GoogleAuthProvider();
             await signInWithPopup(auth, provider);
@@ -17,7 +17,7 @@ const LogOption = () => {
         }
     }
     const handleFacebook = async () => {
-        Alert.alert("Please Wait", "This will take time sorry for incovience estimated time 10 minutes...")
+        Alert.alert("The server is down", "This will take time sorry for incovience estimated time 10 minutes...")
         try {
             const provider = new FacebookAuthProvider();
             await signInWithPopup(auth, provider);
