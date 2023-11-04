@@ -70,7 +70,7 @@ const SendingNotifications = () => {
 
 
       <View>
-        <Button title="Pick expiring time" onPress={showDatePicker} style={{ marginBottom: 12 }} />
+        <Button title="Pick expiring time" onPress={showDatePicker} style={{ marginBottom: 10 }} color="green"/>
         <DateTimePickerModal
           isVisible={isDatePickerVisible}
           mode="datetime"
@@ -80,7 +80,7 @@ const SendingNotifications = () => {
       </View>
 
       <Text style={{ color: 'white' }}>Alert Title</Text>
-      <Button title="Send Alerts" onPress={sendNotification} />
+      <Button title="Send Alerts" onPress={sendNotification} color="green"/>
     </View>
   );
 };

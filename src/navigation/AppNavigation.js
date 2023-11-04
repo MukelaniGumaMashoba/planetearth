@@ -38,7 +38,7 @@ function StackNavigator() {
             <Stack.Screen name="CostSavings" component={CostSavings} />
             <Stack.Screen name="Game" component={Game} />
             <Stack.Screen name="Company" component={Company} />
-            <Stack.Screen name="Inbox" component={Inbox} />
+            <Stack.Screen name="Inbox" component={Inbox} options={{headerShown : true}} />
         </Stack.Navigator>
     );
 }
