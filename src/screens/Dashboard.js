@@ -21,11 +21,11 @@ export default function Dashboard({ navigation }) {
     <View style={styles.container}>
 
       <View style={styles.h1}>
-      <Text style={styles.welcomeText}>PlanetPulse 🌍</Text>
+        <Text style={styles.welcomeText}>PlanetPulse 🌍</Text>
 
-      <TouchableOpacity style={styles.icon} onPress={()=>{navigation.navigate("Inbox")}}>
-        <Icon name="notifications" color='green' size={26} />
-      </TouchableOpacity>
+        <TouchableOpacity style={styles.icon} onPress={() => { navigation.navigate("Inbox") }}>
+          <Icon name="notifications" color='green' size={26} />
+        </TouchableOpacity>
       </View>
 
       <Text style={styles.txt}>Know What Is Happening Around You!</Text>
@@ -67,7 +67,6 @@ export default function Dashboard({ navigation }) {
               style={styles.top2}
             />
             <Text style={styles.txt3}>Climate Crisis Warning:</Text>
-            {/* <Text style={styles.txt2}> Extreme weather events intensify as global temperatures soar, endangering communities worldwide.</Text> */}
           </TouchableOpacity>
 
           <TouchableOpacity onPress={Open}>
@@ -76,7 +75,6 @@ export default function Dashboard({ navigation }) {
               style={styles.top2}
             />
             <Text style={styles.txt3}>Daily New To Keep you updated all times</Text>
-            {/* <Text style={styles.txt2}> Extreme weather events intensify as global temperatures soar, endangering communities worldwide.</Text> */}
           </TouchableOpacity>
 
         </ScrollView>
@@ -109,6 +107,7 @@ const styles = StyleSheet.create({
   container: {
     margin: 10,
   },
+  
   welcomeText: {
     fontSize: 24,
     fontWeight: 'bold',
@@ -135,7 +134,7 @@ const styles = StyleSheet.create({
     fontSize: 17,
     alignSelf: 'center',
     backgroundColor: '#dedcd7',
-    paddingHorizontal: 160,
+    paddingHorizontal: 130,
     paddingVertical: 10,
   },
   news: {
@@ -143,7 +142,7 @@ const styles = StyleSheet.create({
     fontSize: 17,
     alignSelf: 'center',
     backgroundColor: '#dedcd7',
-    paddingHorizontal: 120,
+    paddingHorizontal: 130,
     paddingVertical: 10,
   },
   txt: {
@@ -161,11 +160,13 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     width: 250,
     height: 160,
+    opacity: 0.90,
   },
   txt2: {
     color: 'white',
-    fontSize: 12,
+    fontSize: 14,
     textAlign: 'center',
+    fontWeight: 'bold'
   },
   txt3: {
     color: 'black',
@@ -189,9 +190,9 @@ const styles = StyleSheet.create({
   },
   h1: {
     flexDirection: 'row',
-    alignItems: 'center', 
-    justifyContent: 'space-between', 
-    padding: 16, 
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    padding: 16,
     marginTop: 10,
   },
   welcomeText: {

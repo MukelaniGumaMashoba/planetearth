@@ -8,6 +8,8 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { FlatList } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Constants from 'expo-constants';
+import { StyleSheet } from 'react-native';
+import { Dimensions } from 'react-native';
 
 export default function Inbox() {
   const [notifications, setNotifications] = useState([]);
@@ -34,29 +36,70 @@ export default function Inbox() {
           flex: 1,
           alignItems: 'center',
           justifyContent: 'center',
-          alignContent: "center"
+          alignContent: "center",
         }}>
 
         <FlatList
           data={notifications}
           keyExtractor={(item) => item.id}
           renderItem={({ item }) => {
-            const date = new Date(item.createdAt || 1_699_043_759_501).toDateString()
-            const time = new Date(item.createdAt || 1_699_043_759_501).toLocaleTimeString()
+            const date = new Date(item.createdAt || 1_699_043_759_501).toDateString();
+            const time = new Date(item.createdAt || 1_699_043_759_501).toLocaleTimeString();
             return (
-              <View style={{ textAlign: "left", alignItems: 'center', backgroundColor: "green" }}>
-                <Text style={{ color: "white", fontSize: 14 }}>{item.title} </Text>
-                <Text style={{ color: "white", fontSize: 14 }}>{item.body}</Text>
-                <Text style={{ color: "white", fontSize: 14 }}>
-                  {`${date}, ${time}`}
-                </Text>
+              <View>
+                <View style={styles.messageContainer}>
+                  <Text style={styles.messageTitle}>{item.title}</Text>
+                  <Text style={styles.messageBody}>{item.body}</Text>
+                  <Text style={styles.messageDate}>{`${date}, ${time}`}</Text>
+                </View>
               </View>
-            )
+            );
           }}
-          ListEmptyComponent={() => (<Text>No notifications this time 🎉</Text>)}
+          showsVerticalScrollIndicator={false}
+          ListEmptyComponent={() => <Text style={styles.emptyMessage}>No notifications this time 🎉</Text>}
         />
+
 
       </View>
     </SafeAreaView>
   );
 }
+
+
+const styles = StyleSheet.create({
+  messageContainer: {
+    backgroundColor: '#4CAF50',
+    padding: 10,
+    marginVertical: 12,
+    borderRadius: 10,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.2,
+    shadowRadius: 2,
+    elevation: 3,
+    width: Dimensions.get("screen").width,
+    height: 100,
+    margin: 2,
+  },
+  messageTitle: {
+    color: 'white',
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginBottom: 5,
+  },
+  messageBody: {
+    color: 'white',
+    fontSize: 14,
+    marginBottom: 10,
+  },
+  messageDate: {
+    color: 'white',
+    fontSize: 12,
+    textAlign: 'right',
+  },
+  emptyMessage: {
+    textAlign: 'center',
+    marginTop: 20,
+    fontSize: 18,
+  },
+});

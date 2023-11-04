@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View, StyleSheet, ScrollView } from 'react-native';
+import { Text, View, StyleSheet, ScrollView, Image } from 'react-native';
 
 const News = () => {
   return (
@@ -10,7 +10,11 @@ const News = () => {
       <Text style={styles.paragraph}>
         In today's rapidly changing world, where the boundaries between nations are becoming blurrier...
         **Title: Embracing a Greener Tomorrow: How React Native is Powering Change in the Age of Globalization**
+      </Text>
 
+      <Image source={require("../assets/news2.jpeg")} style={{height: 300, width: '100%'}}/>
+
+      <Text>
         In today's rapidly changing world, where the boundaries between nations are becoming blurrier and the challenges we face are more interconnected than ever, two pressing issues stand out: global warming and globalization. As we navigate this complex landscape, technology has emerged as a beacon of hope, offering innovative solutions to address these challenges. React Native, a versatile framework for building cross-platform mobile applications, has proven to be a powerful tool in the hands of developers striving to make a positive impact.
 
         1. Empowering Environmental Awareness**
