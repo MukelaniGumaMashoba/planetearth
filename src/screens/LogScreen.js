@@ -9,7 +9,7 @@ import { Button } from "native-base";
 
 // Import your LogBack.jpg image
 import LogBackground from '../assets/LogBack.jpg';
-import { IconButton } from 'native-base';
+
 
 export default function Log({ navigation }) {
   const { doLogin } = useContext(UserContext);
@@ -110,7 +110,7 @@ export default function Log({ navigation }) {
           onPress={() => {
             navigation.navigate('AdminLog')
           }}
-          colorScheme="green.wethu"
+          colorScheme="green"
 
           mt={10}
         >ADMIN</Button>

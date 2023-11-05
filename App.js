@@ -8,7 +8,6 @@ import { NativeBaseProvider, extendTheme } from 'native-base';
 
 function App() {
   LogBox.ignoreAllLogs(true)
-
   const theme = extendTheme({
     colors: {
       primary: {
