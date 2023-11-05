@@ -8,6 +8,7 @@ import { db } from '../../firebase';
 
 // Import the background image
 import backgroundImage from '../assets/LogBack.jpg';
+import { Image } from 'react-native';
 
 function Gamification() {
   const [companies, setCompanies] = useState([]);
@@ -51,11 +52,12 @@ function Gamification() {
 
   return (
     <ImageBackground source={backgroundImage} style={{ flex: 1, backgroundColor: 'rgba(192, 229, 124, 0.3)', paddingTop: 10 }}>
-      <View style={{ flex: 1, paddingHorizontal: 16, justifyContent: "center" }}>
+      <View style={{ flex: 1, paddingHorizontal: 16, justifyContent: "center"}}>
         {!showRanking ? (
           <View style={styles.container}>
             <View style={styles.content}>
-              <Icon as={FontAwesome} name="trophy" size={40} color="white" />
+              {/* <Icon as={FontAwesome} name="trophy" size={40} color="white" /> */}
+              <Image source={require("../assets/cvb.gif")} />
               <Text style={styles.header}>Carbon Emissions Ranking</Text>
               <Text style={styles.description}>
                 "Climate change is the single greatest threat to a sustainable future, but, at the same time,
@@ -182,7 +184,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: 'green',
     marginVertical: 40,
-    opacity: 0.9
+    opacity: 0.9,
+    borderRadius : 23
   },
   content: {
     flex: 1,

@@ -8,7 +8,7 @@ import { Ionicons } from '@expo/vector-icons'; // Import Ionicons
 const App = ({ route }) => {
   const { params } = route;
   const { user } = useContext(UserContext);
-  const [company, setCompany] = useState({ name: "", emissions: "", goal: "", id: null, description: "", location: "" });
+  const [company, setCompany] = useState({ name: "", emissions: "", goal: "", id: null});
   const [description, setDescription] = useState("")
   const [location, setLocation] = useState("")
 
@@ -24,6 +24,10 @@ const App = ({ route }) => {
   }, [params?.id]);
 
   const saveCompany = async () => {
+    if (!company.name || !location || !company.emissions || company.goal || description) {
+      Alert.alert("Invalid Inputs", "Please fill out all fields.");
+      return;
+    }
     if (company.id) {
       const docref = doc(db, "companies", company.id);
       await updateDoc(docref, {
@@ -46,6 +50,9 @@ const App = ({ route }) => {
     if (docRef.id) {
       setCompany((prev) => ({ ...prev, id: docRef.id }));
       Alert.alert("Saved", `${company.name} created successfully.`);
+    }
+    if (!company) {
+      Alert.alert("Invalid Inputs", "Enter missing fields information")
     }
   };
 
@@ -71,7 +78,7 @@ const App = ({ route }) => {
             placeholder='Company Discription'
             value={company.discription}
             onChangeText={(e) => {
-              setCompany((prev) => ({ ...prev, discription: e }));
+              setDescription((prev) => ({ ...prev, discription: e }));
             }}
           />
           <TextInput
@@ -79,7 +86,7 @@ const App = ({ route }) => {
             placeholder='Company Location'
             value={company.location}
             onChangeText={(e) => {
-              setCompany((prev) => ({ ...prev, location: e }));
+              setLocation((prev) => ({ ...prev, location: e }));
             }}
           />
           <TextInput

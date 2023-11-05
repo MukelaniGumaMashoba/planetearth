@@ -24,7 +24,7 @@ function AuthNavigator() {
       <Stack.Screen name="Boarding3" component={Boarding3} />
       <Stack.Screen name="Login" component={Log} />
       <Stack.Screen name="Register" component={Register} />
-      <Stack.Screen name="ResetPasswordScreen" component={ResetPasswordScreen} options={{ headerShown: true }} />
+      <Stack.Screen name="ResetPasswordScreen" component={ResetPasswordScreen} options={{ headerShown: true , title: "Reset Password"}} />
       <Stack.Screen name="Sending" component={SendingNotifications} />
     </Stack.Navigator>
   );

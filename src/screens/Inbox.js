@@ -10,6 +10,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import Constants from 'expo-constants';
 import { StyleSheet } from 'react-native';
 import { Dimensions } from 'react-native';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 export default function Inbox() {
   const [notifications, setNotifications] = useState([]);
@@ -48,9 +49,9 @@ export default function Inbox() {
             return (
               <View>
                 <View style={styles.messageContainer}>
-                  <Text style={styles.messageTitle}>{item.title}</Text>
+                  <Text style={styles.messageTitle}><Icon name="notifications" color='white' size={18} />{item.title}</Text>
                   <Text style={styles.messageBody}>{item.body}</Text>
-                  <Text style={styles.messageDate}>{`${date}, ${time}`}</Text>
+                  <Text style={styles.messageDate}><Icon name="calendar-outline" color='white' size={15} /> {`${date}, ${time}`}</Text>
                 </View>
               </View>
             );
