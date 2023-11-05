@@ -13,8 +13,10 @@ import {
 import { Ozow } from "react-native-ozow";
 import { UserContext } from "../../userCtxt";
 import { MaterialIcons } from '@expo/vector-icons'; // Import MaterialIcons for the back button
+import { useNavigation } from "@react-navigation/native";
 
 export default CostSavings = ({ navigation }) => {
+  const n = useNavigation()
   const { user } = useContext(UserContext);
   // useState to handle values
   const [currentSpending, setCurrentSpending] = useState("");
@@ -214,9 +216,11 @@ export default CostSavings = ({ navigation }) => {
           }}
           onPaymentCancel={(data) => {
             console.log(data);
+            n.goBack()
           }}
           onPaymentSuccess={(data) => {
             console.log(data);
+            n.navigation("CostSavings")
             setModalVisible(!modalVisible);
           }}
         />
