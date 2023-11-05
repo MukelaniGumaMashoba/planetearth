@@ -2,6 +2,7 @@ import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore"
 import { initializeAuth, getReactNativePersistence } from 'firebase/auth';
 import ReactNativeAsyncStorage from '@react-native-async-storage/async-storage';
+import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 
 const firebaseConfig = {
   apiKey: "AIzaSyBNbnsazXpoQ2DFYKVqwvixb8NKj1hX0Lw",
@@ -17,5 +18,46 @@ const auth = initializeAuth(app, {
   persistence: getReactNativePersistence(ReactNativeAsyncStorage)
 });
 const db = getFirestore(app)
+const fbStorage = getStorage();
 
-export { auth, db }
+
+/**
+ *
+ * @param {*} uri
+ * @param {*} name
+ */
+const UploadImages = async (uri, name, onProgress) => {
+  const fetchResponse = await fetch(uri);
+  const theBob = await fetchResponse.blob();
+  theBob
+  console.log(theBob)
+
+  const imageRef = ref(getStorage(), `images/${name}`);
+  const uploadTask = uploadBytesResumable(imageRef, theBob);
+
+
+  return new Promise((resolve, reject) => {
+    uploadTask.on('state_changed',
+      (snapshot) => {
+        const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        onProgress?.(progress)
+      },
+      (error) => {
+        // Handle unsuccessful uploads
+        reject(error)
+      },
+      async () => {
+        const downloadUrl = await getDownloadURL(uploadTask.snapshot.ref)
+        resolve({
+          downloadUrl,
+          metaData: uploadTask.snapshot.metadata
+        })
+      }
+
+    );
+  });
+};
+
+
+
+export { auth, db, UploadImages, fbStorage }
