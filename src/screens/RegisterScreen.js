@@ -3,30 +3,32 @@ import { auth, db } from "../../firebase.js"
 import Logo from '../components/Logo.js';
 import { UserContext } from '../../userCtxt.js';
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { TextInput, Text, Button, View, TouchableOpacity, StyleSheet, Alert, ImageBackground } from 'react-native';
+import { TextInput, Text, View, TouchableOpacity, StyleSheet, Alert, ImageBackground } from 'react-native';
 import LogOption from '../components/LogOption.js';
 import LogBackground from '../assets/LogBack.jpg';
 import { collection, doc, setDoc } from 'firebase/firestore';
+import { Button } from "native-base";
 
 export default function Register({ navigation }) {
   const [error, setErrorMessage] = useState('');
   const [userData, setUserData] = useState({ email: "", password: "", cpassword: "", name: "" })
-
+  const [stateBtn, setBtnState] = useState(false)
   const { doLogin } = useContext(UserContext)
   const userRegister = () => {
 
+    setBtnState(true)
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(userData.email)) {
       Alert.alert('Invalid Email', 'Please enter a valid email address.');
-      return
+      return setBtnState(false);
     }
     if (!userData.email || !userData.password) {
       setErrorMessage("Please enter both email and password.");
-      return;
+      return setBtnState(false);
     }
     else if (userData.password != userData.cpassword) {
       setErrorMessage('The passwords do not match.');
-      return
+      return setBtnState(false);
     }
 
     createUserWithEmailAndPassword(auth, userData.email, userData.password)
@@ -49,7 +51,8 @@ export default function Register({ navigation }) {
           setErrorMessage(errorMessage);
         }
       }
-      );
+      )
+      .finally(() => setBtnState(false));
   }
 
   return (
@@ -96,10 +99,14 @@ export default function Register({ navigation }) {
           {error !== '' && <Text style={styles.error}>{error}</Text>}
 
 
-          <Button mode="contained" title='Enter' onPress={userRegister}
-            color="green"
-            style={{ width: 200 }}
-          />
+          <Button
+          onPress={userRegister}
+          isLoading={stateBtn}
+          isLoadingText="Creating an account"
+          size="md"
+          bgColor="green.wethu"
+          //style={{ width: 200 }}
+        >SIGN UP</Button>
 
           <TouchableOpacity onPress={() => navigation.navigate('Login')}>
             <Text style={styles.link}>Already Have An Account</Text>

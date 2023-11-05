@@ -1,30 +1,31 @@
 import React, { useState } from 'react'
-import { Alert, Button, SafeAreaView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
+import { Alert, SafeAreaView, StyleSheet, Text, TextInput, View } from 'react-native'
 import Logo from '../components/Logo';
-
 import { sendPasswordResetEmail } from "firebase/auth";
 import { auth } from '../../firebase';
 import { Image } from 'react-native';
-
-
+import { Button } from "native-base";
 
 export default function ResetPasswordScreen({ navigation }) {
-  const [email, setEmail] = useState({ value: '', error: '' })
+  const [email, setEmail] = useState({ value: '', error: '' });
+  const [stateBtn, setBtnState] = useState(false);
 
   const sendResetPasswordEmail = () => {
+    setBtnState(true)
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email.value)) {
-      setEmail({ ...email, error: emailError })
-      return
+    if (!emailRegex.test(email)) {
+      Alert.alert('Invalid Email', 'Please enter a valid email address.');
+      return setBtnState(false);
     }
 
     sendPasswordResetEmail(auth, email.value)
       .then(() => {
-        Alert.alert("Success", "Email has been sent to" + email.value)
+        Alert.alert("Success", `Email has been sent to ${email.value}`)
+        return setBtnState(false);
       })
       .catch((error) => {
         Alert.alert("Error", error.message)
-      });
+      }).finally(() => setBtnState(false));
 
   }
 
@@ -48,18 +49,12 @@ export default function ResetPasswordScreen({ navigation }) {
           style={styles.input}
         />
         <Button
-          mode="contained"
           onPress={sendResetPasswordEmail}
-          style={{ marginTop: 16}}
-          color= "green"
-          title='Continue'
-        />
-
-        {/* <View style={styles.row}>
-          <TouchableOpacity onPress={() => navigation.goBack()}>
-            <Text style={styles.link}>Back</Text>
-          </TouchableOpacity>
-        </View> */}
+          isLoading={stateBtn}
+          isLoadingText="Sending Email"
+          size="md"
+          bgColor="green.wethu"
+        >RESET</Button>
 
       </View>
     </SafeAreaView>
