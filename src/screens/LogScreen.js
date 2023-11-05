@@ -3,18 +3,22 @@ import { auth } from '../../firebase.js';
 import { UserContext } from '../../userCtxt.js';
 import React, { useContext, useState } from 'react'
 import { signInWithEmailAndPassword } from 'firebase/auth';
-import { TouchableOpacity, StyleSheet, View, Text, TextInput, Button, Image, Alert, ImageBackground } from 'react-native';
+import { TouchableOpacity, StyleSheet, View, Text, TextInput, Alert, ImageBackground } from 'react-native';
 import LogOption from '../components/LogOption.js';
+import { Button } from "native-base";
 
 // Import your LogBack.jpg image
 import LogBackground from '../assets/LogBack.jpg';
+import { IconButton } from 'native-base';
 
 export default function Log({ navigation }) {
   const { doLogin } = useContext(UserContext);
   const [error, setErrorMessage] = useState('');
   const [userData, setUserData] = useState({ email: "", password: "" })
+  const [stateBtn, setBtnState] = useState(false)
 
   const userLogin = () => {
+    setBtnState(true)
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     setErrorMessage('');
 
@@ -43,7 +47,7 @@ export default function Log({ navigation }) {
         const errorMessage = error.message;
         console.log(errorMessage)
         Alert.alert(errorMessage)
-      });
+      }).finally(() => setBtnState(false));
   }
 
   return (
@@ -80,28 +84,36 @@ export default function Log({ navigation }) {
             <Text style={styles.forgot}>Forgot your password ?</Text>
           </TouchableOpacity>
         </View>
+
         <Button
-          mode="contained"
-          title='Log in'
           onPress={userLogin}
-          color="green"
-          style={{ width: 200 }}
-        />
-        <Button
-          mode="contained"
-          title='Admin'
-          onPress={() => {
-            navigation.navigate('AdminLog')
-          }}
-          color="green"
-          style={{ width: 200 , marginTop: 10}}
-        />
+          isLoading={stateBtn}
+          isLoadingText="Authenticating"
+          size="md"
+          bgColor="green.wethu"
+          //style={{ width: 200 }}
+        >LOGIN</Button>
+
+        
+
+
         <View>
           <TouchableOpacity onPress={() => navigation.navigate('Register')}>
             <Text style={[styles.link, styles.acc]}>Don't have an account? Sign up</Text>
           </TouchableOpacity>
         </View>
         <LogOption />
+        <Button
+         variant="outline" 
+          isDisabled={stateBtn}
+          size="md"
+          onPress={() => {
+            navigation.navigate('AdminLog')
+          }}
+          colorScheme="green.wethu"
+
+          mt={10}
+        >ADMIN</Button>
       </View>
     </ImageBackground>
   )

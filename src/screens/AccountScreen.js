@@ -1,18 +1,16 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { TextInput, Modal, Alert } from 'react-native';
-import { collection, doc, getDoc, onSnapshot, query, where } from "firebase/firestore";
-import { Text, Box, Progress } from 'native-base';
-import { ImageBackground, View, ScrollView, Image, StyleSheet, TouchableOpacity, KeyboardAvoidingView } from 'react-native';
+import { collection, doc, getDoc, onSnapshot, query, where, setDoc } from "firebase/firestore";
 import Score from '../components/Score';
 import { UserContext } from '../../userCtxt';
-import { db } from '../../firebase';
 import { Ionicons } from '@expo/vector-icons';
+import * as ImagePicker from 'expo-image-picker';
+import { UploadImages, db } from '../../firebase';
+import { Text, Box, Progress } from 'native-base';
+import { getAuth, deleteUser } from "firebase/auth";
+import { ImageBackground, View, ScrollView, Image, StyleSheet, TouchableOpacity, KeyboardAvoidingView } from 'react-native';
 
 const backgroundImage = require('../assets/LogBack.jpg');
-import { getAuth, deleteUser } from "firebase/auth";
-
-
-
 const AccountScreen = ({ navigation }) => {
   const { user, doLogout } = useContext(UserContext);
 
@@ -20,6 +18,34 @@ const AccountScreen = ({ navigation }) => {
   const [editProfileModalVisible, setEditProfileModalVisible] = useState(false);
   const [editedEmail, setEditedEmail] = useState(user.email);
   const [users, setUsers] = useState({})
+  // const [permission, requestPermission] = ImagePicker.useCameraPermissions();
+
+  const TakePhoto = async () => {
+    try {
+      const camereRes = await ImagePicker.launchCameraAsync({
+        allowsEditing: true,
+        mediaTypes: ImagePicker.MediaTypeOptions.Images,
+        quality: 1
+      })
+      if (!camereRes.canceled) {
+        const { uri } = camereRes.assets[0];
+        const fileName = uri.split('/').pop();
+        setUsers((prev) => ({ ...prev, photoURL:uri }))
+        const UploadRes = await UploadImages(uri, fileName)
+
+        const userRef = doc(db, "users", user.uid);
+        try {
+          await setDoc(userRef, { photoURL: UploadRes.downloadUrl }, { merge: true })
+        } catch (e) {
+          Alert.alert("Capture Image", e.message.toString())
+        }
+
+      }
+    }
+    catch (e) {
+      Alert.alert("Capture Image", e.message)
+    }
+  }
 
   const deleteFroFB = () => {
     const auth = getAuth();
@@ -49,8 +75,6 @@ const AccountScreen = ({ navigation }) => {
     );
   };
 
-
-
   useEffect(() => {
     const q = query(collection(db, "companies"), where("user", "==", user.uid));
     const unsubscribe = onSnapshot(q, (querySnapshot) => {
@@ -62,14 +86,13 @@ const AccountScreen = ({ navigation }) => {
     return () => unsubscribe();
   }, []);
 
-
-
   const UserName = async () => {
     const docRef = doc(db, "users", user.uid);
     const docSnap = await getDoc(docRef);
 
     if (docSnap.exists()) {
       setUsers(docSnap.data())
+      console.log("Getting user data: ", reload);
       console.log("Document data:", docSnap.data());
     } else {
       console.log("No such document!");
@@ -88,18 +111,18 @@ const AccountScreen = ({ navigation }) => {
     setEditProfileModalVisible(false);
   };
 
-    // State to control the contact info pop-up
-    const [showContactPopUp, setShowContactPopUp] = useState(false);
+  // State to control the contact info pop-up
+  const [showContactPopUp, setShowContactPopUp] = useState(false);
 
-    // Function to open the contact info pop-up
-    const openContactPopUp = () => {
-      setShowContactPopUp(true);
-    };
-  
-    // Function to close the contact info pop-up
-    const closeContactPopUp = () => {
-      setShowContactPopUp(false);
-    };
+  // Function to open the contact info pop-up
+  const openContactPopUp = () => {
+    setShowContactPopUp(true);
+  };
+
+  // Function to close the contact info pop-up
+  const closeContactPopUp = () => {
+    setShowContactPopUp(false);
+  };
 
   const handleLogout = () => {
     doLogout();
@@ -123,10 +146,12 @@ const AccountScreen = ({ navigation }) => {
         <ScrollView contentContainerStyle={styles.scrollContainer}>
           <View style={styles.account}>
             <View style={styles.profileContainer}>
-              <Image
-                style={styles.profileImage}
-                source={require('../../src/assets/globe.png')}
-              />
+              <TouchableOpacity onPress={TakePhoto}>
+                <Image
+                  style={styles.profileImage}
+                  source={users?.photoURL ? { uri: users?.photoURL } : require('../../src/assets/user.png')}
+                />
+              </TouchableOpacity>
             </View>
 
             <Text style={styles.title}>Welcome {users?.name}!</Text>
@@ -195,7 +220,7 @@ const AccountScreen = ({ navigation }) => {
             </TouchableOpacity>
           </View>
           <TouchableOpacity onPress={openContactPopUp} style={styles.button3}>
-              <Text style={styles.buttonText}>PlanetPulse Support</Text>
+            <Text style={styles.buttonText}>PlanetPulse Support</Text>
           </TouchableOpacity>
 
           {/* Edit Profile Modal */}
@@ -247,7 +272,7 @@ const AccountScreen = ({ navigation }) => {
                     placeholder="Search..."
                   />
 
-              </View>
+                </View>
                 <Text style={styles.contactName}>Contact Us</Text>
                 <Text style={styles.contactEmail}>Tel: 011 065 0288</Text>
                 <Text style={styles.contactEmail}>Email: planetpulse@email.com</Text>
@@ -255,15 +280,15 @@ const AccountScreen = ({ navigation }) => {
               </View>
 
               <View style={styles.faq}>
-                  <Text style={styles.faqHeading}>FAQ</Text>
-                  <Text style={styles.faqInfo}>How to use the carbon calculator?</Text>
-                  <Text style={styles.faqInfo}>How to calculate cost savings</Text>
-                  <Text style={styles.faqInfo}>User Support. Report a problem</Text>
-                  <Text style={styles.faqInfo}>Assisting you with connecting to the world</Text>
-                </View>
-                <Text style={styles.faqSave}>🌍 Save Earth 🌍</Text>
+                <Text style={styles.faqHeading}>FAQ</Text>
+                <Text style={styles.faqInfo}>How to use the carbon calculator?</Text>
+                <Text style={styles.faqInfo}>How to calculate cost savings</Text>
+                <Text style={styles.faqInfo}>User Support. Report a problem</Text>
+                <Text style={styles.faqInfo}>Assisting you with connecting to the world</Text>
+              </View>
+              <Text style={styles.faqSave}>🌍 Save Earth 🌍</Text>
             </View>
-            
+
           </Modal>
 
         </ScrollView>
@@ -298,6 +323,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   profileContainer: {
+    flex: 1,
     width: 120,
     height: 120,
     borderRadius: 60,
@@ -306,6 +332,9 @@ const styles = StyleSheet.create({
     marginTop: 10,
     borderColor: 'lightgreen',
     borderWidth: 2,
+    backgroundColor: "grey",
+    justifyContent: "center",
+    alignContent: 'center'
   },
   profileImage: {
     width: '100%',
@@ -362,7 +391,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     justifyContent: 'center',
     alignItems: 'center',
-    
+
   },
   logoutButton: {
     backgroundColor: '#DC3545',
@@ -414,7 +443,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
-    marginTop:120,
+    marginTop: 120,
   },
   closeButton: {
     position: 'absolute',
@@ -422,13 +451,13 @@ const styles = StyleSheet.create({
     right: 10,
     padding: 10,
     backgroundColor: 'lightgray',
-    borderRadius:10,
+    borderRadius: 10,
 
   },
   contactInfoContainer: {
     padding: 20,
     alignItems: 'center',
-    
+
   },
   searchContainer: {
     flexDirection: 'row',
@@ -458,7 +487,7 @@ const styles = StyleSheet.create({
   },
   faq: {
     alignItems: 'center',
-    marginTop:50,
+    marginTop: 50,
     fontSize: 16,
   },
   faqHeading: {
@@ -476,7 +505,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 100,
     paddingVertical: 15,
     marginTop: 5,
-    borderRadius:5,
+    borderRadius: 5,
   },
   faqSave: {
     fontSize: 20,
