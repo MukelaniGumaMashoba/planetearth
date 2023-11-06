@@ -5,16 +5,27 @@ import { TouchableOpacity, ImageBackground, Image, Modal } from 'react-native';
 import { ScrollView } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import News from '../components/news';
+import NewsNew from '../components/newsNew';
 
 
 export default function Dashboard({ navigation }) {
   const [modalVisible, setModalVisible] = useState(false);
+  const [modalNewVisible, setModalNewVisible] = useState(false);
 
   const Open = () => {
     setModalVisible(true)
   }
   const Close = () => {
     setModalVisible(false)
+    // navigation.goBack()
+  }
+
+  const OpenNew = () => {
+    setModalNewVisible(true)
+  }
+  const Closenew = () => {
+    setModalNewVisible(false)
+    // navigation.goBack()
   }
 
   return (
@@ -69,7 +80,7 @@ export default function Dashboard({ navigation }) {
             <Text style={styles.txt3}>Climate Crisis Warning:</Text>
           </TouchableOpacity>
 
-          <TouchableOpacity onPress={Open}>
+          <TouchableOpacity onPress={OpenNew}>
             <Image
               source={require('../assets/news.jpg')}
               style={styles.top2}
@@ -98,6 +109,28 @@ export default function Dashboard({ navigation }) {
 
           </View>
         </Modal>
+
+
+        <Modal
+          animationType="slide"
+          transparent={true}
+          visible={modalNewVisible}
+          onRequestClose={() => {
+            setModalNewVisible(!modalNewVisible);
+          }}
+        >
+          <View style={styles.modalContainer}>
+            <TouchableOpacity onPress={Closenew}>
+              <Text style={styles.btn}>Back</Text>
+            </TouchableOpacity>
+
+            <View style={styles.newContainer}>
+              <NewsNew />
+            </View>
+
+          </View>
+        </Modal>
+
       </View>
     </View>
   );
@@ -107,7 +140,7 @@ const styles = StyleSheet.create({
   container: {
     margin: 10,
   },
-  
+
   welcomeText: {
     fontSize: 24,
     fontWeight: 'bold',
@@ -144,6 +177,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#dedcd7',
     paddingHorizontal: 130,
     paddingVertical: 10,
+    textAlign: 'center'
   },
   txt: {
     fontSize: 18,

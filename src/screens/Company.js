@@ -24,7 +24,7 @@ const App = ({ route }) => {
   }, [params?.id]);
 
   const saveCompany = async () => {
-    if (!company.name || !location || !company.emissions || company.goal || description) {
+    if (!company.name || !location || !company.emissions || !company.goal || !description) {
       Alert.alert("Invalid Inputs", "Please fill out all fields.");
       return;
     }
